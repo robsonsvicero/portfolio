@@ -1,6 +1,6 @@
 /* HEADER */
 .header {
-    padding: 30px 15px;
+    padding: 0 15px;
     background-color: rgba(4, 2, 3, 0.3);
 }
 
@@ -96,13 +96,7 @@ header nav ul li a:hover {
     bottom: 0;
 }
 
-@media(max-width:1280px) {
-    .header {
-        padding: var(--mobile-padding);
-    }
-}
-
-@media(max-width: 900px) {
+@media(max-width: 1000px) {
     .header .menu {
         display: block;
     }
