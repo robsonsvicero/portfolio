@@ -5,11 +5,12 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ricardo Hofstetter Dias - Desenvolvedor Frontend</title>
+  <title>Robson Svicero - Desenvolvedor Frontend</title>
 
-  <link rel="stylesheet" href="src/css/font-awesome.css" />
+  <link rel="stylesheet" href="src/css/fontawesome.css" />
+  <script src="https://kit.fontawesome.com/fc3986c9ff.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="src/css/reset.css" />
-  
+
   <!-- Global -->
   <link rel="stylesheet" href="src/css/globais.css" />
   <link rel="stylesheet" href="src/css/variaveis.css" />
@@ -21,58 +22,38 @@
   <link rel="stylesheet" href="src/css/secoes/footer.css" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css">
+
+  <link rel="shortcut icon" href="src/imagens/favicon.png" type="image/x-icon">
 </head>
 
 <body>
   <header class="header">
-    <div class="container">
-      <div class="row justify-content-between alinhar-itens-no-centro">
-        <a href="#">
-          <h1 class="logo">RD</h1>
-        </a>
-        <nav>
-          <input id="menu-hamburguer" type="checkbox" />
 
-          <label for="menu-hamburguer">
-            <div class="menu">
-              <span class="hamburguer"></span>
-            </div>
-          </label>
-          <ul>
-            <li><a href="#sobre-mim">Sobre mim</a></li>
-            <li><a href="#habilidades">Habilidades</a></li>
-            <li><a href="#projetos">Meus projetos</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
   </header>
 
   <section class="home">
     <div class="container">
       <div class="row full-screen alinhar-itens-no-centro">
         <div class="texto-home">
-          <p>Olá 🖖,</p>
-          <h1>Sou o Ricardo Dias</h1>
+          <h1>Olá, sou o<br>Robson Svicero ;)</h1>
           <h2>Desenvolvedor Frontend</h2>
 
-          <div class="redes-sociais">
-            <a href="#" class="outer-shadow"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="outer-shadow"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="outer-shadow"><i class="fab fa-github"></i></a>
-            <a href="#" class="outer-shadow"><i class="fab fa-instagram"></i></a>
+
+          <div class="botoes">
+            <a target="_blank" href="/src/arquivos/cv.pdf" class="botao outer-shadow">Veja meu CV</a>
           </div>
+
         </div>
 
         <div class="img-home">
-          <div class="img-box inner-shadow">
-            <img class="outer-shadow" src="src/imagens/foto-perfil.png" alt="foto do perfil do Ricardo" />
+          <div class="img-box">
+            <img src="src/imagens/pop-funko.png" alt="Pop Funko do Robson" />
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="sobre-mim section" id="sobre-mim">
+  <section class="sobre-mim section" id="sobre">
     <div class="container">
       <div class="row">
         <div class="section-title">
@@ -87,22 +68,24 @@
         </div>
         <div class="informacoes-sobre-mim">
           <p>
-            <strong>Olá! Me chamo Ricardo Dias e sou um desenvolvedor frontend em
-              formação!</strong>
-              Gosto MUITO da área de tecnologia, e tenho certeza que posso contribuir em qualquer time com as minhas habilidades.
-          </p>
+            Meu nome é Robson Svicero, e sou um desenvolvedor frontend em formação. Sou de São Paulo/SP, especializado
+            em design de interface e experiência do usuário (UI/UX).</p>
 
           <p>
-           Estou sempre me desafiando coim novos projetos e participando de comunidades de programação para buscar feedback de outros desenvolvedores e desenvolvedoras. Além de tentar ajudar essas pessoas com o que eu já aprendi. 😁
-          </p>
+            Minha história com a área começou há uns anos quando decidi que iria trabalhar com programação, sempre
+            “brinquei” criando projetos desktop com VB, mas nunca pensei nisso como profissão. No último trimestre de
+            2020, finalmente, resolvi me aprofundar fazendo um curso de frontend, mas por alguns problemas não cheguei a
+            buscar uma vaga como dev. Todo o conhecimento adquirido foi muito útil quando me surgiu uma oportunidade de
+            trabalhar como UX designer.</p>
 
           <p>
-            Ah, gosto de jogos, filmes, séries, animes e outras nerdices. 💜
+            Agora, em 2024, retomei meus estudos e pretendo ir além do que já fiz no curso anterior e hoje, com as
+            minhas habilidades, tenho certeza que posso contribuir com qualquer time que eu venha fazer parte. 😉</p>
+
+          <p>
+            Já ia me esquecendo... nas horas vagas curto música, filmes, séries, animes, hqs e umas outras nerdices.
           </p>
 
-          <div class="botoes">
-            <a target="_blank" href="/src/arquivos/cv.pdf" class="botao outer-shadow">Veja meu CV</a>
-          </div>
         </div>
       </div>
     </div>
@@ -122,9 +105,6 @@
             <i class="devicon devicon-javascript-plain" id="javascript"></i>
           </div>
           <h3>JavaScript</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt placeat ipsam suscipit consequuntur ex
-            reiciendis alias accusamus quo consectetur. Consequatur sequi ab id expedita facilis cupiditate quia atque
-            dignissimos possimus!</p>
         </div>
 
         <div class="informacoes html">
@@ -132,9 +112,7 @@
             <i class="devicon devicon-html5-plain-wordmark" id="html"></i>
           </div>
           <h3>HTML5</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt placeat ipsam suscipit consequuntur ex
-            reiciendis alias accusamus quo consectetur. Consequatur sequi ab id expedita facilis cupiditate quia atque
-            dignissimos possimus!</p>
+
         </div>
 
         <div class="informacoes css">
@@ -142,9 +120,16 @@
             <i class="devicon devicon-css3-plain-wordmark" id="css"></i>
           </div>
           <h3>CSS3</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt placeat ipsam suscipit consequuntur ex
-            reiciendis alias accusamus quo consectetur. Consequatur sequi ab id expedita facilis cupiditate quia atque
-            dignissimos possimus!</p>
+
+        </div>
+
+        <div class="informacoes github">
+          <div class="logo">
+
+            <i class="devicon-figma-plain" id="figma"></i>
+          </div>
+          <h3>Figma</h3>
+
         </div>
 
         <div class="informacoes github">
@@ -152,9 +137,7 @@
             <i class="devicon devicon-github-original" id="github"></i>
           </div>
           <h3>GitHub</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt placeat ipsam suscipit consequuntur ex
-            reiciendis alias accusamus quo consectetur. Consequatur sequi ab id expedita facilis cupiditate quia atque
-            dignissimos possimus!</p>
+
         </div>
 
         <div class="informacoes git">
@@ -162,9 +145,7 @@
             <i class="devicon devicon-git-plain" id="git"></i>
           </div>
           <h3>Git</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt placeat ipsam suscipit consequuntur ex
-            reiciendis alias accusamus quo consectetur. Consequatur sequi ab id expedita facilis cupiditate quia atque
-            dignissimos possimus!</p>
+
         </div>
       </div>
     </div>
@@ -179,29 +160,29 @@
       </div>
 
       <div class="container-projetos">
-        <div class="projeto">        
-          <a href="https://github.com">
-            <img src="https://via.placeholder.com/515X700" alt="Nome do projeto" />
+        <div class="projeto">
+          <a href="https://robsonsvicero.github.io/projeto-huddle-lp/">
+            <img src="https://robsonsvicero.github.io/projeto-huddle-lp/" alt="Nome do projeto" />
             <h3>Projeto 1</h3>
-            <div class="informacoes-projeto">          
+            <div class="informacoes-projeto">
               <p>Projeto feito usando HTML, CSS e JavaScript</p>
               <p>🔗 Ver no GitHub Pages</p>
-            </div>     
+            </div>
           </a>
         </div>
 
-        <div class="projeto">        
+        <div class="projeto">
           <a href="https://github.com">
             <img src="https://via.placeholder.com/515X700" alt="Nome do projeto" />
             <h3>Projeto 2</h3>
-            <div class="informacoes-projeto">          
+            <div class="informacoes-projeto">
               <p>Lorem ipsum</p>
               <p>🔗 Ver no GitHub Pages</p>
-            </div>      
-          </a>          
+            </div>
+          </a>
         </div>
 
-        <div class="projeto">     
+        <div class="projeto">
           <a href="https://github.com">
             <img src="https://via.placeholder.com/515X700" alt="Nome do projeto" />
             <h3>Projeto 3</h3>
@@ -209,7 +190,7 @@
               <p>Lorem ipsum</p>
               <p>🔗 Ver no GitHub Pages</p>
             </div>
-          </a>   
+          </a>
         </div>
 
         <div class="projeto">
@@ -226,17 +207,18 @@
     </div>
   </section>
 
-  <footer class="footer">
+  <footer class="footer" id="contatos">
     <div class="container">
-      <h2>Me envie uma mensagem!</h2>
+      <h2>Me encontre nas redes sociais!</h2>
       <div class="redes-sociais">
-        <a href="#" class="outer-shadow"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="outer-shadow"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="outer-shadow"><i class="fab fa-github"></i></a>
-        <a href="#" class="outer-shadow"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="outer-shadow"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#" class="outer-shadow"><i class="fa-brands fa-square-whatsapp"></i></a>
+        <a href="#" class="outer-shadow"><i class="fa-brands fa-github"></i></a>
+        <a href="#" class="outer-shadow"><i class="fa-brands fa-square-instagram"></i></a>
       </div>
     </div>
   </footer>
+
 </body>
 
 </html>
