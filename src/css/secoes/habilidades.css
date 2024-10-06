@@ -1,5 +1,8 @@
 /* HABILIDADES */
 .habilidades .container-habilidades {
+    padding: 0 150px;
+}
+.habilidades .container-habilidades {
     text-align: center;
     justify-content: center;
 }

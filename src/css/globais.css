@@ -52,7 +52,9 @@ body {
 
 .botao {
     font-size: var(--fonte-normal);
+    letter-spacing: 1px;
     text-transform: none;
+    font-weight: 400;
     padding: 16px 60px;
     border-radius: 100px;
     transition: all .3s ease;
@@ -61,5 +63,5 @@ body {
 
 .botao:hover {
     font-size: 1.8rem;
-    font-weight: 400;
+    font-weight: 500;
 }
