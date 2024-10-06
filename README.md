@@ -71,4 +71,4 @@ Para os ícones das redes sociais foi utilizada a biblioteca do Font Awesome e D
 
 ### Mobile 📱:
 
-![Versão mobile do design do portfolio](/design/LP -mobile.png)
+![Versão mobile do design do portfolio](/design/lp-mobile.png)
