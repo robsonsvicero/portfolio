@@ -9,11 +9,11 @@
 }
 
 .footer h2 {
-    font-family: var(--fonte-secundaria);
-    font-size: var(--fonte-normal);
+    font-family: var(--fonte-titulo);
+    font-size: var(--fonte-g);
     font-weight: 500;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .redes-sociais a {

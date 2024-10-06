@@ -1,13 +1,14 @@
 /* PROJETOS */
 .projetos .container-projetos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     margin: 0 auto;
     grid-gap: 20px;
 }
 
 .projetos .container-projetos .projeto {
     border-radius: 6px;
+    max-height: 650px;
     transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -25,7 +26,9 @@
 .projetos .container-projetos .projeto img {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    width: 100%;
     height: 100%;
+
 }
 
 .projetos .container-projetos .projeto .informacoes-projeto {
@@ -51,6 +54,10 @@
     width: 100%;
     padding: 10px 20px;
     opacity: 0.6;
+}
+
+.projetos .container-projetos .projeto p:nth-child(1) {
+    font-weight: 400;
 }
 
 .projetos .container-projetos .projeto .informacoes-projeto p:nth-child(2) {

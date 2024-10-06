@@ -25,7 +25,7 @@
     user-select: none;
 }
 
-header nav ul li a:hover {
+.header nav ul li a:hover {
     color: var(--cor-cta);
     font-weight: 600;
 }
@@ -96,7 +96,7 @@ header nav ul li a:hover {
     bottom: 0;
 }
 
-@media(max-width: 600px) {
+@media(max-width: 768px) {
     .header .menu {
         display: block;
     }
