@@ -96,7 +96,7 @@ header nav ul li a:hover {
     bottom: 0;
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 600px) {
     .header .menu {
         display: block;
     }

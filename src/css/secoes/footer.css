@@ -15,3 +15,23 @@
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
+
+.redes-sociais a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem;
+    text-align: center;
+    color: var(--cor-branca);
+    margin: 0 4px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .redes-sociais a i {
+    line-height: 40px;
+  }
+  
+  .redes-sociais a:hover {
+    color: var(--cor-primaria);
+  }
