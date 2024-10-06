@@ -41,24 +41,10 @@
     margin-bottom: 30px;
 }
 
-.home .botoes {
+/* .home .botoes {
     margin-top: 60px;
-}
-
-.home .botao {
-    font-size: var(--fonte-normal);
-    text-transform: none;
-    padding: 12px 40px;
-    border-radius: 100px;
-    transition: all .3s ease;
-    background-color: var(--cor-cta);
-}
-
-.home .botao:hover {
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
+} */
+ 
 @media(max-width: 880px) {
 
     .home .texto-home,

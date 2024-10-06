@@ -1,1 +1,28 @@
 /* HABILIDADES */
+.habilidades .container-habilidades {
+    text-align: center;
+    justify-content: center;
+}
+
+.habilidades .container-habilidades .informacoes {
+    width: 350px;
+    padding: 40px 20px;
+}
+
+.habilidades .container-habilidades .informacoes h3,
+.habilidades .container-habilidades .informacoes .logo i {
+    transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+}
+
+.habilidades .container-habilidades .informacoes h3 {
+    font-size: var(--fonte-xg);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.habilidades .container-habilidades .informacoes i {
+    font-size: 8rem;
+}

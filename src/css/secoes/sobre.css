@@ -8,3 +8,40 @@
     padding: 15px;
     text-align: center;
 }
+
+.sobre .informacoes-sobre {
+    max-width: 50%;
+    padding: 0 25px;
+}
+
+.sobre .informacoes-sobre .botoes {
+    margin-top: 50px;
+}
+
+.sobre .informacoes-sobre p {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+@media(max-width: 880px) {
+    .sobre .row {
+        justify-content: center;
+    }
+
+    .sobre .informacoes-sobre .botoes {
+        text-align: center;
+    }
+
+    .sobre .imagem-sobre {
+        max-width: 100%;
+        padding: 0 var(--mobile-padding);
+        margin-bottom: 50px;
+    }
+
+    .sobre .informacoes-sobre {
+        padding: 0 var(--mobile-padding);
+        max-width: 100%;
+    }
+
+
+}
