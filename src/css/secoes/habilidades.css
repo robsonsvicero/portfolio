@@ -30,7 +30,8 @@
 
 @media(max-width: 768px) {
     .habilidades .container-habilidades {
-        padding: 0 40px;
+        margin: 0 16px;
+        padding: 0;
     }
 
     .habilidades .container-habilidades .informacoes h3 {
@@ -38,6 +39,6 @@
     }
 
     .habilidades .container-habilidades .informacoes {
-        width: 200px;
+        width: 189px;
     }
 }
