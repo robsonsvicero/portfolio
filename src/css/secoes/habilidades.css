@@ -1,8 +1,6 @@
 /* HABILIDADES */
 .habilidades .container-habilidades {
     padding: 0 150px;
-}
-.habilidades .container-habilidades {
     text-align: center;
     justify-content: center;
 }
@@ -28,4 +26,18 @@
 
 .habilidades .container-habilidades .informacoes i {
     font-size: 8rem;
+}
+
+@media(max-width: 768px) {
+    .habilidades .container-habilidades {
+        padding: 0 40px;
+    }
+
+    .habilidades .container-habilidades .informacoes h3 {
+        font-size: 3.2rem;
+    }
+
+    .habilidades .container-habilidades .informacoes {
+        width: 200px;
+    }
 }
