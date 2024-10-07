@@ -75,7 +75,7 @@
     }
 
     .projetos .container-projetos .projeto {
-        margin-bottom: 20px;
+        margin: 20px 0;
     }
 
     .projetos .container-projetos .projeto:nth-last-child(1) {

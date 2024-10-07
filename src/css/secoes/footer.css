@@ -39,3 +39,9 @@
     color: var(--cor-branca);
     background-color: var(--cor-cta);
   }
+
+  @media(max-width: 768px) {
+    .footer h2 {
+      padding: 0 40px;
+    }
+  }
