@@ -82,3 +82,9 @@ body {
     font-size: 1.8rem;
     font-weight: 500;
 }
+
+@media(max-width: 768px) {
+  .home:after {
+    display: none;
+  }
+}
