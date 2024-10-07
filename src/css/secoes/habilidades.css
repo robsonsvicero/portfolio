@@ -28,7 +28,7 @@
     font-size: 8rem;
 }
 
-@media(max-width: 768px) {
+@media(max-width: 1024px) {
     .habilidades .container-habilidades {
         margin: 0 16px;
         padding: 0;
@@ -39,6 +39,13 @@
     }
 
     .habilidades .container-habilidades .informacoes {
+        width: 250px;
+    }
+}
+
+@media(max-width: 768px) {
+    .habilidades .container-habilidades .informacoes {
         width: 189px;
     }
 }
+

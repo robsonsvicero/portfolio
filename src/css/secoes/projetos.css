@@ -69,7 +69,7 @@
 
 }
 
-@media(max-width: 1140px) {
+@media(max-width: 1040px) {
     .projetos .container-projetos {
         padding: 0 var(--mobile-padding);
     }
@@ -80,5 +80,15 @@
 
     .projetos .container-projetos .projeto:nth-last-child(1) {
         margin-bottom: 0;
+    }
+
+    .projetos .container-projetos .projeto:nth-child(1) {
+        margin-right: 40px;
+    }
+}
+
+@media(max-width: 768px) {
+    .projetos .container-projetos .projeto:nth-child(1) {
+        margin-right: 0;
     }
 }

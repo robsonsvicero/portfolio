@@ -83,6 +83,12 @@ body {
     font-weight: 500;
 }
 
+@media(max-width: 1240px) {
+  .container {
+    margin: 0 60px;
+  }
+}
+
 @media(max-width: 768px) {
   .home:after {
     display: none;
