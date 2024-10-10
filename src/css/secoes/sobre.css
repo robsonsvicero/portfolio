@@ -16,6 +16,10 @@
     align-self: center;
 }
 
+.sobre .informacoes-sobre p {
+    text-align: left;
+}
+
 .sobre .informacoes-sobre .botoes {
     display: flex;
     justify-content: space-around;
