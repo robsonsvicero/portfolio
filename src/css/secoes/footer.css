@@ -53,7 +53,7 @@
 }
 
 .footer .redes-sociais .icone-redes li:hover, 
-.footer .redes-sociais .icone-redes li a i:hover{
+.footer .redes-sociais .icone-redes li:hover i {
   color: var(--cor-branca);
   background-color: var(--cor-cta);
 }
