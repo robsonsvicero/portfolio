@@ -2,6 +2,7 @@
 .footer {
     margin-top: 7rem;
     text-align: center;
+    background-color: #00000050;
 }
 
 .footer .container {
@@ -16,36 +17,49 @@
     margin-bottom: 40px;
 }
 
-.redes-sociais a {
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    font-size: 1.8rem;
-    text-align: center;
-    align-content: center;
-    color: var(--cor-primaria);
-    background-color: var(--cor-branca);
-    margin-right: 18px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-  }
+.footer .redes-sociais {
+  text-align: center;
+}
+
+.footer .redes-sociais .icone-redes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
   
-  .redes-sociais a i {
-    font-size: 4rem;
-    line-height: 40px;
-  }
-  
-  .redes-sociais a:hover {
-    color: var(--cor-branca);
-    background-color: var(--cor-cta);
-  }
+.footer .redes-sociais .icone-redes li {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  background-color: var(--cor-branca);
+  border-radius: 100px;
+  padding: 12px;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.footer .redes-sociais .icone-redes li a {
+  text-align: center;
+}
+
+.footer .redes-sociais .icone-redes li a i {
+  color: var(--cor-primaria);
+  font-weight: 500;
+  font-size: 2.4rem;
+  transition: 0.3s;
+}
+
+.footer .redes-sociais .icone-redes li:hover, 
+.footer .redes-sociais .icone-redes li a i:hover{
+  color: var(--cor-branca);
+  background-color: var(--cor-cta);
+}
 
   @media(max-width: 768px) {
     .footer h2 {
-      padding: 0 40px;
-    }
-
-    .redes-sociais a {
-      margin-right: 10px;
+      padding: 0 var(--mobile-padding);
     }
   }

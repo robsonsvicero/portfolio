@@ -1,7 +1,4 @@
 /* SOBRE */
-.sobre .row {
-    justify-content: space-between;
-}
 
 .sobre .imagem-sobre {
     max-width: 40%;
@@ -16,10 +13,27 @@
 .sobre .informacoes-sobre {
     max-width: 50%;
     padding: 0 25px;
+    align-self: center;
 }
 
 .sobre .informacoes-sobre .botoes {
+    display: flex;
+    justify-content: space-around;
     margin-top: 50px;
+}
+
+.sobre .informacoes-sobre .botoes a {
+    margin-top: 40px;
+}
+
+.sobre .informacoes-sobre .botoes a i {
+    margin-left: 8px;
+}
+
+.sobre .informacoes-sobre .botoes a:nth-child(1) {
+    background-color: transparent;
+    border: 2px solid var(--cor-branca);
+    color: var(--cor-branca);
 }
 
 .sobre .informacoes-sobre p {
@@ -27,25 +41,25 @@
     margin-bottom: 20px;
 }
 
-@media(max-width: 880px) {
+@media(max-width: 1280px) {
     .sobre .row {
         justify-content: center;
-    }
-
-    .sobre .informacoes-sobre .botoes {
-        text-align: center;
     }
 
     .sobre .imagem-sobre {
         max-width: 100%;
         padding: 0 var(--mobile-padding);
-        margin-bottom: 50px;
+        text-align: center;
     }
 
     .sobre .informacoes-sobre {
         padding: 0 var(--mobile-padding);
+        text-align: center;
+    }
+}
+
+@media(max-width: 768px) {
+    .sobre .informacoes-sobre {
         max-width: 100%;
     }
-
-
 }

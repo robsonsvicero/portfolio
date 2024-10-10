@@ -1,21 +1,20 @@
 /* PROJETOS */
+
 .projetos .container-projetos {
-    justify-content: center;
-    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
     margin: 0 auto;
-    grid-gap: 20px; */
+    grid-gap: 20px;
 }
 
 .projetos .container-projetos .projeto {
+    margin-bottom: 20px;
     border-radius: 6px;
-    max-width: 350px;
-    max-height: 550px;
     transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
     position: relative;
-    margin-right: 20px;
 }
 
 .projetos .container-projetos .projeto:hover,
@@ -34,7 +33,7 @@
 }
 
 .projetos .container-projetos .projeto .informacoes-projeto {
-    padding: 20px;
+    padding: 20px 20px;
     background-color: var(--cor-fundo-escuro);
     position: absolute;
     top: 0;
@@ -47,6 +46,12 @@
     -webkit-transition: all 0.3s ease;
 }
 
+.projetos .container-projetos .projeto .informacoes-projeto p:nth-child(2) {
+    font-weight: 500;
+    margin-top: 10px;
+    font-size: 1.4rem;
+}
+
 .projetos .container-projetos .projeto h3 {
     font-size: 2rem;
     font-weight: 500;
@@ -54,41 +59,20 @@
     bottom: 0;
     background-color: var(--cor-fundo-escuro);
     width: 100%;
-    padding: 10px 20px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     opacity: 0.6;
 }
 
-.projetos .container-projetos .projeto p:nth-child(1) {
-    font-weight: 400;
-}
-
-.projetos .container-projetos .projeto .informacoes-projeto p:nth-child(2) {
-    font-weight: 700;
-    margin-top: 10px;
-    font-size: 1.4rem;
-
-}
-
-@media(max-width: 1040px) {
+@media(max-width: 1280px) {
     .projetos .container-projetos {
         padding: 0 var(--mobile-padding);
     }
-
-    .projetos .container-projetos .projeto {
-        margin: 20px 0;
-    }
-
-    .projetos .container-projetos .projeto:nth-last-child(1) {
-        margin-bottom: 0;
-    }
-
-    .projetos .container-projetos .projeto:nth-child(1) {
-        margin-right: 40px;
-    }
 }
 
-@media(max-width: 768px) {
-    .projetos .container-projetos .projeto:nth-child(1) {
-        margin-right: 0;
+@media(max-width: 480px) {
+    .projetos .container-projetos {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
 }

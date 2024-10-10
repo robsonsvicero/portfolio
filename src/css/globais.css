@@ -13,23 +13,6 @@ body {
   font-size: var(--fonte-m);
 }
 
-.home {
-  text-align: center;
-}
-
-.home:after {
-  content: url('../imagens/seta-branca.png');
-  position: absolute;
-  height: 35px;
-  bottom: 40px;
-  animation: downarrow 0.6s infinite alternate ease-in-out;
-}
-
-@-webkit-keyframes downarrow {
-  0% {-webkit-transform: translateY(0); opacity: 0.4;}
-  100% {-webkit-transform: translateY(0.4em); opacity: 0.9;}
-}
-
 .container {
   max-width: 1440px;
   margin: auto;
@@ -69,28 +52,15 @@ body {
 
 .botao {
     font-size: var(--fonte-normal);
-    letter-spacing: 1px;
-    text-transform: none;
-    font-weight: 400;
     padding: 16px 60px;
     border-radius: 100px;
     transition: all .3s ease;
     background-color: var(--cor-cta);
+    letter-spacing: 1px;
+    font-weight: 400;
 }
 
 .botao:hover {
     font-size: 1.8rem;
     font-weight: 500;
-}
-
-@media(max-width: 1240px) {
-  .container {
-    margin: 0 60px;
-  }
-}
-
-@media(max-width: 768px) {
-  .home:after {
-    display: none;
-  }
 }

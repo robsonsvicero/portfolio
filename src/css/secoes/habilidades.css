@@ -1,12 +1,14 @@
 /* HABILIDADES */
 .habilidades .container-habilidades {
-    padding: 0 150px;
-    text-align: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    margin: 0 auto;
+    grid-gap: 20px;
+    text-align: center;  
+    
 }
 
 .habilidades .container-habilidades .informacoes {
-    width: 350px;
     padding: 40px 20px;
 }
 
@@ -22,30 +24,20 @@
     font-size: var(--fonte-xg);
     font-weight: 500;
     margin-bottom: 20px;
+    color: var(--cor-branca);
 }
 
 .habilidades .container-habilidades .informacoes i {
     font-size: 8rem;
-}
+ }
 
-@media(max-width: 1024px) {
+ @media(max-width: 1024px) {
+
     .habilidades .container-habilidades {
-        margin: 0 16px;
-        padding: 0;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 
     .habilidades .container-habilidades .informacoes h3 {
-        font-size: 3.2rem;
+        font-size: 1.6rem;
     }
-
-    .habilidades .container-habilidades .informacoes {
-        width: 250px;
-    }
-}
-
-@media(max-width: 768px) {
-    .habilidades .container-habilidades .informacoes {
-        width: 189px;
-    }
-}
-
+ }
