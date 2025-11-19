@@ -1,0 +1,54 @@
+/* Schedule Page - Estilos específicos */
+
+.schedule {
+  padding: 6.25rem 12.75rem;
+  background-color: #FFF8F0;
+  min-height: 100vh;
+}
+
+.schedule-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.schedule-iframe {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 1440px) {
+  .schedule {
+    padding: 6.25rem 10rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .schedule {
+    padding: 5rem 5rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .schedule {
+    padding: 3.75rem 2.5rem;
+  }
+  
+  .schedule-iframe {
+    height: 800px;
+  }
+}
+
+@media (max-width: 520px) {
+  .schedule {
+    padding: 2.5rem 1.25rem;
+  }
+  
+  .schedule-iframe {
+    height: 700px;
+  }
+}

@@ -1,0 +1,7 @@
+/* Button hover styles for icons */
+.group:hover i,
+.group:hover .fa-brands,
+.group:hover .fa-solid,
+.group:hover .fa-regular {
+  color: #FFF8F0 !important;
+}

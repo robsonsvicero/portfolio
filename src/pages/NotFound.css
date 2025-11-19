@@ -1,0 +1,81 @@
+/* 404 Not Found Page */
+
+.not-found-page {
+  font-family: 'Outfit', sans-serif;
+  text-align: center;
+  background-color: #FFF8F0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3.125rem;
+}
+
+.not-found-page p {
+  font-family: 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #666666;
+  margin-bottom: 2rem;
+}
+
+#backHome {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.625rem 2.5rem;
+  background-color: #094C7E;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+#backHome:hover {
+  transform: scale(1.1);
+  background-color: #800020;
+  transition: all 0.5s ease-in-out;
+}
+
+.animation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .animation dotlottie-player {
+    width: 400px !important;
+    height: 400px !important;
+  }
+
+  .not-found-page p {
+    font-size: 1.6rem;
+  }
+
+  #backHome {
+    font-size: 1.6rem;
+    padding: 0.5rem 2rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .animation dotlottie-player {
+    width: 300px !important;
+    height: 300px !important;
+  }
+
+  .not-found-page p {
+    font-size: 1.4rem;
+  }
+
+  #backHome {
+    font-size: 1.4rem;
+    padding: 0.5rem 1.5rem;
+  }
+}

@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-base font-normal leading-normal bg-dark-bg text-cream;
+  }
+}
+
+@layer components {
+  /* Classes legadas ainda em uso */
+  .container {
+    @apply w-full;
+  }
+
+  .row {
+    @apply flex flex-wrap;
+  }
+
+  .section {
+    padding: 6.25rem 12.75rem;
+  }
+
+  .section-title {
+    @apply flex flex-col items-center text-center w-full pb-10;
+  }
+
+  .section-title h2 {
+    @apply font-title text-5xl font-extralight uppercase text-center tracking-wide pb-5 text-cream;
+  }
+
+  .decorBar {
+    @apply w-48 h-0.5 bg-secondary;
+  }
+}
