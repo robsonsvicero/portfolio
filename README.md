@@ -81,56 +81,6 @@ npm run dev
 http://localhost:3000
 ```
 
-## 📦 Build para Produção
-
-```bash
-npm run build
-```
-
-Os arquivos otimizados serão gerados na pasta `dist/`.
-
-## 🚀 Deploy
-
-### Hostinger (Recomendado)
-
-1. Execute o script de deploy:
-```bash
-.\deploy-hostinger.ps1
-```
-
-2. Faça upload do conteúdo da pasta `dist/` para `public_html/` via:
-   - File Manager da Hostinger
-   - FTP (FileZilla)
-
-3. Siga o checklist em `DEPLOY-CHECKLIST.md`
-
-### Outros Hosts
-
-O projeto é compatível com qualquer host que suporte:
-- Arquivos estáticos
-- Mod_rewrite (Apache) ou configuração similar (Nginx)
-
-## 🎨 Personalização
-
-### Cores do Tema
-
-Edite `tailwind.config.js`:
-
-```js
-colors: {
-  primary: '#094C7E',    // Azul principal
-  secondary: '#800020',  // Bordô
-  cream: '#FFF8F0',      // Creme
-  'dark-bg': '#050505',  // Fundo escuro
-}
-```
-
-### Fontes
-
-Configuradas no `tailwind.config.js`:
-- **Inter** - Corpo do texto
-- **Outfit** - Títulos
-
 ## 📧 Contato
 
 - **Website**: [robsonsvicero.com.br](https://robsonsvicero.com.br)
