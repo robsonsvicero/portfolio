@@ -1,8 +1,8 @@
 # 🎨 Robson Svicero - Portfólio Profissional
 
-Este é o portfolio de Robson Svicero, especialista em Identidade Visual, UI/UX Design e Desenvolvimento Front-End. Meu foco é transformar ideias em experiências digitais memoráveis, utilizando ReactJS para performance e Tailwind CSS para um design ágil.
+Este é o portfólio de Robson Svicero, especialista em Identidade Visual, UI/UX Design e Desenvolvimento Front-End. Meu foco é transformar ideias em experiências digitais memoráveis, utilizando ReactJS para performance e Tailwind CSS para um design ágil.
 
-![Preview do Projeto](https://robsonsvicero.com.br/src/images/robsonsvicero.webp)
+![Preview do Projeto](./src/images/preview.webp)
 
 ## 🚀 Tecnologias
 
@@ -93,10 +93,9 @@ npm run dev
 
 4. Acesse no navegador:
 ```
-http://localhost:3000
+http://localhost:5173
 ```
 
-<<<<<<< HEAD
 ## 📦 Build para Produção
 
 ```bash
@@ -160,15 +159,13 @@ Este site foi reconstruído com muito carinho e uma ajudinha de peso. Um salve e
 - **Formspree** - Formulários sem backend
 - **Lottie** - Animações da página 404
 
-=======
->>>>>>> 86c22c77d2b0854278ff54f70b61dd65b212223b
 ## 📧 Contato
 
 - **Website**: [robsonsvicero.com.br](https://robsonsvicero.com.br)
-- **LinkedIn**: [/in/robsonsvicero](https://www.linkedin.com/in/robsonsvicero/)
-- **GitHub**: [/robsonsvicero](https://github.com/robsonsvicero)
-- **Behance**: [/robsonsvicero](https://www.behance.net/robsonsvicero)
-- **Email**: hello@robsonsvicero.com.br
+- **LinkedIn**: [linkedin.com/in/robsonsvicero](https://www.linkedin.com/in/robsonsvicero/)
+- **GitHub**: [github.com/robsonsvicero](https://github.com/robsonsvicero)
+- **Behance**: [behance.net/robsonsvicero](https://www.behance.net/robsonsvicero)
+- **Email**: [hello@robsonsvicero.com.br](mailto:hello@robsonsvicero.com.br)
 
 ## 📄 Licença
 
