@@ -96,6 +96,7 @@ npm run dev
 http://localhost:3000
 ```
 
+<<<<<<< HEAD
 ## 📦 Build para Produção
 
 ```bash
@@ -159,6 +160,8 @@ Este site foi reconstruído com muito carinho e uma ajudinha de peso. Um salve e
 - **Formspree** - Formulários sem backend
 - **Lottie** - Animações da página 404
 
+=======
+>>>>>>> 86c22c77d2b0854278ff54f70b61dd65b212223b
 ## 📧 Contato
 
 - **Website**: [robsonsvicero.com.br](https://robsonsvicero.com.br)
