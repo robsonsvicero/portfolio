@@ -3,8 +3,8 @@
   RewriteBase /
   
   # Força HTTPS (opcional - descomente se quiser)
-  # RewriteCond %{HTTPS} off
-  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   
   # Não reescreve arquivos ou diretórios existentes
   RewriteCond %{REQUEST_FILENAME} !-f

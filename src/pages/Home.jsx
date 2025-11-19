@@ -406,13 +406,15 @@ const Home = () => {
               <label htmlFor="mensagem">Mensagem*</label>
               <textarea name="mensagem" id="mensagem" required></textarea>
 
-              <p>*campos obrigatórios</p>
+              <p className='w-full text-left'>*campos obrigatórios</p>
 
               <input type="hidden" name="_subject" value="Novo envio!" />
 
-              <Button type="submit" variant="primary" className="border-2 hover:border-primary">
-                Enviar Proposta
-              </Button>
+              <div className='w-full items-center flex justify-center'>
+                <Button type="submit" variant="primary" className="w-[50%] border-2 hover:border-primary">
+                  Enviar Proposta
+                </Button>
+              </div>
             </form>
           </div>
         </section>
