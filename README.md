@@ -1,6 +1,6 @@
 # 🎨 Robson Svicero - Portfólio Profissional
 
-Portfólio profissional desenvolvido com React, apresentando serviços de Design UI/UX, Identidade Visual e Desenvolvimento Front-End.
+Este é o portfolio de Robson Svicero, especialista em Identidade Visual, UI/UX Design e Desenvolvimento Front-End. Meu foco é transformar ideias em experiências digitais memoráveis, utilizando ReactJS para performance e Tailwind CSS para um design ágil.
 
 ![Preview do Projeto](https://robsonsvicero.com.br/src/images/robsonsvicero.webp)
 
@@ -17,17 +17,32 @@ Portfólio profissional desenvolvido com React, apresentando serviços de Design
 
 ## ✨ Funcionalidades
 
-- 🎯 Navegação fluida com React Router (SPA)
-- 📱 Design 100% responsivo
-- 🎨 Tema customizado com Tailwind CSS
-- 📧 Formulário de contato funcional
-- 📅 Página de agendamento integrada
-- 🖼️ Galeria de projetos
-- 🎠 Carrossel de serviços
-- 🌐 SEO otimizado
-- ⚡ Imagens otimizadas em WebP
-- 🎭 Animações suaves
-- 📄 Página 404 customizada
+### 🎯 Navegação e Performance
+- **Single Page Application (SPA)** com React Router para navegação instantânea
+- **Build otimizado** com Vite para carregamento ultra-rápido
+- **Imagens em WebP** reduzindo até 70% o tamanho dos arquivos
+- **Lazy loading** de componentes para melhor performance
+
+### 🎨 Design e Experiência
+- **Design 100% responsivo** adaptado para todos os dispositivos
+- **Tema customizado** com Tailwind CSS refletindo identidade visual única
+- **Animações suaves** e transições profissionais
+- **Componentes reutilizáveis** (Button, Card) com variantes
+
+### 📦 Funcionalidades de Negócio
+- **3 páginas de serviços** detalhadas (Identidade Visual, UI/UX Design, Front-End)
+- **Formulário de contato** integrado com Formspree
+- **Agendamento online** com Google Calendar
+- **Galeria de projetos** com links para Behance
+- **Carrossel de serviços** com Swiper
+- **WhatsApp flutuante** para contato rápido
+
+### 🔍 SEO e Acessibilidade
+- **Meta tags otimizadas** (Open Graph, Twitter Card)
+- **Sitemap.xml** atualizado
+- **Robots.txt** configurado
+- **Página 404 customizada** com animação Lottie
+- **Schema.org** para dados estruturados
 
 ## 📂 Estrutura do Projeto
 
@@ -131,17 +146,30 @@ Configuradas no `tailwind.config.js`:
 - **Inter** - Corpo do texto
 - **Outfit** - Títulos
 
+## 🙏 Créditos e Agradecimentos
+
+Este site foi reconstruído com muito carinho e uma ajudinha de peso. Um salve especial à dupla que garantiu a performance e a agilidade: **ReactJS** (por toda a mágica da interface) e **Tailwind CSS** (por me salvar de vez de escrever muito CSS). Sem eles, a vida do desenvolvedor não seria tão leve!
+
+### Tecnologias que tornaram isso possível:
+- **React 18** - A base de tudo
+- **Vite** - Build tool que faz a diferença
+- **Tailwind CSS** - Styling sem sofrimento
+- **Swiper** - Carrosséis elegantes
+- **Font Awesome** - Ícones perfeitos
+- **Formspree** - Formulários sem backend
+- **Lottie** - Animações da página 404
+
 ## 📧 Contato
 
 - **Website**: [robsonsvicero.com.br](https://robsonsvicero.com.br)
 - **LinkedIn**: [/in/robsonsvicero](https://www.linkedin.com/in/robsonsvicero/)
 - **GitHub**: [/robsonsvicero](https://github.com/robsonsvicero)
 - **Behance**: [/robsonsvicero](https://www.behance.net/robsonsvicero)
-- **Email**: contato@robsonsvicero.com.br
+- **Email**: hello@robsonsvicero.com.br
 
 ## 📄 Licença
 
-© 2025 Robson Svicero. Todos os direitos reservados.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
