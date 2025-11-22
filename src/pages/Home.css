@@ -380,6 +380,12 @@
   color: rgba(255, 248, 240, 0.6);
 }
 
+.forms form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* Responsive */
 @media (max-width: 1440px) {
   .section { padding: 6.25rem; }
@@ -435,4 +441,110 @@
   .section { padding: 2.5rem 1.25rem; }
   .title-banner { font-size: 1.75rem; }
   .banner-description { font-size: 1rem; }
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  min-width: 320px;
+  max-width: 450px;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 10000;
+  animation: slideInRight 0.4s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast.success {
+  border-left: 4px solid #10b981;
+}
+
+.toast.error {
+  border-left: 4px solid #ef4444;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex: 1;
+}
+
+.toast-content i {
+  font-size: 1.5rem;
+}
+
+.toast.success .toast-content i {
+  color: #10b981;
+}
+
+.toast.error .toast-content i {
+  color: #ef4444;
+}
+
+.toast-content span {
+  color: #1a1a1a;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  font-size: 1.25rem;
+}
+
+.toast-close:hover {
+  color: #1a1a1a;
+}
+
+@media (max-width: 820px) {
+  .toast {
+    right: 1rem;
+    left: 1rem;
+    min-width: auto;
+    max-width: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .toast {
+    top: 1rem;
+    padding: 1rem;
+    min-width: auto;
+  }
+  
+  .toast-content span {
+    font-size: 0.9rem;
+  }
+  
+  .toast-content i {
+    font-size: 1.25rem;
+  }
 }

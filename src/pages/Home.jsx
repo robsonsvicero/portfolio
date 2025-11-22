@@ -20,6 +20,10 @@ import aboutPhoto from '../images/about-photo.webp';
 
 const Home = () => {
   const [whatsappVisible, setWhatsappVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState('success');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -88,6 +92,53 @@ const Home = () => {
       });
     };
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formspree.io/f/xdkegzaw', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setToastMessage('Mensagem enviada com sucesso! Entrarei em contato em breve.');
+        setToastType('success');
+        setShowToast(true);
+        form.reset();
+        
+        setTimeout(() => {
+          setShowToast(false);
+        }, 5000);
+      } else {
+        setToastMessage('Erro ao enviar mensagem. Tente novamente.');
+        setToastType('error');
+        setShowToast(true);
+        
+        setTimeout(() => {
+          setShowToast(false);
+        }, 5000);
+      }
+    } catch (error) {
+      setToastMessage('Erro ao enviar mensagem. Verifique sua conexão.');
+      setToastType('error');
+      setShowToast(true);
+      
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const projects = [
     {
@@ -384,7 +435,7 @@ const Home = () => {
               </p>
             </div>
 
-            <form action="https://formspree.io/f/xdkegzaw" method="post">
+            <form onSubmit={handleSubmit}>
               <label htmlFor="nome">Nome*</label>
               <input type="text" name="nome" id="nome" required />
 
@@ -411,8 +462,13 @@ const Home = () => {
               <input type="hidden" name="_subject" value="Novo envio!" />
 
               <div className='w-full items-center flex justify-center'>
-                <Button type="submit" variant="primary" className="w-[50%] border-2 hover:border-primary">
-                  Enviar Proposta
+                <Button 
+                  type="submit" 
+                  variant="primary" 
+                  className="w-[50%] border-2 hover:border-primary"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Enviando...' : 'Enviar Proposta'}
                 </Button>
               </div>
             </form>
@@ -421,6 +477,23 @@ const Home = () => {
       </div>
 
       <Footer />
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className={`toast ${toastType}`}>
+          <div className="toast-content">
+            <i className={`fa-solid ${toastType === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}`}></i>
+            <span>{toastMessage}</span>
+          </div>
+          <button 
+            className="toast-close" 
+            onClick={() => setShowToast(false)}
+            aria-label="Fechar notificação"
+          >
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
