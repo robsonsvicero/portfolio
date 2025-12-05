@@ -327,37 +327,43 @@ const Home = () => {
           <div className="swiper overflow-visible pb-12">
             <div className="card-wrapper swiper-wrapper">
               <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
-                  <Card.Image src={idvDesigner} alt="Card Designer" className="w-full aspect-video rounded-xl mb-4" />
-                  <Card.Badge variant="designer">Identidade Visual</Card.Badge>
-                  <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
-                    Desenvolvo identidades visuais autênticas que traduzem a essência da sua marca. Do conceito ao design final, crio conexões visuais fortes e memoráveis que destacam seu negócio no mercado.
-                  </Card.Description>
-                  <a href="/servico-identidade-visual">
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                  <div className="flex flex-col items-center">
+                    <Card.Image src={idvDesigner} alt="Card Designer" className="w-full aspect-video rounded-xl mb-4" />
+                    <Card.Badge variant="designer">Identidade Visual</Card.Badge>
+                    <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
+                      Desenvolvo identidades visuais autênticas que traduzem a essência da sua marca. Do conceito ao design final, crio conexões visuais fortes e memoráveis que destacam seu negócio no mercado.
+                    </Card.Description>
+                  </div>
+                  <a href="/servico-identidade-visual" className="mt-auto">
                     <Card.Badge variant="cta">Saiba mais...</Card.Badge>
                   </a>
                 </Card>
               </div>
               <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
-                  <Card.Image src={uiDesigner} alt="Card UI designer" className="w-full aspect-video rounded-xl mb-4" />
-                  <Card.Badge variant="ui-ux">UI & UX</Card.Badge>
-                  <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
-                    Crio interfaces intuitivas e envolventes, focadas na melhor experiência do usuário. Aliando estética e funcionalidade, entrego designs que encantam visualmente e facilitam a navegação.
-                  </Card.Description>
-                  <a href="/servico-ui-design">
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                  <div className="flex flex-col items-center">
+                    <Card.Image src={uiDesigner} alt="Card UI designer" className="w-full aspect-video rounded-xl mb-4" />
+                    <Card.Badge variant="ui-ux">UI & UX</Card.Badge>
+                    <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
+                      Crio interfaces intuitivas e envolventes, focadas na melhor experiência do usuário. Aliando estética e funcionalidade, entrego designs que encantam visualmente e facilitam a navegação.
+                    </Card.Description>
+                  </div>
+                  <a href="/servico-ui-design" className="mt-auto">
                     <Card.Badge variant="cta">Saiba mais...</Card.Badge>
                   </a>
                 </Card>
               </div>
               <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
-                  <Card.Image src={developer} alt="Card Programador" className="w-full aspect-video rounded-xl mb-4" />
-                  <Card.Badge variant="developer">Front-End</Card.Badge>
-                  <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
-                    Transformo ideias em sites funcionais com código limpo, performance otimizada e designs que conectam marcas às pessoas.
-                  </Card.Description>
-                  <a href="/servico-front-end">
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                  <div className="flex flex-col items-center">
+                    <Card.Image src={developer} alt="Card Programador" className="w-full aspect-video rounded-xl mb-4" />
+                    <Card.Badge variant="developer">Front-End</Card.Badge>
+                    <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
+                      Transformo ideias em sites funcionais com código limpo, performance otimizada e designs que conectam marcas às pessoas.
+                    </Card.Description>
+                  </div>
+                  <a href="/servico-front-end" className="mt-auto">
                     <Card.Badge variant="cta">Saiba mais...</Card.Badge>
                   </a>
                 </Card>
