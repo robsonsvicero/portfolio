@@ -91,11 +91,9 @@ const Header = ({ variant = 'transparent' }) => {
               </a>
             ))}
             <Button
-              href="https://wa.me/5511964932007"
+              href="/agenda"
               variant="secondary"
-              icon={<i className="fa-brands fa-whatsapp"></i>}
-              target="_blank"
-              rel="noopener noreferrer"
+              icon={<i className="fa-regular fa-calendar"></i>}
               className="ml-4 px-6 py-2 text-base font-semibold"
             >
               Agendar Conversa
@@ -140,11 +138,9 @@ const Header = ({ variant = 'transparent' }) => {
             </a>
           ))}
           <Button
-            href="https://wa.me/5511964932007"
+            href="/agenda"
             variant="secondary"
-            icon={<i className="fa-brands fa-whatsapp"></i>}
-            target="_blank"
-            rel="noopener noreferrer"
+            icon={<i className="fa-regular fa-calendar"></i>}
             className="px-8 py-3 text-lg font-semibold"
           >
             Agendar Conversa

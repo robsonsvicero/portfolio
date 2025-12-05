@@ -136,10 +136,9 @@ const ServiceIdentidadeVisual = () => {
             <p className="font-sans text-lg text-cream/80 mb-8 leading-relaxed">Crie uma presença marcante com uma identidade visual criativa, coerente e profissional.</p>
             <Button
               className='lg:w-[60%] w-full'
-              href="https://wa.me/5511964932007"
+              href="/agenda"
               variant="secondary"
-              target="_blank"
-              rel="noopener noreferrer"
+              icon={<i className="fa-regular fa-calendar"></i>}
             >
               Agendar Conversa Estratégica
             </Button>

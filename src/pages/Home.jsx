@@ -277,8 +277,9 @@ const Home = () => {
               Quando esses três pilares trabalham juntos, sua marca não apenas se destaca — ela <strong className="text-primary">lidera</strong>.
             </p>
             <Button
-              href="#contato"
+              href="/agenda"
               variant="primary"
+              icon={<i className="fa-regular fa-calendar"></i>}
               className="inline-block"
             >
               Agendar Conversa Estratégica
@@ -391,11 +392,9 @@ const Home = () => {
           </div>
               <div className="flex justify-center mt-8">
                 <Button
-                  href="https://wa.me/5511964932007"
+                  href="/agenda"
                   variant="secondary"
-                  icon={<i className="fa-brands fa-whatsapp"></i>}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  icon={<i className="fa-regular fa-calendar"></i>}
                   className="mb-16 px-8 py-4 text-lg w-full lg:w-[40%]"
                 >Agendar Conversa</Button>
               </div>

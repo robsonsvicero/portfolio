@@ -169,10 +169,9 @@ const ServiceFrontEnd = () => {
             </p>
             <Button
               className='lg:w-[40%] w-full'
-              href="https://wa.me/5511964932007"
+              href="/agenda"
               variant="secondary"
-              target="_blank"
-              rel="noopener noreferrer"
+              icon={<i className="fa-regular fa-calendar"></i>}
             >
               Agendar Conversa Estratégica
             </Button>
