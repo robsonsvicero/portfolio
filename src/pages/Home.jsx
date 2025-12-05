@@ -206,19 +206,21 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12 items-stretch">
             {/* Identidade Visual */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary">
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
-                  <i className="fa-solid fa-palette text-4xl text-primary"></i>
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex flex-col justify-between h-full">
+              <div>
+                <div className="flex justify-center mb-6">
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                    <i className="fa-solid fa-palette text-4xl text-primary"></i>
+                  </div>
                 </div>
+                <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Identidade Visual</h3>
+                <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                  A base para a autoridade. Criamos a fundação estratégica que posiciona sua marca no mercado.
+                </p>
               </div>
-              <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Identidade Visual</h3>
-              <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
-                A base para a autoridade. Criamos a fundação estratégica que posiciona sua marca no mercado.
-              </p>
-              <div className="text-center">
+              <div className="text-center mt-auto">
                 <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full">
                   O que somos
                 </span>
@@ -231,17 +233,19 @@ const Home = () => {
             </div>
 
             {/* UX/UI Design */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary">
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
-                  <i className="fa-solid fa-pen-ruler text-4xl text-primary"></i>
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex flex-col justify-between h-full">
+              <div>
+                <div className="flex justify-center mb-6">
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                    <i className="fa-solid fa-pen-ruler text-4xl text-primary"></i>
+                  </div>
                 </div>
+                <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">UX/UI Design</h3>
+                <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                  Interfaces que convertem. Transformamos estratégia em experiências intuitivas e funcionais.
+                </p>
               </div>
-              <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">UX/UI Design</h3>
-              <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
-                Interfaces que convertem. Transformamos estratégia em experiências intuitivas e funcionais.
-              </p>
-              <div className="text-center">
+              <div className="text-center mt-auto">
                 <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full">
                   Como pensamos
                 </span>
@@ -254,17 +258,19 @@ const Home = () => {
             </div>
 
             {/* Front-end */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary">
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
-                  <i className="fa-solid fa-code text-4xl text-primary"></i>
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex flex-col justify-between h-full">
+              <div>
+                <div className="flex justify-center mb-6">
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                    <i className="fa-solid fa-code text-4xl text-primary"></i>
+                  </div>
                 </div>
+                <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Front-end</h3>
+                <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                  Performance e fidelidade. Entregamos interfaces rápidas, responsivas e fiéis ao design.
+                </p>
               </div>
-              <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Front-end</h3>
-              <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
-                Performance e fidelidade. Entregamos interfaces rápidas, responsivas e fiéis ao design.
-              </p>
-              <div className="text-center">
+              <div className="text-center mt-auto">
                 <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full">
                   Como entregamos
                 </span>

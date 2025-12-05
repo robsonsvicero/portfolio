@@ -17,4 +17,18 @@
 @layer components {
   /* Todas as classes CSS foram migradas para Tailwind */
   /* Use classes utilitárias do Tailwind diretamente no JSX */
+  
+  /* Swiper - Garantir mesma altura nos slides */
+  .swiper-wrapper {
+    @apply items-stretch;
+  }
+  
+  .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+  
+  .swiper-slide > * {
+    width: 100%;
+  }
 }
