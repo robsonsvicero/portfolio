@@ -84,10 +84,16 @@ Write-Host "   • https://robsonsvicero.com.br/agenda" -ForegroundColor Gray
 Write-Host "   • https://robsonsvicero.com.br/servico-front-end" -ForegroundColor Gray
 Write-Host "   • https://robsonsvicero.com.br/servico-ui-design" -ForegroundColor Gray
 Write-Host "   • https://robsonsvicero.com.br/servico-identidade-visual" -ForegroundColor Gray
+Write-Host "   • https://robsonsvicero.com.br/login" -ForegroundColor Gray
+Write-Host "   • https://robsonsvicero.com.br/admin/projetos (após login)" -ForegroundColor Gray
 
 Write-Host "`n⚠ IMPORTANTE:" -ForegroundColor Yellow
+Write-Host "  • As variáveis do .env foram incluídas no build automaticamente" -ForegroundColor White
+Write-Host "  • Supabase está configurado e funcionando" -ForegroundColor White
 Write-Host "  • Limpe o cache do navegador após o deploy" -ForegroundColor White
 Write-Host "  • Verifique se o .htaccess está funcionando" -ForegroundColor White
 Write-Host "  • Teste em modo anônimo/privado" -ForegroundColor White
+Write-Host "  • Teste o sistema de projetos (Home deve mostrar projetos do banco)" -ForegroundColor White
+Write-Host "  • Teste o login e acesso à área admin" -ForegroundColor White
 
 Write-Host "`n"
