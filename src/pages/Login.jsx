@@ -22,17 +22,20 @@ const Login = () => {
       
       if (error) {
         if (error.message.includes('Invalid login credentials')) {
-          setError('Email ou senha incorretos')
+          setError('Email ou senha incorretos. Certifique-se de que o usuário foi criado no Supabase.')
+        } else if (error.message.includes('Email not confirmed')) {
+          setError('Email não confirmado. Marque "Auto Confirm User" ao criar o usuário no Supabase.')
         } else {
-          setError('Erro ao fazer login. Tente novamente.')
+          setError(`Erro ao fazer login: ${error.message}`)
         }
+        console.error('Erro de autenticação:', error)
         return
       }
 
       // Redirecionar para admin após login bem-sucedido
       navigate('/admin/projetos')
     } catch (err) {
-      setError('Erro inesperado. Tente novamente.')
+      setError('Erro inesperado. Verifique sua conexão e tente novamente.')
       console.error('Erro no login:', err)
     } finally {
       setIsLoading(false)

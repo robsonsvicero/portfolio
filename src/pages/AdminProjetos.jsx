@@ -157,7 +157,7 @@ const AdminProjetos = () => {
     <div className="min-h-screen bg-cream">
       <Header variant="solid" />
       
-      <section className="pt-32 pb-24 px-4 md:px-16">
+      <section className="pt-[200px] pb-24 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto">
           {/* Header com informações do usuário e logout */}
           <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
