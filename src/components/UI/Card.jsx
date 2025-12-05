@@ -7,16 +7,14 @@ const Card = ({
   hover = true,
   ...props 
 }) => {
+  // Tailwind classes para variantes e hover
   const baseClasses = 'rounded-xl transition-all duration-300';
-  
   const variantClasses = {
-    default: 'bg-dark-gray border border-gray-800',
-    project: 'bg-dark-gray sticky top-0',
-    service: 'bg-dark-gray h-full',
+    default: 'bg-neutral-900 border border-gray-800',
+    project: 'bg-neutral-900 sticky top-0',
+    service: 'bg-neutral-900 h-full',
   };
-  
-  const hoverClasses = hover ? 'hover:shadow-2xl hover:transform' : '';
-
+  const hoverClasses = hover ? 'hover:shadow-2xl hover:scale-[1.02]' : '';
   const classes = `${baseClasses} ${variantClasses[variant]} ${hoverClasses} ${className}`;
 
   return (
@@ -29,10 +27,10 @@ const Card = ({
 // Subcomponentes
 Card.Image = ({ src, alt, className = '' }) => (
   <div className={`overflow-hidden rounded-t-xl ${className}`}>
-    <img 
-      src={src} 
-      alt={alt} 
-      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105 rounded-xl"
     />
   </div>
 );
@@ -44,13 +42,13 @@ Card.Content = ({ children, className = '' }) => (
 );
 
 Card.Title = ({ children, className = '' }) => (
-  <h3 className={`font-title text-2xl font-normal text-cream mb-6 ${className}`}>
+  <h3 className={`font-title text-2xl font-light text-cream mb-6 ${className}`}>
     {children}
   </h3>
 );
 
 Card.Description = ({ children, className = '' }) => (
-  <p className={`text-base text-cream/60 mb-6 leading-relaxed ${className}`}>
+  <p className={`text-lg text-cream/60 mb-6 leading-relaxed ${className}`}>
     {children}
   </p>
 );
@@ -63,16 +61,15 @@ Card.Actions = ({ children, className = '' }) => (
 
 Card.Button = ({ children, href, variant = 'outline', className = '' }) => {
   const variantClasses = {
-    outline: 'border border-cream/40 hover:bg-cream/10 hover:border-cream',
+    outline: 'border-2 border-primary text-cream hover:bg-primary hover:border-primary',
     filled: 'bg-primary text-cream hover:bg-primary/80',
   };
-
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`w-full flex items-center justify-center py-3 px-4 rounded transition-all duration-300 text-cream/60 hover:text-cream ${variantClasses[variant]} ${className}`}
+      className={`w-full flex items-center justify-center py-3 px-6 rounded-full font-medium transition-all duration-300 ${variantClasses[variant]} ${className}`}
     >
       {children}
     </a>
@@ -81,15 +78,14 @@ Card.Button = ({ children, href, variant = 'outline', className = '' }) => {
 
 Card.Badge = ({ children, variant = 'default', className = '' }) => {
   const variantClasses = {
-    default: 'bg-blue-100 text-primary',
-    designer: 'bg-pink-100 text-pink-700',
-    'ui-ux': 'bg-orange-100 text-orange-700',
-    developer: 'bg-green-100 text-green-700',
-    cta: 'bg-transparent text-light-gray border-cream hover:bg-cream hover:border-primary hover:text-primary hover:border',
+    default: 'bg-primary/10 text-primary border border-primary/20',
+    designer: 'bg-primary/10 text-primary border border-primary/20',
+    'ui-ux': 'bg-primary/10 text-primary border border-primary/20',
+    developer: 'bg-primary/10 text-primary border border-primary/20',
+    cta: 'bg-primary/10 text-primary border border-primary/30 hover:bg-primary hover:border-primary hover:text-cream',
   };
-
   return (
-    <span className={`inline-block text-sm font-medium px-3 py-1.5 rounded-full w-fit my-4 transition-all duration-300 ${variantClasses[variant]} ${className}`}>
+    <span className={`inline-block text-sm font-medium px-4 py-2 rounded-full w-fit my-4 transition-all duration-300 ${variantClasses[variant]} ${className}`}>
       {children}
     </span>
   );

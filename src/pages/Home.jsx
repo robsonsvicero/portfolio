@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import { supabase } from '../lib/supabase';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
-import './Home.css';
 
-// Importar imagens
-import projetoAlexandre from '../images/projeto-alexandre.webp';
-import projetoPowerbrain from '../images/projeto-powerbrain.webp';
-import projetoSacada from '../images/projeto-sacada.webp';
-import projetoIsaque from '../images/projeto-isaquemoveis.webp';
-import projetoUmusic from '../images/projeto-umusicstore.webp';
+// Importar imagens (apenas as usadas no layout)
 import idvDesigner from '../images/idv-deigner.webp';
 import uiDesigner from '../images/ui-designer.webp';
 import developer from '../images/developer.webp';
 import aboutPhoto from '../images/about-photo.webp';
+import heroImage from '../images/hero.webp';
 
 const Home = () => {
   const [whatsappVisible, setWhatsappVisible] = useState(false);
@@ -24,6 +20,7 @@ const Home = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState('success');
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,61 +33,51 @@ const Home = () => {
 
   // Inicializar Swiper
   useEffect(() => {
-    const swiper = new Swiper('.card-wrapper', {
-      loop: true,
-      spaceBetween: 30,
+    const cardWrapper = document.querySelector('.card-wrapper');
 
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-      },
-
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-
-      breakpoints: {
-        820: {
-          slidesPerView: 1
+    if (cardWrapper) {
+      const swiper = new Swiper('.swiper', {
+        loop: false,
+        spaceBetween: 20,
+        centeredSlides: false,
+        freeMode: {
+          enabled: true,
+          sticky: false,
         },
-        1024: {
-          slidesPerView: 2
+
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: false,
         },
-        1440: {
-          slidesPerView: 3
+
+        navigation: false,
+
+        breakpoints: {
+          320: {
+            slidesPerView: 1.2,
+            spaceBetween: 16,
+            freeMode: true,
+          },
+          640: {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+            freeMode: true,
+          },
+          820: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+            freeMode: false,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+            freeMode: false,
+          }
         }
-      }
-    });
-
-    return () => {
-      if (swiper) swiper.destroy();
-    };
-  }, []);
-
-  // Efeito botão ripple
-  useEffect(() => {
-    const buttons = document.querySelectorAll('.button');
-
-    const handleMouseMove = (e) => {
-      const btn = e.currentTarget;
-      const x = e.pageX - btn.offsetLeft;
-      const y = e.pageY - btn.offsetTop;
-
-      btn.style.setProperty('--eixoX', x + 'px');
-      btn.style.setProperty('--eixoY', y + 'px');
-    };
-
-    buttons.forEach((btn) => {
-      btn.addEventListener('mousemove', handleMouseMove);
-    });
-
-    return () => {
-      buttons.forEach((btn) => {
-        btn.removeEventListener('mousemove', handleMouseMove);
       });
-    };
+      return () => swiper && swiper.destroy();
+    }
   }, []);
 
   const handleSubmit = async (e) => {
@@ -140,353 +127,342 @@ const Home = () => {
     }
   };
 
-  const projects = [
-    {
-      image: projetoAlexandre,
-      title: 'Alexandre Ivo',
-      description: 'Criação da identidade visual do professor de música Alexandre Ivo. O projeto reflete sua missão de inspirar pessoas a viverem a música com propósito, unindo harmonia, expressão e autenticidade.',
-      link: 'https://www.behance.net/gallery/236215677/Alexandre-Ivo-Professor-de-musica',
-      buttonText: 'Visite o projeto de IDV'
-    },
-    {
-      image: projetoPowerbrain,
-      title: 'PowerBrain',
-      description: 'Desenvolvimento da identidade visual e do site institucional da PowerBrain, empresa de tecnologia que aplica IoT no setor de energia elétrica. A marca traduz inovação e confiabilidade com um visual tecnológico e contemporâneo.',
-      link: 'https://powerbrainbr.com',
-      link2: 'https://www.behance.net/gallery/221467317/PowerBrain',
-      buttonText: 'Visite o site',
-      buttonText2: 'Visite o projeto de IDV'
-    },
-    {
-      image: projetoSacada,
-      title: 'Sacada Classz',
-      description: 'Criação da identidade visual e desenvolvimento de site one-page para a Sacada Classz, especializada em fechamento de sacadas, guarda-corpos e vidraçarias. O design minimalista valoriza transparência, leveza e sofisticação.',
-      link: 'https://sacadaclassz.com.br/',
-      link2: 'https://www.behance.net/gallery/211657157/Sacada-Classz',
-      buttonText: 'Visite o site',
-      buttonText2: 'Visite o projeto de IDV'
-    },
-    {
-      image: projetoIsaque,
-      title: 'Isaque Móveis',
-      description: 'Criação da identidade visual para a loja Isaque Móveis. A marca equilibra solidez e elegância, reforçando a essência artesanal e a qualidade presente em cada peça.',
-      link: 'https://www.behance.net/gallery/188436653/Isaque-Moveis',
-      buttonText: 'Visite o projeto de IDV'
-    },
-    {
-      image: projetoUmusic,
-      title: 'Universal Music',
-      description: 'Projeto de UX Design voltado à modernização da experiência de navegação no site da Universal Music Store. A proposta trouxe fluidez, clareza e uma interface mais alinhada à linguagem contemporânea da marca.',
-      link: 'https://www.behance.net/gallery/174232557/Universal-Music',
-      buttonText: 'Visite o projeto de UX'
-    }
-  ];
+  // Buscar projetos do Supabase (últimos 4)
+  useEffect(() => {
+    const fetchProjetos = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('projetos')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(4);
+
+        if (error) throw error;
+        
+        // Mapear dados do banco para o formato esperado
+        const projetosFormatados = data.map(projeto => ({
+          image: projeto.imagem_url,
+          title: projeto.titulo,
+          description: projeto.descricao,
+          link: projeto.link,
+          buttonText: projeto.button_text
+        }));
+
+        setProjects(projetosFormatados);
+      } catch (error) {
+        console.error('Erro ao buscar projetos:', error);
+        // Array vazio como fallback - incentiva usar o banco de dados
+        setProjects([]);
+      }
+    };
+
+    fetchProjetos();
+  }, []);
 
   return (
-    <div className="bg-cream">
+    <div className="bg-cream min-h-screen">
       <Header />
 
-      <div className="home">
-        {/* Botão flutuante WhatsApp */}
-        <a
-          href="https://wa.me/5511964932007"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="whatsapp-button"
-          style={{ display: whatsappVisible ? 'flex' : 'none' }}
-        >
-          <i className="fa-brands fa-whatsapp"></i>
-        </a>
+      {/* Botão flutuante WhatsApp */}
+      <a
+        href="https://wa.me/5511964932007"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 bg-green-500 text-white rounded-full shadow-lg transition-opacity duration-300 ${whatsappVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        aria-label="Fale pelo WhatsApp"
+      >
+        <i className="fa-brands fa-whatsapp text-3xl"></i>
+      </a>
 
-        {/* Hero Section / Banner */}
-        <section className="letter-banner" id="inicio">
-          <div className="banner">
-            <div className="description">
-              <h1 className="title-banner">
-                Design que conecta estratégia e estética.
-              </h1>
-              <p className="banner-description">
-                Transformo marcas e interfaces em experiências memoráveis.
+      {/* Hero Section / Banner */}
+      <section id="inicio" className="relative h-[780px] flex items-center justify-center text-center overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${heroImage})` }}></div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4">
+          <h1 className="font-title font-extralight text-cream text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6 drop-shadow-lg">Simplicidade que Posiciona</h1>
+          <p className="font-sans text-cream text-xl md:text-2xl lg:text-3xl font-light tracking-wide mb-10 max-w-5xl">Integramos Identidade Visual, UX/UI e Front-end para construir sua autoridade digital.</p>
+          <Button
+            href="https://wa.me/5511964932007"
+            variant="primary"
+            icon={<i className="fa-brands fa-whatsapp"></i>}
+            target="_blank"
+            rel="noopener noreferrer"
+          >Começar seu Posicionamento</Button>
+        </div>
+        <div className="absolute bottom-20 left-0 w-full flex justify-center z-20">
+          <a href="#triade" className="animate-bounce text-cream text-3xl hover:text-primary transition-colors duration-300">
+            <i className="fa-solid fa-chevron-down"></i>
+          </a>
+        </div>
+      </section>
+
+      {/* Tríade Integrada */}
+      <section id="triade" className="bg-cream py-24 px-4 md:px-16">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-4">A Tríade Integrada</h2>
+            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
+            <p className="font-sans text-xl text-low-medium max-w-3xl mx-auto leading-relaxed">
+              O gap entre design e desenvolvimento acaba aqui. Oferecemos uma solução completa que conecta estratégia, usabilidade e performance.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12 items-center">
+            {/* Identidade Visual */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary">
+              <div className="flex justify-center mb-6">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                  <i className="fa-solid fa-palette text-4xl text-primary"></i>
+                </div>
+              </div>
+              <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Identidade Visual</h3>
+              <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                A base para a autoridade. Criamos a fundação estratégica que posiciona sua marca no mercado.
               </p>
-              <div className="banner-button row" id="button">
+              <div className="text-center">
+                <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full">
+                  O que somos
+                </span>
+              </div>
+            </div>
+
+            {/* Seta conectora (oculta em mobile) */}
+            <div className="hidden md:flex items-center justify-center">
+              <i className="fa-solid fa-arrow-right text-4xl text-primary/40"></i>
+            </div>
+
+            {/* UX/UI Design */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary">
+              <div className="flex justify-center mb-6">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                  <i className="fa-solid fa-pen-ruler text-4xl text-primary"></i>
+                </div>
+              </div>
+              <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">UX/UI Design</h3>
+              <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                Interfaces que convertem. Transformamos estratégia em experiências intuitivas e funcionais.
+              </p>
+              <div className="text-center">
+                <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full">
+                  Como pensamos
+                </span>
+              </div>
+            </div>
+
+            {/* Seta conectora (oculta em mobile) */}
+            <div className="hidden md:flex items-center justify-center">
+              <i className="fa-solid fa-arrow-right text-4xl text-primary/40"></i>
+            </div>
+
+            {/* Front-end */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary">
+              <div className="flex justify-center mb-6">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                  <i className="fa-solid fa-code text-4xl text-primary"></i>
+                </div>
+              </div>
+              <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Front-end</h3>
+              <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                Performance e fidelidade. Entregamos interfaces rápidas, responsivas e fiéis ao design.
+              </p>
+              <div className="text-center">
+                <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full">
+                  Como entregamos
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <p className="font-sans text-lg text-low-medium max-w-2xl mx-auto leading-relaxed mb-8">
+              Quando esses três pilares trabalham juntos, sua marca não apenas se destaca — ela <strong className="text-primary">lidera</strong>.
+            </p>
+            <Button
+              href="#contato"
+              variant="primary"
+              className="inline-block"
+            >
+              Agendar Conversa Estratégica
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Projetos Selecionados / Works */}
+      <section id="projetos" className="bg-neutral-900 py-24 px-4 md:px-16">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-2">Projetos Selecionados</h2>
+            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
+          </div>
+          <div className="flex flex-col gap-12">
+            {projects.map((project, index) => (
+              <Card key={index} variant="project" className="flex flex-col md:flex-row items-center bg-neutral-800/50 backdrop-blur-sm rounded-xl shadow-lg p-6 md:p-10 gap-8 border border-cream/10">
+                <div className="w-full md:w-1/2 flex justify-center">
+                  <Card.Image src={project.image} alt={project.title} />
+                </div>
+                <div className="w-full md:w-2/5 flex flex-col justify-center">
+                  <Card.Title>{project.title}</Card.Title>
+                  <Card.Description className="text-lg text-cream/70 mb-6 leading-relaxed">{project.description}</Card.Description>
+                  <Card.Actions className="flex flex-col gap-4">
+                    <Card.Button href={project.link}>{project.buttonText}</Card.Button>
+                    {project.buttonText2 && (
+                      <Card.Button href={project.link2}>{project.buttonText2}</Card.Button>
+                    )}
+                  </Card.Actions>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Principais Serviços / Expertise */}
+      <section id="servicos" className="bg-cream py-24 px-4 md:px-16">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Principais Serviços</h2>
+            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
+          </div>
+          <div className="swiper overflow-visible pb-12">
+            <div className="card-wrapper swiper-wrapper">
+              <div className="swiper-slide">
+                <Card variant="service" className="flex flex-col items-center bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                  <Card.Image src={idvDesigner} alt="Card Designer" className="w-full aspect-video rounded-xl mb-4" />
+                  <Card.Badge variant="designer">Identidade Visual</Card.Badge>
+                  <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
+                    Desenvolvo identidades visuais autênticas que traduzem a essência da sua marca. Do conceito ao design final, crio conexões visuais fortes e memoráveis que destacam seu negócio no mercado.
+                  </Card.Description>
+                  <a href="/servico-identidade-visual">
+                    <Card.Badge variant="cta">Saiba mais...</Card.Badge>
+                  </a>
+                </Card>
+              </div>
+              <div className="swiper-slide">
+                <Card variant="service" className="flex flex-col items-center bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                  <Card.Image src={uiDesigner} alt="Card UI designer" className="w-full aspect-video rounded-xl mb-4" />
+                  <Card.Badge variant="ui-ux">UI & UX</Card.Badge>
+                  <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
+                    Crio interfaces intuitivas e envolventes, focadas na melhor experiência do usuário. Aliando estética e funcionalidade, entrego designs que encantam visualmente e facilitam a navegação.
+                  </Card.Description>
+                  <a href="/servico-ui-design">
+                    <Card.Badge variant="cta">Saiba mais...</Card.Badge>
+                  </a>
+                </Card>
+              </div>
+              <div className="swiper-slide">
+                <Card variant="service" className="flex flex-col items-center bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                  <Card.Image src={developer} alt="Card Programador" className="w-full aspect-video rounded-xl mb-4" />
+                  <Card.Badge variant="developer">Front-End</Card.Badge>
+                  <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
+                    Transformo ideias em sites funcionais com código limpo, performance otimizada e designs que conectam marcas às pessoas.
+                  </Card.Description>
+                  <a href="/servico-front-end">
+                    <Card.Badge variant="cta">Saiba mais...</Card.Badge>
+                  </a>
+                </Card>
+              </div>
+            </div>
+            <div className="swiper-pagination mt-8"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sobre / About */}
+      <section id="sobre" className="bg-cream py-24 px-4 md:px-16">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Quem está por trás do Svicero Studio</h2>
+            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
+          </div>
+          <div className="flex flex-col lg:flex-row-reverse gap-12 items-center mb-8">
+            <div className="w-full lg:w-2/5 flex justify-center mb-8 lg:mb-0">
+              <img src={aboutPhoto} alt="Robson Svicero - Fundador do Svicero Studio" className="w-full h-auto rounded-2xl shadow-lg" />
+            </div>
+            <div className="w-full lg:w-3/5 text-low-medium">
+              <div className="text-about">
+                <p className="text-lg leading-relaxed mb-6">O <strong className='text-primary'>Svicero Studio</strong> nasceu da minha trajetória integrando design e desenvolvimento. Eu sou o <strong className='text-primary'>Robson Svicero</strong>, fundador do estúdio e responsável por transformar a estratégia visual da sua marca em uma presença digital completa e de alta performance.</p>
+                <p className="text-lg leading-relaxed mb-6">Minha jornada começou no <strong className='text-primary'>design gráfico</strong>, criando identidades visuais que ajudavam marcas a se expressarem com propósito e autenticidade. Com o tempo, percebi que queria ir além da estética — queria entender como as pessoas interagem com o design. Foi aí que mergulhei no universo do <strong className='text-primary'>UI/UX design</strong>, unindo beleza e funcionalidade para criar interfaces que realmente conectam marcas e usuários.</p>
+                <p className="text-lg leading-relaxed mb-6">Em seguida, encontrei no <strong className='text-primary'>desenvolvimento front-end</strong> a ponte perfeita entre o design e a tecnologia. Hoje, utilizo HTML, CSS, JavaScript e React para dar vida às criações e garantir que cada detalhe visual funcione de forma fluida e responsiva.</p>
+                <p className="text-lg leading-relaxed mb-6">Essa trajetória é a base do Svicero Studio: um estúdio focado em <strong className='text-primary'>simplicidade estratégica</strong>, onde cada projeto integra <strong className='text-primary'>identidade visual</strong>, <strong className='text-primary'>UX/UI</strong> e <strong className='text-primary'>front-end</strong> de forma coesa. Acredito que o design não termina no layout — ele ganha força quando se transforma em uma experiência real, acessível e envolvente.</p>
+                <p className="text-lg leading-relaxed mb-6">Quando não estou projetando ou codando, você provavelmente vai me encontrar brincando com minha filha, ouvindo música, assistindo filmes, séries ou animes, ou lendo HQs — paixões que alimentam minha criatividade e mantêm minha mente em constante movimento.</p>
+                <p className="text-lg leading-relaxed mb-6"><strong className='text-secondary'>Vamos construir sua autoridade digital juntos?</strong> O Svicero Studio está sempre aberto a novos desafios, colaborações estratégicas e projetos que façam a diferença.</p>
+              </div>
+            </div>
+          </div>
+              <div className="flex justify-center mt-8">
                 <Button
                   href="https://wa.me/5511964932007"
-                  variant="outline"
+                  variant="secondary"
                   icon={<i className="fa-brands fa-whatsapp"></i>}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className='btn-banner hover:bg-primary hover:border-primary'
-                >
-                  Fale comigo
-                </Button>
+                  className="mb-16 px-8 py-4 text-lg w-full lg:w-[40%]"
+                >Agendar Conversa</Button>
               </div>
-            </div>
-          </div>
-          <div className="next-section">
-            <div className="btn-next-section">
-              <a href="#works">
-                <i className="fa-solid fa-chevron-down"></i>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Projetos Selecionados / Works */}
-        <section className="works section" id="works">
-          <div className="container">
-            <div className="section-title">
-              <h2>Projetos Selecionados</h2>
-              <span className="decorBar"></span>
-            </div>
-            <div className="row cards-works">
-              <div className="interface">
-                {projects.map((project, index) => (
-                  <Card key={index} variant="project" className="card-work">
-                    <div className="img">
-                      <Card.Image src={project.image} alt={project.title} />
-                    </div>
-                    <div className="content">
-                      <Card.Title>{project.title}</Card.Title>
-                      <Card.Description className="text">{project.description}</Card.Description>
-                      <Card.Actions className="buttons">
-                        <Card.Button href={project.link}>
-                          {project.buttonText}
-                        </Card.Button>
-                        {project.buttonText2 && (
-                          <Card.Button href={project.link2}>
-                            {project.buttonText2}
-                          </Card.Button>
-                        )}
-                      </Card.Actions>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Principais Serviços / Expertise */}
-        <section className="expertise section" id="expertises">
-          <div className="container">
-            <div className="section-title">
-              <h2>Principais Serviços</h2>
-              <span className="decorBar"></span>
-            </div>
-            <div className="swiper">
-              <div className="card-wrapper">
-                <ul className="card-list swiper-wrapper">
-                  <li className="card-item swiper-slide">
-                    <Card variant="service" className="card-link">
-                      <Card.Image
-                        src={idvDesigner}
-                        alt="Card Designer"
-                        className="card-image"
-                      />
-                      <Card.Badge variant="designer">Identidade Visual</Card.Badge>
-                      <Card.Description className="card-title">
-                        Desenvolvo identidades visuais autênticas que traduzem a
-                        essência da sua marca. Do conceito ao design final, crio
-                        conexões visuais fortes e memoráveis que destacam seu
-                        negócio no mercado.
-                      </Card.Description>
-                      <a href="/servico-identidade-visual">
-                        <Card.Badge variant="cta">Saiba mais...</Card.Badge>
-                      </a>
-                    </Card>
-                  </li>
-
-                  <li className="card-item swiper-slide">
-                    <Card variant="service" className="card-link">
-                      <Card.Image
-                        src={uiDesigner}
-                        alt="Card UI designer"
-                        className="card-image"
-                      />
-                      <Card.Badge variant="ui-ux">UI & UX</Card.Badge>
-                      <Card.Description className="card-title">
-                        Crio interfaces intuitivas e envolventes, focadas na
-                        melhor experiência do usuário. Aliando estética e
-                        funcionalidade, entrego designs que encantam visualmente e
-                        facilitam a navegação.
-                      </Card.Description>
-                      <a href="/servico-ui-design">
-                        <Card.Badge variant="cta">Saiba mais...</Card.Badge>
-                      </a>
-                    </Card>
-                  </li>
-
-                  <li className="card-item swiper-slide">
-                    <Card variant="service" className="card-link">
-                      <Card.Image
-                        src={developer}
-                        alt="Card Programador"
-                        className="card-image"
-                      />
-                      <Card.Badge variant="developer">Front-End</Card.Badge>
-                      <Card.Description className="card-title">
-                        Transformo ideias em sites funcionais com código limpo,
-                        performance otimizada e designs que conectam marcas às
-                        pessoas.
-                      </Card.Description>
-                      <a href="/servico-front-end">
-                        <Card.Badge variant="cta">Saiba mais...</Card.Badge>
-                      </a>
-                    </Card>
-                  </li>
-                </ul>
-
-                <div className="swiper-pagination"></div>
-                <div className="swiper-slide-button swiper-button-prev"></div>
-                <div className="swiper-slide-button swiper-button-next"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Sobre / About */}
-        <section className="about section" id="about">
-          <div className="about-container center">
-            <div className="section-title">
-              <h2>Sobre</h2>
-              <span className="decorBar"></span>
-            </div>
-            <div className="about-me">
-              <div className="about-img">
-                <img src={aboutPhoto} alt="Robson Svicero - Design" />
-              </div>
-              <div className="informacoes-about">
-                <div className="text-about">
-                  <p>
-                    Eu sou o <strong>Robson Svicero</strong>,{' '}
-                    <strong>designer de identidade visual</strong>,{' '}
-                    <strong>UI designer</strong> e{' '}
-                    <strong>desenvolvedor front-end</strong> apaixonado por
-                    transformar ideias em experiências digitais marcantes.
-                  </p>
-                  <p>
-                    Minha jornada começou no design gráfico, criando identidades
-                    visuais que ajudavam marcas a se expressarem com propósito e
-                    autenticidade. Com o tempo, percebi que queria ir além da
-                    estética — queria entender como as pessoas interagem com o
-                    design. Foi aí que mergulhei no universo do UI design, unindo
-                    beleza e funcionalidade para criar interfaces que realmente
-                    conectam marcas e usuários.
-                  </p>
-                  <p>
-                    Em seguida, encontrei no desenvolvimento front-end a ponte
-                    perfeita entre o design e a tecnologia. Hoje, utilizo HTML,
-                    CSS, JavaScript e React para dar vida às minhas criações e
-                    garantir que cada detalhe visual funcione de forma fluida e
-                    responsiva.
-                  </p>
-                  <p>
-                    Acredito que o design não termina no layout — ele ganha força
-                    quando se transforma em uma experiência real, acessível e
-                    envolvente.
-                  </p>
-                  <p>
-                    Quando não estou projetando ou codando, você provavelmente vai
-                    me encontrar brincando com minha filha, ouvindo música,
-                    assistindo filmes, séries ou animes, ou lendo HQs — paixões
-                    que alimentam minha criatividade e mantêm minha mente em
-                    constante movimento.
-                  </p>
-                  <p>
-                    <strong>Vamos conversar?</strong>
-                    Estou sempre aberto a novos desafios, colaborações criativas e
-                    projetos que façam a diferença.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="buttons row">
-              <Button
-                href="https://wa.me/5511964932007"
-                variant="outline"
-                icon={<i className="fa-brands fa-whatsapp"></i>}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-primary text-primary hover:text-cream hover:bg-primary hover:border-primary mb-12"
-              >
-                Fale comigo
-              </Button>
-            </div>
-          </div>
-          <div className="reviews">
+                <hr className='my-4 border-[#C1C1C1]'></hr>
+          <div className="mt-16">
             {/* Elfsight Google Reviews */}
-            <div
-              className="elfsight-app-0ed1853d-fdbc-4203-a528-0b0f618422cd"
-              data-elfsight-app-lazy
-            ></div>
+            <div className="elfsight-app-0ed1853d-fdbc-4203-a528-0b0f618422cd" data-elfsight-app-lazy></div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Contato / Contact */}
-        <section className="forms section" id="contact">
-          <div className="container form-container">
-            <div className="chamada">
-              <h2 className="titulo-chamada">
-                FICOU COM DÚVIDA? MANDE UMA MENSAGEM!
-              </h2>
-              <p className="texto-chamada">
-                Caso tenha ficado com qualquer dúvida basta mandar uma mensagem
-                que entrarei em contato o mais breve possível.
-              </p>
+      {/* Contato / Contact */}
+      <section id="contato" className="bg-neutral-900 py-24 px-4 md:px-16">
+        <div className="max-w-screen-md mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="font-title text-3xl md:text-4xl font-light text-cream mb-2">Ficou com dúvida? Mande uma mensagem!</h2>
+            <p className="text-base md:text-lg text-cream/60 mx-auto mb-6">Caso tenha ficado com qualquer dúvida basta mandar uma mensagem que entrarei em contato o mais breve possível.</p>
+          </div>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 bg-neutral-900 rounded-xl shadow-lg p-8">
+            <label htmlFor="nome" className="text-cream text-base">Nome*</label>
+            <input type="text" name="nome" id="nome" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
+
+            <label htmlFor="email" className="text-cream text-base">E-mail*</label>
+            <input type="email" name="email" id="email" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
+
+            <label htmlFor="whats" className="text-cream text-base">WhatsApp*</label>
+            <input type="tel" name="whats" id="whats" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
+
+            <label htmlFor="projeto" className="text-cream text-base">Tipo de projeto*</label>
+            <select name="projeto" id="projeto" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none">
+              <option value="">Selecione uma opção</option>
+              <option value="Identidade Visual">Identidade Visual</option>
+              <option value="UI/UX Design">UI/UX Design</option>
+              <option value="Webdesign">Webdesign</option>
+              <option value="Outros">Outros</option>
+            </select>
+
+            <label htmlFor="mensagem" className="text-cream text-base">Mensagem*</label>
+            <textarea name="mensagem" id="mensagem" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none min-h-[150px] resize-y" />
+
+            <p className='w-full text-left text-cream/60 text-sm'>*campos obrigatórios</p>
+
+            <input type="hidden" name="_subject" value="Novo envio!" />
+
+            <div className='w-full flex justify-center items-center'>
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full md:w-1/2 border-2 hover:border-primary px-8 py-4 text-lg"
+                disabled={isSubmitting}
+              >{isSubmitting ? 'Enviando...' : 'Enviar Proposta'}</Button>
             </div>
-
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="nome">Nome*</label>
-              <input type="text" name="nome" id="nome" required />
-
-              <label htmlFor="email">E-mail*</label>
-              <input type="email" name="email" id="email" required />
-
-              <label htmlFor="whats">WhatsApp*</label>
-              <input type="tel" name="whats" id="whats" required />
-
-              <label htmlFor="projeto">Tipo de projeto*</label>
-              <select name="projeto" id="projeto" required>
-                <option value="">Selecione uma opção</option>
-                <option value="Identidade Visual">Identidade Visual</option>
-                <option value="UI/UX Design">UI/UX Design</option>
-                <option value="Webdesign">Webdesign</option>
-                <option value="Outros">Outros</option>
-              </select>
-
-              <label htmlFor="mensagem">Mensagem*</label>
-              <textarea name="mensagem" id="mensagem" required></textarea>
-
-              <p className='w-full text-left'>*campos obrigatórios</p>
-
-              <input type="hidden" name="_subject" value="Novo envio!" />
-
-              <div className='w-full items-center flex justify-center'>
-                <Button 
-                  type="submit" 
-                  variant="primary" 
-                  className="w-[50%] border-2 hover:border-primary"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Enviando...' : 'Enviar Proposta'}
-                </Button>
-              </div>
-            </form>
-          </div>
-        </section>
-      </div>
+          </form>
+        </div>
+      </section>
 
       <Footer />
 
       {/* Toast Notification */}
       {showToast && (
-        <div className={`toast ${toastType}`}>
-          <div className="toast-content">
-            <i className={`fa-solid ${toastType === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}`}></i>
-            <span>{toastMessage}</span>
+        <div className={`fixed top-8 right-8 z-50 min-w-[320px] max-w-[450px] p-6 bg-white rounded-xl shadow-2xl flex items-center justify-between gap-4 animate-slideInRight border-l-4 ${toastType === 'success' ? 'border-green-500' : 'border-red-500'}`}>
+          <div className="flex items-center gap-3 flex-1">
+            <i className={`fa-solid text-2xl ${toastType === 'success' ? 'fa-circle-check text-green-500' : 'fa-circle-exclamation text-red-500'}`}></i>
+            <span className="text-neutral-900 text-base font-medium">{toastMessage}</span>
           </div>
-          <button 
-            className="toast-close" 
+          <button
+            className="bg-transparent border-none text-neutral-500 hover:text-neutral-900 transition-colors p-1 flex items-center justify-center text-xl"
             onClick={() => setShowToast(false)}
             aria-label="Fechar notificação"
           >

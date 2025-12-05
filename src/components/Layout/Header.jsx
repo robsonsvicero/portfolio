@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '../UI/Button';
-import './Header.css';
-import logoBranco from '../../images/logo_branco.png';
-import logoAzul from '../../images/logo_azul.png';
+
+import logoBranco from '../../images/logo_alternativo 4.png';
+import logoAzul from '../../images/logo_alternativo 1.png';
 
 const Header = ({ variant = 'transparent' }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -51,68 +51,105 @@ const Header = ({ variant = 'transparent' }) => {
   };
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''} ${variant === 'solid' ? 'header-solid' : ''}`}>
-      <div className="container header-container">
-        <div className="header-content row justify-content-between">
-          <div className="logo-container">
+    <header
+      className={`w-full py-5 fixed top-0 left-0 z-50 transition-all duration-300
+        ${scrolled || variant === 'solid' ? 'bg-[#fff8f0cc] shadow-lg' : 'bg-transparent'}
+        `}
+    >
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex-shrink-0">
             <a href="/#inicio" onClick={(e) => handleNavigation(e, 'inicio')}>
               <img
                 src={scrolled || variant === 'solid' ? logoAzul : logoBranco}
-                alt="Logo Robson Svicero"
-                className="logo"
+                alt="Logo Svicero Studio"
+                className="h-14 sm:h-16 md:h-20 w-auto transition-all duration-300"
               />
             </a>
           </div>
 
-          <nav>
-            <div
-              className={`mobile-menu ${menuOpen ? 'active' : ''}`}
-              onClick={toggleMenu}
+          {/* Navegação Desktop */}
+          <nav className="hidden lg:flex items-center gap-6">
+            {[
+              { label: 'Início', section: 'inicio' },
+              { label: 'Tríade', section: 'triade' },
+              { label: 'Projetos', section: 'projetos' },
+              { label: 'Serviços', section: 'servicos' },
+              { label: 'Sobre', section: 'sobre' },
+              { label: 'Contato', section: 'contato' },
+            ].map((item) => (
+              <a
+                key={item.section}
+                href={`/#${item.section}`}
+                onClick={(e) => handleNavigation(e, item.section)}
+                className={`font-title text-base xl:text-lg transition-colors duration-200 px-3 py-2
+                  ${scrolled || variant === 'solid' ? 'text-primary' : 'text-cream'}
+                  hover:bg-secondary hover:text-cream hover:rounded-lg`}
+              >
+                {item.label}
+              </a>
+            ))}
+            <Button
+              href="https://wa.me/5511964932007"
+              variant="secondary"
+              icon={<i className="fa-brands fa-whatsapp"></i>}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4 px-6 py-2 text-base font-semibold"
             >
-              <span className="line1"></span>
-              <span className="line2"></span>
-              <span className="line3"></span>
-            </div>
-
-            <ul className={`nav-list ${menuOpen ? 'active' : ''}`}>
-              <li>
-                <a className="item-list" href="/#inicio" onClick={(e) => handleNavigation(e, 'inicio')}>
-                  Início
-                </a>
-              </li>
-              <li>
-                <a className="item-list" href="/#works" onClick={(e) => handleNavigation(e, 'works')}>
-                  Portfólio
-                </a>
-              </li>
-              <li>
-                <a className="item-list" href="/#expertises" onClick={(e) => handleNavigation(e, 'expertises')}>
-                  Serviços
-                </a>
-              </li>
-              <li>
-                <a className="item-list" href="/#about" onClick={(e) => handleNavigation(e, 'about')}>
-                  Sobre
-                </a>
-              </li>
-              <li>
-                <a className="item-list" href="/#contact" onClick={(e) => handleNavigation(e, 'contact')}>
-                  Contato
-                </a>
-              </li>
-
-              <div className="buttons-header row">
-                <Button
-                  href="/agenda"
-                  variant="secondary"
-                  className="btn-header"
-                >
-                  Agende uma reunião
-                </Button>
-              </div>
-            </ul>
+              Agendar Conversa
+            </Button>
           </nav>
+
+          {/* Menu Mobile */}
+          <div className="lg:hidden flex items-center">
+            <button
+              className="flex flex-col justify-center items-center w-12 h-12 group"
+              onClick={toggleMenu}
+              aria-label="Abrir menu"
+            >
+              <span className={`block w-7 h-0.5 bg-primary mb-1 transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`block w-7 h-0.5 bg-primary mb-1 transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`block w-7 h-0.5 bg-primary transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Nav */}
+        <nav
+          className={`lg:hidden fixed top-0 left-0 w-full h-screen bg-cream/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center transition-all duration-300
+            ${menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none'}`}
+        >
+          {[
+            { label: 'Início', section: 'inicio' },
+            { label: 'Tríade', section: 'triade' },
+            { label: 'Projetos', section: 'projetos' },
+            { label: 'Serviços', section: 'servicos' },
+            { label: 'Sobre', section: 'sobre' },
+            { label: 'Contato', section: 'contato' },
+          ].map((item) => (
+            <a
+              key={item.section}
+              href={`/#${item.section}`}
+              onClick={(e) => handleNavigation(e, item.section)}
+              className={`font-title text-2xl mb-6 transition-colors duration-200 px-4 py-2
+                text-primary hover:bg-secondary hover:text-cream hover:rounded-lg`}
+            >
+              {item.label}
+            </a>
+          ))}
+          <Button
+            href="https://wa.me/5511964932007"
+            variant="secondary"
+            icon={<i className="fa-brands fa-whatsapp"></i>}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 text-lg font-semibold"
+          >
+            Agendar Conversa
+          </Button>
+        </nav>
       </div>
     </header>
   );

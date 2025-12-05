@@ -13,10 +13,13 @@ export default {
         'dark-bg': '#050505',
         'dark-gray': '#1a1a1a',
         'blue-light': '#5FB2D8',
+        'low-light': '#707070',
+        'low-medium': '#404040',
+        'low-dark': '#232323',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        title: ['Outfit', 'sans-serif'],
+        title: ['Manrope', 'sans-serif'],
       },
       fontSize: {
         exg: '5.6rem',

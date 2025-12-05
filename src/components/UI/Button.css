@@ -1,7 +1,18 @@
-/* Button hover styles for icons */
-.group:hover i,
-.group:hover .fa-brands,
-.group:hover .fa-solid,
-.group:hover .fa-regular {
-  color: #FFF8F0 !important;
+
+
+.btn-fill {
+	position: absolute;
+	transform: translate(-50%, -50%) scale(0);
+	transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), width 0s, height 0s;
+	pointer-events: none;
+	opacity: 0.7;
+}
+.btn-fill-animate {
+	transform: translate(-50%, -50%) scale(1);
+	transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
+	opacity: 1;
+}
+
+.outline-hover:hover {
+	border-color: #042C5A !important;
 }

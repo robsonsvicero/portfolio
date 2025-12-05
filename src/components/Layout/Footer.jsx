@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../UI/Button';
-import './Footer.css';
-import logoFooter from '../../images/logo_robsonsvicero.png';
+import logoFooter from '../../images/logo_horizontal 4.png';
+import heroImage from '../../images/hero.webp';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -12,82 +12,59 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer">
-      <div className="container social-container">
-        <div className="social">
-          <nav>
-            <ul>
-              <li>
-                <a
-                  href="https://wa.me/5511964932007"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i className="fa-brands fa-whatsapp"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/robsonsvicero.dsgr/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i className="fa-brands fa-instagram"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/robsonsvicero/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i className="fa-brands fa-linkedin-in"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/robsonsvicero"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i className="fa-brands fa-github-alt"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.behance.net/robsonsvicero"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i className="fa-brands fa-behance"></i>
-                </a>
-              </li>
-            </ul>
-          </nav>
+    <footer className="w-full flex flex-col items-center justify-center bg-cover text-cream py-16 px-4 sm:px-8 md:px-16 lg:px-24" style={{ backgroundImage: `url(${heroImage})` }}>
+      <div className="w-full flex flex-col items-center max-w-screen-xl">
+        <nav className="w-full flex justify-center mb-12">
+          <ul className="flex flex-row gap-6 sm:gap-8 md:gap-12">
+            <li>
+              <a href="https://wa.me/5511964932007" rel="noopener noreferrer" target="_blank" aria-label="WhatsApp">
+                <i className="fa-brands fa-whatsapp text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/robsonsvicero.dsgr/" rel="noopener noreferrer" target="_blank" aria-label="Instagram">
+                <i className="fa-brands fa-instagram text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/robsonsvicero/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn">
+                <i className="fa-brands fa-linkedin-in text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/robsonsvicero" rel="noopener noreferrer" target="_blank" aria-label="GitHub">
+                <i className="fa-brands fa-github-alt text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.behance.net/robsonsvicero" rel="noopener noreferrer" target="_blank" aria-label="Behance">
+                <i className="fa-brands fa-behance text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-          <div className="buttons btn-social row">
-            <Button
-              onClick={scrollToTop}
-              variant="outline"
-              icon={<i className="fa-brands fa-space-awesome"></i>}
-              className="button hover:bg-primary hover:border-primary"
-            >
-              Voltar ao topo
-            </Button>
-          </div>
+        <div className="mb-16">
+          <Button
+            onClick={scrollToTop}
+            variant="outline"
+            icon={<i className="fa-brands fa-space-awesome" />}
+            className="border border-primary text-primary hover:bg-primary hover:text-cream px-6 py-2 rounded-full transition"
+          >
+            Voltar ao topo
+          </Button>
+        </div>
 
-          <div className="made">
-            <p>
-              Feito com <span>💙</span> em Sampa.
-            </p>
-          </div>
+        <div className="mb-20 px-6 py-2 bg-black/60 rounded text-center italic">
+          <p>
+            Feito com <span>💙</span> em Sampa.
+          </p>
+        </div>
 
-          <div className="rp-footer">
-            <p>© 2025 | Desenvolvido por </p>
-            <div>
-              <img src={logoFooter} alt="Logo Robson Svicero" />
-            </div>
-          </div>
+        <div className="flex flex-col sm:flex-row items-center justify-center text-xs sm:text-sm text-cream gap-3 sm:gap-4 flex-wrap text-center">
+          <p>© 2025</p>
+          <span className="hidden sm:inline text-cream/60">•</span>
+          <p className="text-cream/80 italic">Svicero Studio — Simplicidade que Posiciona</p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,374 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
+import { useAuth } from '../contexts/AuthContext'
+import Header from '../components/Layout/Header'
+import Footer from '../components/Layout/Footer'
+import Button from '../components/UI/Button'
+
+const AdminProjetos = () => {
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
+  const [projetos, setProjetos] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [editingId, setEditingId] = useState(null)
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastType, setToastType] = useState('success')
+
+  const [formData, setFormData] = useState({
+    titulo: '',
+    descricao: '',
+    imagem_url: '',
+    link: '',
+    button_text: 'Ver Projeto'
+  })
+
+  // Buscar projetos
+  const fetchProjetos = async () => {
+    try {
+      setIsLoading(true)
+      const { data, error } = await supabase
+        .from('projetos')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (error) throw error
+      setProjetos(data || [])
+    } catch (error) {
+      console.error('Erro ao buscar projetos:', error)
+      showToastMessage('Erro ao carregar projetos', 'error')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchProjetos()
+  }, [])
+
+  const showToastMessage = (message, type = 'success') => {
+    setToastMessage(message)
+    setToastType(type)
+    setShowToast(true)
+    setTimeout(() => setShowToast(false), 3000)
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      if (editingId) {
+        // Atualizar projeto existente
+        const { error } = await supabase
+          .from('projetos')
+          .update(formData)
+          .eq('id', editingId)
+
+        if (error) throw error
+        showToastMessage('Projeto atualizado com sucesso!', 'success')
+      } else {
+        // Criar novo projeto
+        const { error } = await supabase
+          .from('projetos')
+          .insert([formData])
+
+        if (error) throw error
+        showToastMessage('Projeto criado com sucesso!', 'success')
+      }
+
+      // Reset form
+      setFormData({
+        titulo: '',
+        descricao: '',
+        imagem_url: '',
+        link: '',
+        button_text: 'Ver Projeto'
+      })
+      setEditingId(null)
+      fetchProjetos()
+    } catch (error) {
+      console.error('Erro ao salvar projeto:', error)
+      showToastMessage('Erro ao salvar projeto', 'error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleEdit = (projeto) => {
+    setFormData({
+      titulo: projeto.titulo,
+      descricao: projeto.descricao,
+      imagem_url: projeto.imagem_url,
+      link: projeto.link,
+      button_text: projeto.button_text
+    })
+    setEditingId(projeto.id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDelete = async (id) => {
+    if (!confirm('Tem certeza que deseja excluir este projeto?')) return
+
+    try {
+      const { error } = await supabase
+        .from('projetos')
+        .delete()
+        .eq('id', id)
+
+      if (error) throw error
+      showToastMessage('Projeto excluído com sucesso!', 'success')
+      fetchProjetos()
+    } catch (error) {
+      console.error('Erro ao excluir projeto:', error)
+      showToastMessage('Erro ao excluir projeto', 'error')
+    }
+  }
+
+  const handleCancelEdit = () => {
+    setFormData({
+      titulo: '',
+      descricao: '',
+      imagem_url: '',
+      link: '',
+      button_text: 'Ver Projeto'
+    })
+    setEditingId(null)
+  }
+
+  const handleLogout = async () => {
+    try {
+      await signOut()
+      navigate('/login')
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error)
+      showToastMessage('Erro ao sair', 'error')
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-cream">
+      <Header variant="solid" />
+      
+      <section className="pt-32 pb-24 px-4 md:px-16">
+        <div className="max-w-screen-xl mx-auto">
+          {/* Header com informações do usuário e logout */}
+          <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
+            <div>
+              <p className="text-sm text-low-medium mb-1">Logado como:</p>
+              <p className="text-lg font-medium text-low-dark">{user?.email}</p>
+            </div>
+            <Button
+              variant="outline"
+              onClick={handleLogout}
+              className="px-6 py-2 !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
+            >
+              <i className="fa-solid fa-right-from-bracket mr-2"></i>
+              Sair
+            </Button>
+          </div>
+
+          <div className="mb-12 text-center">
+            <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+              Gerenciar Projetos
+            </h1>
+            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
+            <p className="text-lg text-low-medium">
+              Adicione, edite ou remova projetos do portfólio
+            </p>
+          </div>
+
+          {/* Formulário */}
+          <div className="bg-white rounded-xl shadow-lg p-8 mb-12 border border-cream/20">
+            <h2 className="font-title text-2xl font-light text-low-dark mb-6">
+              {editingId ? 'Editar Projeto' : 'Novo Projeto'}
+            </h2>
+            
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <div>
+                <label htmlFor="titulo" className="block text-low-dark text-base mb-2">
+                  Título*
+                </label>
+                <input
+                  type="text"
+                  name="titulo"
+                  id="titulo"
+                  required
+                  value={formData.titulo}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                  placeholder="Nome do projeto"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="descricao" className="block text-low-dark text-base mb-2">
+                  Descrição*
+                </label>
+                <textarea
+                  name="descricao"
+                  id="descricao"
+                  required
+                  value={formData.descricao}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none min-h-[120px] resize-y"
+                  placeholder="Descrição do projeto"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="imagem_url" className="block text-low-dark text-base mb-2">
+                  URL da Imagem*
+                </label>
+                <input
+                  type="url"
+                  name="imagem_url"
+                  id="imagem_url"
+                  required
+                  value={formData.imagem_url}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                  placeholder="https://exemplo.com/imagem.jpg"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="link" className="block text-low-dark text-base mb-2">
+                  Link do Projeto*
+                </label>
+                <input
+                  type="url"
+                  name="link"
+                  id="link"
+                  required
+                  value={formData.link}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                  placeholder="https://exemplo.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="button_text" className="block text-low-dark text-base mb-2">
+                  Texto do Botão*
+                </label>
+                <input
+                  type="text"
+                  name="button_text"
+                  id="button_text"
+                  required
+                  value={formData.button_text}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                  placeholder="Ver Projeto"
+                />
+              </div>
+
+              <div className="flex gap-4 justify-end">
+                {editingId && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handleCancelEdit}
+                    className="px-8 py-3 !bg-neutral-200 !text-neutral-800 !border-2 !border-neutral-300 hover:!bg-neutral-300"
+                  >
+                    Cancelar
+                  </Button>
+                )}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="px-8 py-3 !bg-primary !text-white hover:!bg-primary/90"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Salvando...' : editingId ? 'Atualizar' : 'Criar Projeto'}
+                </Button>
+              </div>
+            </form>
+          </div>
+
+          {/* Lista de Projetos */}
+          <div className="bg-white rounded-xl shadow-lg p-8 border border-cream/20">
+            <h2 className="font-title text-2xl font-light text-low-dark mb-6">
+              Projetos Cadastrados ({projetos.length})
+            </h2>
+
+            {isLoading ? (
+              <p className="text-center text-low-medium py-8">Carregando projetos...</p>
+            ) : projetos.length === 0 ? (
+              <p className="text-center text-low-medium py-8">Nenhum projeto cadastrado ainda.</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projetos.map((projeto) => (
+                  <div
+                    key={projeto.id}
+                    className="border border-cream/40 rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
+                  >
+                    <img
+                      src={projeto.imagem_url}
+                      alt={projeto.titulo}
+                      className="w-full aspect-video object-cover"
+                    />
+                    <div className="p-4">
+                      <h3 className="font-title text-xl font-light text-low-dark mb-2">
+                        {projeto.titulo}
+                      </h3>
+                      <p className="text-sm text-low-medium mb-4 line-clamp-2">
+                        {projeto.descricao}
+                      </p>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          onClick={() => handleEdit(projeto)}
+                          className="flex-1 py-2 text-sm !bg-primary !text-white !border-2 !border-primary hover:!bg-primary/90"
+                        >
+                          <i className="fa-solid fa-pen mr-2"></i>
+                          Editar
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => handleDelete(projeto.id)}
+                          className="flex-1 py-2 text-sm !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
+                        >
+                          <i className="fa-solid fa-trash mr-2"></i>
+                          Excluir
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className={`fixed top-8 right-8 z-50 min-w-[320px] max-w-[450px] p-6 bg-white rounded-xl shadow-2xl flex items-center justify-between gap-4 animate-slideInRight border-l-4 ${toastType === 'success' ? 'border-green-500' : 'border-red-500'}`}>
+          <div className="flex items-center gap-3 flex-1">
+            <i className={`fa-solid text-2xl ${toastType === 'success' ? 'fa-circle-check text-green-500' : 'fa-circle-exclamation text-red-500'}`}></i>
+            <span className="text-low-dark text-base">{toastMessage}</span>
+          </div>
+          <button
+            onClick={() => setShowToast(false)}
+            className="text-low-medium hover:text-low-dark transition-colors"
+          >
+            <i className="fa-solid fa-times text-xl"></i>
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default AdminProjetos
