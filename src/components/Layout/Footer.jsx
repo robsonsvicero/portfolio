@@ -62,7 +62,7 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center text-xs sm:text-sm text-cream gap-3 sm:gap-4 flex-wrap text-center">
-          <p>© 2025</p>
+          <p>© 2026</p>
           <span className="hidden sm:inline text-cream/60">•</span>
           <p className="text-cream/80 italic">Svicero Studio — Simplicidade que Posiciona</p>
         </div>
