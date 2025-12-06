@@ -6,6 +6,7 @@ import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
+import Preloader from '../components/Preloader';
 
 // Importar imagens (apenas as usadas no layout)
 import idvDesigner from '../images/idv-deigner.webp';
@@ -160,8 +161,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-cream min-h-screen">
-      <Header />
+    <>
+      <Preloader />
+      <div className="bg-cream min-h-screen">
+        <Header />
 
       {/* Botão flutuante WhatsApp */}
       <a
@@ -481,7 +484,8 @@ const Home = () => {
           </button>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 };
 

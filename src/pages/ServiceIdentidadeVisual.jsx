@@ -43,7 +43,7 @@ const ServiceIdentidadeVisual = () => {
             Construo identidades visuais criativas, estratégicas e alinhadas à essência da sua marca para que ela se destaque e se posicione com autoridade.
           </p>
           <Button
-            className='lg:w-[40%] w-full'
+            className='lg:w-[40%] w-full whitespace-nowrap'
             href="https://wa.me/5511964932007"
             variant="secondary"
             target="_blank"

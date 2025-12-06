@@ -43,7 +43,7 @@ const ServiceUIUXDesign = () => {
             Crio interfaces visuais funcionais, modernas e esteticamente consistentes — focadas em experiência, usabilidade e conversão.
           </p>
           <Button
-            className='lg:w-[40%] w-full'
+            className='lg:w-[40%] w-full whitespace-nowrap'
             href="https://wa.me/5511964932007"
             variant="secondary"
             target="_blank"

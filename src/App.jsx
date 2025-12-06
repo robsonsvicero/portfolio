@@ -15,9 +15,9 @@ import './styles/global.css';
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
           <Route path="/agenda" element={<Schedule />} />
           <Route path="/servico-front-end" element={<ServiceFrontEnd />} />
           <Route path="/servico-identidade-visual" element={<ServiceIdentidadeVisual />} />
