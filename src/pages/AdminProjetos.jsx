@@ -22,7 +22,9 @@ const AdminProjetos = () => {
     descricao: '',
     imagem_url: '',
     link: '',
-    button_text: 'Ver Projeto'
+    button_text: 'Ver Projeto',
+    data_projeto: '',
+    mostrar_home: true
   })
 
   // Buscar projetos
@@ -56,8 +58,8 @@ const AdminProjetos = () => {
   }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    const { name, value, type, checked } = e.target
+    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
   }
 
   const handleSubmit = async (e) => {
@@ -90,7 +92,9 @@ const AdminProjetos = () => {
         descricao: '',
         imagem_url: '',
         link: '',
-        button_text: 'Ver Projeto'
+        button_text: 'Ver Projeto',
+        data_projeto: '',
+        mostrar_home: true
       })
       setEditingId(null)
       fetchProjetos()
@@ -108,7 +112,9 @@ const AdminProjetos = () => {
       descricao: projeto.descricao,
       imagem_url: projeto.imagem_url,
       link: projeto.link,
-      button_text: projeto.button_text
+      button_text: projeto.button_text,
+      data_projeto: projeto.data_projeto || '',
+      mostrar_home: projeto.mostrar_home ?? true
     })
     setEditingId(projeto.id)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -138,7 +144,9 @@ const AdminProjetos = () => {
       descricao: '',
       imagem_url: '',
       link: '',
-      button_text: 'Ver Projeto'
+      button_text: 'Ver Projeto',
+      data_projeto: '',
+      mostrar_home: true
     })
     setEditingId(null)
   }
@@ -269,6 +277,35 @@ const AdminProjetos = () => {
                   className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
                   placeholder="Ver Projeto"
                 />
+              </div>
+
+              <div>
+                <label htmlFor="data_projeto" className="block text-low-dark text-base mb-2">
+                  Data de Criação do Projeto*
+                </label>
+                <input
+                  type="date"
+                  name="data_projeto"
+                  id="data_projeto"
+                  required
+                  value={formData.data_projeto}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  name="mostrar_home"
+                  id="mostrar_home"
+                  checked={formData.mostrar_home}
+                  onChange={handleInputChange}
+                  className="w-5 h-5 rounded border border-cream/40 text-primary focus:ring-primary focus:ring-2"
+                />
+                <label htmlFor="mostrar_home" className="text-low-dark text-base cursor-pointer">
+                  Exibir este projeto na página inicial (Home)
+                </label>
               </div>
 
               <div className="flex gap-4 justify-end">
