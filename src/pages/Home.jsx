@@ -128,7 +128,7 @@ const Home = () => {
     }
   };
 
-  // Buscar projetos do Supabase (últimos 4 marcados para exibir na home)
+  // Buscar projetos do Supabase (últimos 6 marcados para exibir na home)
   useEffect(() => {
     const fetchProjetos = async () => {
       try {
@@ -137,7 +137,7 @@ const Home = () => {
           .select('*')
           .eq('mostrar_home', true)
           .order('data_projeto', { ascending: false })
-          .limit(4);
+          .limit(6);
 
         if (error) throw error;
         
