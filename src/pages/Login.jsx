@@ -46,11 +46,11 @@ const Login = () => {
     <div className="min-h-screen bg-cream flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <img 
             src={logoImage} 
             alt="Svicero Studio" 
-            className="h-16 mx-auto mb-6"
+            className="h-16 mx-auto mb-12"
           />
           <h1 className="font-title text-3xl md:text-4xl font-light text-low-dark mb-2">
             Área Administrativa
