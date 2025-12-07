@@ -147,7 +147,9 @@ const Home = () => {
           title: projeto.titulo,
           description: projeto.descricao,
           link: projeto.link,
-          buttonText: projeto.button_text
+          buttonText: projeto.button_text,
+          link2: projeto.link2,
+          buttonText2: projeto.button_text2
         }));
 
         setProjects(projetosFormatados);

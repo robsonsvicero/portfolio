@@ -30,3 +30,14 @@ CREATE INDEX IF NOT EXISTS idx_projetos_data_projeto ON projetos(data_projeto DE
 
 -- Criar índice para melhorar performance nas consultas filtradas por mostrar_home
 CREATE INDEX IF NOT EXISTS idx_projetos_mostrar_home ON projetos(mostrar_home) WHERE mostrar_home = true;
+
+-- Adicionar colunas para segundo link e botão (opcional - para projetos com múltiplos serviços)
+ALTER TABLE projetos
+ADD COLUMN IF NOT EXISTS link2 TEXT;
+
+ALTER TABLE projetos
+ADD COLUMN IF NOT EXISTS button_text2 TEXT;
+
+-- Comentários nas colunas para documentação
+COMMENT ON COLUMN projetos.link2 IS 'Link opcional para segundo serviço (ex: Behance quando há site + identidade visual)';
+COMMENT ON COLUMN projetos.button_text2 IS 'Texto do botão opcional para segundo link';

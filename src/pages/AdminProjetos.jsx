@@ -23,6 +23,8 @@ const AdminProjetos = () => {
     imagem_url: '',
     link: '',
     button_text: 'Ver Projeto',
+    link2: '',
+    button_text2: '',
     data_projeto: '',
     mostrar_home: true
   })
@@ -93,6 +95,8 @@ const AdminProjetos = () => {
         imagem_url: '',
         link: '',
         button_text: 'Ver Projeto',
+        link2: '',
+        button_text2: '',
         data_projeto: '',
         mostrar_home: true
       })
@@ -113,6 +117,8 @@ const AdminProjetos = () => {
       imagem_url: projeto.imagem_url,
       link: projeto.link,
       button_text: projeto.button_text,
+      link2: projeto.link2 || '',
+      button_text2: projeto.button_text2 || '',
       data_projeto: projeto.data_projeto || '',
       mostrar_home: projeto.mostrar_home ?? true
     })
@@ -145,6 +151,8 @@ const AdminProjetos = () => {
       imagem_url: '',
       link: '',
       button_text: 'Ver Projeto',
+      link2: '',
+      button_text2: '',
       data_projeto: '',
       mostrar_home: true
     })
@@ -277,6 +285,44 @@ const AdminProjetos = () => {
                   className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
                   placeholder="Ver Projeto"
                 />
+              </div>
+
+              {/* Segundo Link (Opcional) */}
+              <div className="pt-4 border-t border-cream/40">
+                <h3 className="text-low-dark text-lg font-medium mb-4">Segundo Link (Opcional)</h3>
+                <p className="text-sm text-low-medium mb-4">Use quando o projeto tiver mais de um serviço (ex: site + identidade visual)</p>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="link2" className="block text-low-dark text-base mb-2">
+                      Link do Segundo Projeto
+                    </label>
+                    <input
+                      type="url"
+                      name="link2"
+                      id="link2"
+                      value={formData.link2}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                      placeholder="https://exemplo.com/projeto2"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="button_text2" className="block text-low-dark text-base mb-2">
+                      Texto do Segundo Botão
+                    </label>
+                    <input
+                      type="text"
+                      name="button_text2"
+                      id="button_text2"
+                      value={formData.button_text2}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                      placeholder="Ver no Behance"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div>
