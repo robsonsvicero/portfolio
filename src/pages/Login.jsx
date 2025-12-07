@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import Button from '../components/UI/Button'
-import logoImage from '../images/logo_alternativo 4.png'
+import logoImage from '../images/logo_alternativo 1.png'
 
 const Login = () => {
   const [email, setEmail] = useState('')
