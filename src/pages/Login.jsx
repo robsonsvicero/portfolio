@@ -46,7 +46,7 @@ const Login = () => {
     <div className="min-h-screen bg-cream flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
           <img 
             src={logoImage} 
             alt="Svicero Studio" 
