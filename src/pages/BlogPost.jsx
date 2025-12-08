@@ -271,6 +271,21 @@ const BlogPost = () => {
                   {post.resumo}
                 </p>
               )}
+
+              {/* Tags */}
+              {post.tags && (
+                <div className="flex flex-wrap gap-2 mt-6">
+                  {post.tags.split(',').map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium hover:bg-primary hover:text-white transition-colors cursor-default"
+                    >
+                      <i className="fa-solid fa-tag mr-2"></i>
+                      {tag.trim()}
+                    </span>
+                  ))}
+                </div>
+              )}
             </header>
 
             {/* Imagem de Destaque */}
