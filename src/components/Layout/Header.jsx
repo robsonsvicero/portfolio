@@ -90,6 +90,15 @@ const Header = ({ variant = 'transparent' }) => {
                 {item.label}
               </a>
             ))}
+            <a
+              href="/blog"
+              onClick={closeMenu}
+              className={`font-title text-base xl:text-lg transition-colors duration-200 px-3 py-2
+                ${scrolled || variant === 'solid' ? 'text-primary' : 'text-cream'}
+                hover:bg-secondary hover:text-cream hover:rounded-lg`}
+            >
+              Blog
+            </a>
             <Button
               href="/agenda"
               variant="secondary"
@@ -137,6 +146,14 @@ const Header = ({ variant = 'transparent' }) => {
               {item.label}
             </a>
           ))}
+          <a
+            href="/blog"
+            onClick={closeMenu}
+            className={`font-title text-2xl mb-6 transition-colors duration-200 px-4 py-2
+              text-primary hover:bg-secondary hover:text-cream hover:rounded-lg`}
+          >
+            Blog
+          </a>
           <Button
             href="/agenda"
             variant="secondary"

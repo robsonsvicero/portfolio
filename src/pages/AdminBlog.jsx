@@ -1,0 +1,539 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
+import { useAuth } from '../contexts/AuthContext'
+import Header from '../components/Layout/Header'
+import Footer from '../components/Layout/Footer'
+import Button from '../components/UI/Button'
+
+const AdminBlog = () => {
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
+  const [posts, setPosts] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [editingId, setEditingId] = useState(null)
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastType, setToastType] = useState('success')
+
+  const [formData, setFormData] = useState({
+    titulo: '',
+    slug: '',
+    resumo: '',
+    conteudo: '',
+    imagem_destaque: '',
+    categoria: '',
+    tags: '',
+    data_publicacao: '',
+    autor: 'Robson Svicero',
+    publicado: false
+  })
+
+  // Buscar posts
+  const fetchPosts = async () => {
+    try {
+      setIsLoading(true)
+      const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (error) throw error
+      setPosts(data || [])
+    } catch (error) {
+      console.error('Erro ao buscar posts:', error)
+      showToastMessage('Erro ao carregar posts', 'error')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
+
+  const showToastMessage = (message, type = 'success') => {
+    setToastMessage(message)
+    setToastType(type)
+    setShowToast(true)
+    setTimeout(() => setShowToast(false), 3000)
+  }
+
+  // Gerar slug automaticamente do título
+  const generateSlug = (text) => {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+      .replace(/[^\w\s-]/g, '') // Remove caracteres especiais
+      .replace(/\s+/g, '-') // Substitui espaços por hífens
+      .replace(/-+/g, '-') // Remove hífens duplicados
+      .trim()
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target
+    
+    if (name === 'titulo') {
+      // Atualizar título e gerar slug automaticamente
+      setFormData(prev => ({ 
+        ...prev, 
+        titulo: value,
+        slug: generateSlug(value)
+      }))
+    } else {
+      setFormData(prev => ({ 
+        ...prev, 
+        [name]: type === 'checkbox' ? checked : value 
+      }))
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      if (editingId) {
+        // Atualizar post existente
+        const { error } = await supabase
+          .from('posts')
+          .update(formData)
+          .eq('id', editingId)
+
+        if (error) throw error
+        showToastMessage('Post atualizado com sucesso!', 'success')
+      } else {
+        // Criar novo post
+        const { error } = await supabase
+          .from('posts')
+          .insert([formData])
+
+        if (error) throw error
+        showToastMessage('Post criado com sucesso!', 'success')
+      }
+
+      // Reset form
+      setFormData({
+        titulo: '',
+        slug: '',
+        resumo: '',
+        conteudo: '',
+        imagem_destaque: '',
+        categoria: '',
+        tags: '',
+        data_publicacao: '',
+        autor: 'Robson Svicero',
+        publicado: false
+      })
+      setEditingId(null)
+      fetchPosts()
+    } catch (error) {
+      console.error('Erro ao salvar post:', error)
+      showToastMessage('Erro ao salvar post', 'error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleEdit = (post) => {
+    setFormData({
+      titulo: post.titulo,
+      slug: post.slug,
+      resumo: post.resumo || '',
+      conteudo: post.conteudo,
+      imagem_destaque: post.imagem_destaque || '',
+      categoria: post.categoria || '',
+      tags: post.tags || '',
+      data_publicacao: post.data_publicacao,
+      autor: post.autor,
+      publicado: post.publicado
+    })
+    setEditingId(post.id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDelete = async (id) => {
+    if (!confirm('Tem certeza que deseja excluir este post?')) return
+
+    try {
+      const { error } = await supabase
+        .from('posts')
+        .delete()
+        .eq('id', id)
+
+      if (error) throw error
+      showToastMessage('Post excluído com sucesso!', 'success')
+      fetchPosts()
+    } catch (error) {
+      console.error('Erro ao excluir post:', error)
+      showToastMessage('Erro ao excluir post', 'error')
+    }
+  }
+
+  const handleCancelEdit = () => {
+    setFormData({
+      titulo: '',
+      slug: '',
+      resumo: '',
+      conteudo: '',
+      imagem_destaque: '',
+      categoria: '',
+      tags: '',
+      data_publicacao: '',
+      autor: 'Robson Svicero',
+      publicado: false
+    })
+    setEditingId(null)
+  }
+
+  const handleLogout = async () => {
+    try {
+      await signOut()
+      navigate('/login')
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error)
+      showToastMessage('Erro ao sair', 'error')
+    }
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('pt-BR')
+  }
+
+  return (
+    <div className="min-h-screen bg-cream">
+      <Header variant="solid" />
+      
+      <section className="pt-[200px] pb-24 px-4 md:px-16">
+        <div className="max-w-screen-xl mx-auto">
+          {/* Header com informações do usuário e navegação */}
+          <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
+            <div className="flex-1">
+              <p className="text-sm text-low-medium mb-1">Logado como:</p>
+              <p className="text-lg font-medium text-low-dark">{user?.email}</p>
+            </div>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={() => navigate('/admin/projetos')}
+                className="px-6 py-2 !bg-neutral-200 !border-2 !border-neutral-300 !text-neutral-800 hover:!bg-neutral-300"
+              >
+                <i className="fa-solid fa-folder mr-2"></i>
+                Projetos
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleLogout}
+                className="px-6 py-2 !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
+              >
+                <i className="fa-solid fa-right-from-bracket mr-2"></i>
+                Sair
+              </Button>
+            </div>
+          </div>
+
+          <div className="mb-12 text-center">
+            <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+              Gerenciar Blog
+            </h1>
+            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
+            <p className="text-lg text-low-medium">
+              Crie, edite ou remova posts do blog
+            </p>
+          </div>
+
+          {/* Formulário */}
+          <div className="bg-white rounded-xl shadow-lg p-8 mb-12 border border-cream/20">
+            <h2 className="font-title text-2xl font-light text-low-dark mb-6">
+              {editingId ? 'Editar Post' : 'Novo Post'}
+            </h2>
+            
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="titulo" className="block text-low-dark text-base mb-2">
+                    Título*
+                  </label>
+                  <input
+                    type="text"
+                    name="titulo"
+                    id="titulo"
+                    required
+                    value={formData.titulo}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                    placeholder="Título do post"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="slug" className="block text-low-dark text-base mb-2">
+                    Slug (URL)* <span className="text-xs text-low-medium">(gerado automaticamente)</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="slug"
+                    id="slug"
+                    required
+                    value={formData.slug}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                    placeholder="slug-do-post"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="resumo" className="block text-low-dark text-base mb-2">
+                  Resumo <span className="text-xs text-low-medium">(aparece na listagem)</span>
+                </label>
+                <textarea
+                  name="resumo"
+                  id="resumo"
+                  value={formData.resumo}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none min-h-[80px] resize-y"
+                  placeholder="Breve descrição do post..."
+                />
+              </div>
+
+              <div>
+                <label htmlFor="conteudo" className="block text-low-dark text-base mb-2">
+                  Conteúdo* 
+                  <span className="text-xs text-low-medium ml-2">
+                    (use ## para títulos, ### para subtítulos, - para listas)
+                  </span>
+                </label>
+                <textarea
+                  name="conteudo"
+                  id="conteudo"
+                  required
+                  value={formData.conteudo}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none min-h-[300px] resize-y font-mono"
+                  placeholder="Conteúdo completo do post..."
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="imagem_destaque" className="block text-low-dark text-base mb-2">
+                    URL da Imagem de Destaque
+                  </label>
+                  <input
+                    type="url"
+                    name="imagem_destaque"
+                    id="imagem_destaque"
+                    value={formData.imagem_destaque}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                    placeholder="https://exemplo.com/imagem.jpg"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="categoria" className="block text-low-dark text-base mb-2">
+                    Categoria
+                  </label>
+                  <input
+                    type="text"
+                    name="categoria"
+                    id="categoria"
+                    value={formData.categoria}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                    placeholder="UI/UX Design, Desenvolvimento, etc."
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="tags" className="block text-low-dark text-base mb-2">
+                  Tags <span className="text-xs text-low-medium">(separe por vírgula)</span>
+                </label>
+                <input
+                  type="text"
+                  name="tags"
+                  id="tags"
+                  value={formData.tags}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                  placeholder="react, design, ui, ux, figma"
+                />
+                <p className="text-xs text-low-medium mt-2">
+                  <i className="fa-solid fa-lightbulb mr-1"></i>
+                  Use tags para facilitar a busca. Exemplo: react, typescript, design system
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="data_publicacao" className="block text-low-dark text-base mb-2">
+                    Data de Publicação*
+                  </label>
+                  <input
+                    type="date"
+                    name="data_publicacao"
+                    id="data_publicacao"
+                    required
+                    value={formData.data_publicacao}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="autor" className="block text-low-dark text-base mb-2">
+                    Autor*
+                  </label>
+                  <input
+                    type="text"
+                    name="autor"
+                    id="autor"
+                    required
+                    value={formData.autor}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none"
+                    placeholder="Nome do autor"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  name="publicado"
+                  id="publicado"
+                  checked={formData.publicado}
+                  onChange={handleInputChange}
+                  className="w-5 h-5 rounded border border-cream/40 text-primary focus:ring-primary focus:ring-2"
+                />
+                <label htmlFor="publicado" className="text-low-dark text-base cursor-pointer">
+                  Publicar este post (tornar visível no site)
+                </label>
+              </div>
+
+              <div className="flex gap-4 justify-end">
+                {editingId && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handleCancelEdit}
+                    className="px-8 py-3 !bg-neutral-200 !text-neutral-800 !border-2 !border-neutral-300 hover:!bg-neutral-300"
+                  >
+                    Cancelar
+                  </Button>
+                )}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="px-8 py-3 !bg-primary !text-white hover:!bg-primary/90"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Salvando...' : editingId ? 'Atualizar' : 'Criar Post'}
+                </Button>
+              </div>
+            </form>
+          </div>
+
+          {/* Lista de Posts */}
+          <div className="bg-white rounded-xl shadow-lg p-8 border border-cream/20">
+            <h2 className="font-title text-2xl font-light text-low-dark mb-6">
+              Posts Cadastrados ({posts.length})
+            </h2>
+
+            {isLoading ? (
+              <p className="text-center text-low-medium py-8">Carregando posts...</p>
+            ) : posts.length === 0 ? (
+              <p className="text-center text-low-medium py-8">Nenhum post cadastrado ainda.</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-cream/50">
+                    <tr>
+                      <th className="text-left px-4 py-3 text-low-dark font-medium">Título</th>
+                      <th className="text-left px-4 py-3 text-low-dark font-medium">Categoria</th>
+                      <th className="text-left px-4 py-3 text-low-dark font-medium">Data</th>
+                      <th className="text-center px-4 py-3 text-low-dark font-medium">Status</th>
+                      <th className="text-center px-4 py-3 text-low-dark font-medium">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {posts.map((post) => (
+                      <tr key={post.id} className="border-t border-cream/40 hover:bg-cream/20">
+                        <td className="px-4 py-4">
+                          <div>
+                            <p className="text-low-dark font-medium">{post.titulo}</p>
+                            <p className="text-sm text-low-medium">/{post.slug}</p>
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 text-low-medium">
+                          {post.categoria || '-'}
+                        </td>
+                        <td className="px-4 py-4 text-low-medium">
+                          {formatDate(post.data_publicacao)}
+                        </td>
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                            post.publicado 
+                              ? 'bg-green-100 text-green-700' 
+                              : 'bg-neutral-200 text-neutral-600'
+                          }`}>
+                            {post.publicado ? 'Publicado' : 'Rascunho'}
+                          </span>
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="flex gap-2 justify-center">
+                            <Button
+                              variant="outline"
+                              onClick={() => handleEdit(post)}
+                              className="py-2 px-4 text-sm !bg-primary !text-white !border-2 !border-primary hover:!bg-primary/90"
+                            >
+                              <i className="fa-solid fa-pen mr-2"></i>
+                              Editar
+                            </Button>
+                            <Button
+                              variant="outline"
+                              onClick={() => handleDelete(post.id)}
+                              className="py-2 px-4 text-sm !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
+                            >
+                              <i className="fa-solid fa-trash mr-2"></i>
+                              Excluir
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className={`fixed top-8 right-8 z-50 min-w-[320px] max-w-[450px] p-6 bg-white rounded-xl shadow-2xl flex items-center justify-between gap-4 animate-slideInRight border-l-4 ${toastType === 'success' ? 'border-green-500' : 'border-red-500'}`}>
+          <div className="flex items-center gap-3 flex-1">
+            <i className={`fa-solid text-2xl ${toastType === 'success' ? 'fa-circle-check text-green-500' : 'fa-circle-exclamation text-red-500'}`}></i>
+            <span className="text-low-dark text-base">{toastMessage}</span>
+          </div>
+          <button
+            onClick={() => setShowToast(false)}
+            className="text-low-medium hover:text-low-dark transition-colors"
+          >
+            <i className="fa-solid fa-times text-xl"></i>
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default AdminBlog

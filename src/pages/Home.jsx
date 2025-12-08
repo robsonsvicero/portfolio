@@ -22,6 +22,7 @@ const Home = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState('success');
   const [projects, setProjects] = useState([]);
+  const [blogPosts, setBlogPosts] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,6 +162,28 @@ const Home = () => {
     };
 
     fetchProjetos();
+  }, []);
+
+  // Buscar últimas 3 publicações do blog
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('posts')
+          .select('*')
+          .eq('publicado', true)
+          .order('data_publicacao', { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+        setBlogPosts(data || []);
+      } catch (error) {
+        console.error('Erro ao buscar posts do blog:', error);
+        setBlogPosts([]);
+      }
+    };
+
+    fetchBlogPosts();
   }, []);
 
   return (
@@ -421,6 +444,89 @@ const Home = () => {
             {/* Elfsight Google Reviews */}
             <div className="elfsight-app-0ed1853d-fdbc-4203-a528-0b0f618422cd" data-elfsight-app-lazy></div>
           </div>
+        </div>
+      </section>
+
+      {/* Blog - Últimas Publicações */}
+      <section className="bg-cream py-24 px-4 md:px-16">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Blog</h2>
+            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
+            <p className="text-lg text-low-medium max-w-2xl mx-auto leading-relaxed">
+              Insights, tutoriais e reflexões sobre design e desenvolvimento
+            </p>
+          </div>
+
+          {blogPosts.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                {blogPosts.map((post) => {
+                  const formatDate = (dateString) => {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('pt-BR', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    });
+                  };
+
+                  return (
+                    <a
+                      key={post.id}
+                      href={`/blog/${post.slug}`}
+                      className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-cream/20"
+                    >
+                      {post.imagem_destaque && (
+                        <div className="aspect-video overflow-hidden bg-cream">
+                          <img
+                            src={post.imagem_destaque}
+                            alt={post.titulo}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+                      <div className="p-6">
+                        {post.categoria && (
+                          <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-3">
+                            {post.categoria}
+                          </span>
+                        )}
+                        <h3 className="font-title text-xl font-light text-low-dark mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                          {post.titulo}
+                        </h3>
+                        {post.resumo && (
+                          <p className="text-low-medium text-sm mb-3 line-clamp-2 leading-relaxed">
+                            {post.resumo}
+                          </p>
+                        )}
+                        <span className="text-sm text-low-medium flex items-center gap-2">
+                          <i className="fa-regular fa-calendar"></i>
+                          {formatDate(post.data_publicacao)}
+                        </span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="text-center">
+                <Button
+                  href="/blog"
+                  variant="primary"
+                  icon={<i className="fa-solid fa-arrow-right"></i>}
+                  className="px-8 py-4 text-lg"
+                >
+                  Ver Todos os Posts
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <i className="fa-regular fa-newspaper text-5xl text-low-light mb-4"></i>
+              <p className="text-lg text-low-medium">Em breve novos conteúdos por aqui!</p>
+            </div>
+          )}
         </div>
       </section>
 
