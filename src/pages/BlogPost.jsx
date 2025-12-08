@@ -177,6 +177,37 @@ const BlogPost = () => {
         return
       }
 
+      // Detectar imagens Markdown ![alt](url)
+      const imageMatch = trimmedLine.match(/!\[(.*?)\]\((.*?)\)/)
+      if (imageMatch) {
+        // Fecha lista se existir
+        if (listItems.length > 0) {
+          elements.push(
+            <ul key={`list-${index}`} className="list-disc ml-6 mb-6">
+              {listItems}
+            </ul>
+          )
+          listItems = []
+        }
+        const [, alt, url] = imageMatch
+        elements.push(
+          <div key={index} className="my-8">
+            <img 
+              src={url} 
+              alt={alt || 'Imagem do artigo'} 
+              className="w-full rounded-lg shadow-lg"
+              loading="lazy"
+            />
+            {alt && (
+              <p className="text-sm text-low-medium italic text-center mt-2">
+                {alt}
+              </p>
+            )}
+          </div>
+        )
+        return
+      }
+
       // Fecha lista se existir antes de adicionar parágrafo
       if (listItems.length > 0) {
         elements.push(

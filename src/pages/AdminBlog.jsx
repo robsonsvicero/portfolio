@@ -90,6 +90,54 @@ const AdminBlog = () => {
     }
   }
 
+  // Função para processar imagens coladas
+  const handlePaste = async (e) => {
+    const items = e.clipboardData?.items
+    if (!items) return
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i]
+      
+      // Verificar se é uma imagem
+      if (item.type.indexOf('image') !== -1) {
+        e.preventDefault()
+        
+        const file = item.getAsFile()
+        if (!file) continue
+
+        try {
+          // Converter imagem para base64
+          const reader = new FileReader()
+          reader.onload = (event) => {
+            const base64 = event.target.result
+            const imageMarkdown = `\n\n![Imagem colada](${base64})\n\n`
+            
+            // Inserir no cursor ou no final
+            const textarea = e.target
+            const start = textarea.selectionStart
+            const end = textarea.selectionEnd
+            const currentValue = formData.conteudo
+            const newValue = currentValue.substring(0, start) + imageMarkdown + currentValue.substring(end)
+            
+            setFormData(prev => ({ ...prev, conteudo: newValue }))
+            
+            // Reposicionar cursor após a imagem
+            setTimeout(() => {
+              textarea.selectionStart = textarea.selectionEnd = start + imageMarkdown.length
+              textarea.focus()
+            }, 0)
+            
+            showToastMessage('Imagem colada com sucesso! (base64)', 'success')
+          }
+          reader.readAsDataURL(file)
+        } catch (error) {
+          console.error('Erro ao processar imagem:', error)
+          showToastMessage('Erro ao colar imagem', 'error')
+        }
+      }
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -304,7 +352,7 @@ const AdminBlog = () => {
                 <label htmlFor="conteudo" className="block text-low-dark text-base mb-2">
                   Conteúdo* 
                   <span className="text-xs text-low-medium ml-2">
-                    (use ## para títulos, ### para subtítulos, - para listas)
+                    (use ## para títulos, ### para subtítulos, - para listas, ![alt](url) para imagens)
                   </span>
                 </label>
                 <textarea
@@ -313,9 +361,13 @@ const AdminBlog = () => {
                   required
                   value={formData.conteudo}
                   onChange={handleInputChange}
+                  onPaste={handlePaste}
                   className="w-full px-4 py-3 rounded-lg bg-cream border border-cream/40 text-low-dark text-base focus:border-primary focus:outline-none min-h-[300px] resize-y font-mono"
-                  placeholder="Conteúdo completo do post..."
+                  placeholder="Conteúdo completo do post... Cole imagens diretamente aqui!"
                 />
+                <p className="text-xs text-low-medium mt-2">
+                  💡 <strong>Dica:</strong> Cole imagens (Ctrl+V) diretamente no campo ou use a sintaxe: <code className="bg-primary/10 px-1 rounded">![Descrição](url-da-imagem)</code>
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

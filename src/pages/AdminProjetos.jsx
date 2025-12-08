@@ -181,14 +181,24 @@ const AdminProjetos = () => {
               <p className="text-sm text-low-medium mb-1">Logado como:</p>
               <p className="text-lg font-medium text-low-dark">{user?.email}</p>
             </div>
-            <Button
-              variant="outline"
-              onClick={handleLogout}
-              className="px-6 py-2 !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
-            >
-              <i className="fa-solid fa-right-from-bracket mr-2"></i>
-              Sair
-            </Button>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={() => navigate('/admin/blog')}
+                className="px-6 py-2"
+              >
+                <i className="fa-solid fa-blog mr-2"></i>
+                Gerenciar Blog
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleLogout}
+                className="px-6 py-2 !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
+              >
+                <i className="fa-solid fa-right-from-bracket mr-2"></i>
+                Sair
+              </Button>
+            </div>
           </div>
 
           <div className="mb-12 text-center">
