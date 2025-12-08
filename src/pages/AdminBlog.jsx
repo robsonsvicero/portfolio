@@ -143,11 +143,17 @@ const AdminBlog = () => {
     setIsSubmitting(true)
 
     try {
+      // Normalizar tags para lowercase
+      const normalizedData = {
+        ...formData,
+        tags: formData.tags.toLowerCase()
+      }
+
       if (editingId) {
         // Atualizar post existente
         const { error } = await supabase
           .from('posts')
-          .update(formData)
+          .update(normalizedData)
           .eq('id', editingId)
 
         if (error) throw error
@@ -156,7 +162,7 @@ const AdminBlog = () => {
         // Criar novo post
         const { error } = await supabase
           .from('posts')
-          .insert([formData])
+          .insert([normalizedData])
 
         if (error) throw error
         showToastMessage('Post criado com sucesso!', 'success')

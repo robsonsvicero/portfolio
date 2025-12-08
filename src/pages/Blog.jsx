@@ -32,11 +32,11 @@ const Blog = () => {
       const uniqueCategories = ['Todos', ...new Set(data.map(post => post.categoria).filter(Boolean))]
       setCategories(uniqueCategories)
 
-      // Extrair tags únicas
+      // Extrair tags únicas (normalizar para lowercase)
       const tagsSet = new Set()
       data.forEach(post => {
         if (post.tags) {
-          post.tags.split(',').forEach(tag => tagsSet.add(tag.trim()))
+          post.tags.toLowerCase().split(',').forEach(tag => tagsSet.add(tag.trim()))
         }
       })
       setAllTags(Array.from(tagsSet).sort())
@@ -56,8 +56,8 @@ const Blog = () => {
     // Filtro de categoria
     const categoryMatch = selectedCategory === 'Todos' || post.categoria === selectedCategory
     
-    // Filtro de tag
-    const tagMatch = !selectedTag || (post.tags && post.tags.split(',').map(t => t.trim()).includes(selectedTag))
+    // Filtro de tag (normalizar para lowercase)
+    const tagMatch = !selectedTag || (post.tags && post.tags.toLowerCase().split(',').map(t => t.trim()).includes(selectedTag.toLowerCase()))
     
     // Filtro de busca (título, resumo ou conteúdo)
     const searchMatch = !searchTerm || 
@@ -236,7 +236,7 @@ const Blog = () => {
                       {/* Tags */}
                       {post.tags && (
                         <div className="flex flex-wrap gap-2 mb-4">
-                          {post.tags.split(',').slice(0, 3).map((tag, idx) => (
+                          {post.tags.toLowerCase().split(',').slice(0, 3).map((tag, idx) => (
                             <span
                               key={idx}
                               className="px-2 py-1 bg-cream text-low-medium rounded text-xs"
