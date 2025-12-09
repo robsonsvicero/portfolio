@@ -12,6 +12,7 @@ import BlogPost from './pages/BlogPost';
 import Login from './pages/Login';
 import AdminProjetos from './pages/AdminProjetos';
 import AdminBlog from './pages/AdminBlog';
+import BusinessCard from './pages/BusinessCard';
 import NotFound from './pages/NotFound';
 import './styles/global.css';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/servico-ui-design" element={<ServiceUIUXDesign />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/cartao" element={<BusinessCard />} />
           <Route path="/login" element={<Login />} />
           <Route 
             path="/admin/projetos" 

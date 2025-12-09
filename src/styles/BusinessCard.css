@@ -1,0 +1,234 @@
+/* Business Card Styles */
+.business-card-container {
+  min-height: 100vh;
+  background-color: #FFF8F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.business-card {
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 20px;
+}
+
+/* Logo */
+.business-card-logo {
+  margin-bottom: 16px;
+}
+
+.logo-circle {
+  width: 120px;
+  height: 120px;
+  border: 3px solid #094C7E;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF8F0;
+}
+
+.logo-symbol {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.logo-r {
+  font-family: 'Inter', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #094C7E;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+}
+
+.logo-circle-inner {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #094C7E;
+}
+
+.logo-dot {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #C41E3A;
+}
+
+/* Título */
+.business-card-title {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.business-card-title h1 {
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #094C7E;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.5px;
+}
+
+.business-card-title .tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  color: #094C7E;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Descrição */
+.business-card-description {
+  text-align: center;
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+
+.business-card-description p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}
+
+/* Botões */
+.business-card-buttons {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.business-card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #094C7E;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 16px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(9, 76, 126, 0.15);
+}
+
+.business-card-button:hover {
+  background-color: #0A5A94;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(9, 76, 126, 0.25);
+}
+
+.business-card-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(9, 76, 126, 0.2);
+}
+
+.button-icon {
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Rodapé */
+.business-card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.footer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #C41E3A;
+}
+
+.business-card-footer p {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #666666;
+  margin: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .business-card {
+    padding: 32px 16px;
+    gap: 20px;
+  }
+
+  .logo-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo-symbol {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logo-r {
+    font-size: 48px;
+  }
+
+  .logo-circle-inner {
+    width: 28px;
+    height: 28px;
+  }
+
+  .business-card-title h1 {
+    font-size: 24px;
+  }
+
+  .business-card-title .tagline {
+    font-size: 14px;
+  }
+
+  .business-card-description p {
+    font-size: 13px;
+  }
+
+  .business-card-button {
+    font-size: 14px;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .business-card-buttons {
+    max-width: 100%;
+  }
+
+  .business-card-description {
+    max-width: 100%;
+  }
+}
