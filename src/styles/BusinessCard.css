@@ -22,11 +22,19 @@
 /* Logo */
 .business-card-logo {
   margin-bottom: 16px;
+  width: 140px;
+  height: 140px;
+  border: 4px solid #094C7E;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF8F0;
 }
 
 .logo-image {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 
@@ -135,9 +143,14 @@
     gap: 20px;
   }
 
+  .business-card-logo {
+    width: 120px;
+    height: 120px;
+  }
+
   .logo-image {
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
   }
 
   .business-card-title h1 {
