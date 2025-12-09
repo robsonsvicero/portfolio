@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/BusinessCard.css';
+import simbolo from '../images/simbolo.png';
 
 const BusinessCard = () => {
   return (
@@ -7,13 +8,7 @@ const BusinessCard = () => {
       <div className="business-card">
         {/* Logo */}
         <div className="business-card-logo">
-          <div className="logo-circle">
-            <div className="logo-symbol">
-              <div className="logo-r">R</div>
-              <div className="logo-circle-inner"></div>
-              <div className="logo-dot"></div>
-            </div>
-          </div>
+          <img src={simbolo} alt="Svicero Studio" className="logo-image" />
         </div>
 
         {/* Título e Tagline */}
@@ -39,7 +34,6 @@ const BusinessCard = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="button-icon">💬</span>
             Começar um Projeto
           </a>
 
@@ -49,7 +43,6 @@ const BusinessCard = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="button-icon">🖼️</span>
             Ver Portfólio (Behance)
           </a>
 
@@ -59,7 +52,6 @@ const BusinessCard = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="button-icon">🌐</span>
             Nosso Website Oficial
           </a>
 
@@ -69,7 +61,6 @@ const BusinessCard = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="button-icon">📸</span>
             Acompanhe o Studio
           </a>
 
@@ -79,7 +70,6 @@ const BusinessCard = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="button-icon">✉️</span>
             E-mail de contato
           </a>
         </div>

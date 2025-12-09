@@ -24,54 +24,10 @@
   margin-bottom: 16px;
 }
 
-.logo-circle {
+.logo-image {
   width: 120px;
   height: 120px;
-  border: 3px solid #094C7E;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #FFF8F0;
-}
-
-.logo-symbol {
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-
-.logo-r {
-  font-family: 'Inter', sans-serif;
-  font-size: 56px;
-  font-weight: 700;
-  color: #094C7E;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  line-height: 1;
-}
-
-.logo-circle-inner {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #094C7E;
-}
-
-.logo-dot {
-  position: absolute;
-  right: 0;
-  bottom: 10px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #C41E3A;
+  object-fit: contain;
 }
 
 /* Título */
@@ -126,7 +82,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   background-color: #094C7E;
   color: #FFFFFF;
   font-family: 'Inter', sans-serif;
@@ -148,12 +103,6 @@
 .business-card-button:active {
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(9, 76, 126, 0.2);
-}
-
-.button-icon {
-  font-size: 20px;
-  display: inline-flex;
-  align-items: center;
 }
 
 /* Rodapé */
@@ -186,23 +135,9 @@
     gap: 20px;
   }
 
-  .logo-circle {
+  .logo-image {
     width: 100px;
     height: 100px;
-  }
-
-  .logo-symbol {
-    width: 70px;
-    height: 70px;
-  }
-
-  .logo-r {
-    font-size: 48px;
-  }
-
-  .logo-circle-inner {
-    width: 28px;
-    height: 28px;
   }
 
   .business-card-title h1 {
