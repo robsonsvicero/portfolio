@@ -7,7 +7,7 @@ const BusinessCard = () => {
     <div className="business-card-container">
       <div className="business-card">
         {/* Logo */}
-        <div className="business-card-logo">
+        <div className="business-card-logo bg-white">
           <img src={simbolo} alt="Svicero Studio" className="logo-image" />
         </div>
 
