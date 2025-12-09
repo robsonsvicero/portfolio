@@ -16,6 +16,30 @@ import aboutPhoto from '../images/about-photo.webp';
 import heroImage from '../images/hero.webp';
 
 const Home = () => {
+    // Dados dos serviços principais
+    const servicos = [
+      {
+        img: idvDesigner,
+        alt: 'Card Designer',
+        badge: { text: 'Identidade Visual', className: 'designer text-[15px] font-medium text-[#B22485] bg-[#F7DFF5]' },
+        title: 'Desenvolvo identidades visuais autênticas que traduzem a essência da sua marca. Do conceito ao design final, crio conexões visuais fortes e memoráveis que destacam seu negócio no mercado.',
+        link: '/servico-identidade-visual'
+      },
+      {
+        img: uiDesigner,
+        alt: 'Card UI designer',
+        badge: { text: 'UI & UX', className: 'ui-ux text-[15px] font-medium text-[#B25A2B] bg-[#FFE3D2]' },
+        title: 'Crio interfaces intuitivas e envolventes, focadas na melhor experiência do usuário. Aliando estética e funcionalidade, entrego designs que encantam visualmente e facilitam a navegação.',
+        link: '/servico-uiux-design'
+      },
+      {
+        img: developer,
+        alt: 'Card Programador',
+        badge: { text: 'Front-End', className: 'developer text-[15px] font-medium text-[#205C20] bg-[#D6F8D6]' },
+        title: 'Transformo ideias em sites funcionais com código limpo, performance otimizada e designs que conectam marcas às pessoas.',
+        link: '/servico-front-end'
+      },
+    ];
   const [whatsappVisible, setWhatsappVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -36,47 +60,40 @@ const Home = () => {
   // Inicializar Swiper
   const swiperRef = React.useRef(null);
   useEffect(() => {
-    const cardWrapper = document.querySelector('.card-wrapper');
-    if (cardWrapper) {
-      swiperRef.current = new Swiper('.swiper', {
-        loop: false,
-        spaceBetween: 20,
-        centeredSlides: false,
-        freeMode: {
-          enabled: true,
-          sticky: false,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          dynamicBullets: false,
-        },
-        navigation: false,
-        breakpoints: {
-          320: {
-            slidesPerView: 1.2,
-            spaceBetween: 16,
-            freeMode: true,
+    // Aguarda o próximo paint do React para garantir que os elementos estejam no DOM
+    let rafId = null;
+    function initSwiper() {
+      const cardWrapper = document.querySelector('.card-wrapper');
+      if (cardWrapper instanceof Element) {
+        swiperRef.current = new Swiper('.card-wrapper', {
+          loop: true,
+          spaceBetween: 24,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
           },
-          640: {
-            slidesPerView: 1.5,
-            spaceBetween: 20,
-            freeMode: true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
           },
-          820: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-            freeMode: false,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 24,
-            freeMode: false,
+          breakpoints: {
+            426: {
+              slidesPerView: 1
+            },
+            768: {
+              slidesPerView: 2
+            },
+            1240: {
+              slidesPerView: 3
+            }
           }
-        }
-      });
+        });
+      }
     }
+    rafId = requestAnimationFrame(initSwiper);
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       if (
         swiperRef.current &&
         swiperRef.current.destroy &&
@@ -244,17 +261,17 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12 items-stretch">
+          <div className="flex flex-col md:flex-row md:justify-center md:items-stretch gap-8 md:gap-10 mb-12">
             {/* Identidade Visual */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex flex-col justify-between h-full">
-              <div>
+            <div className="bg-white rounded-2xl p-6 md:p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex-1 flex flex-col justify-between md:max-w-[400px] w-full mx-auto">
+              <div className="h-full flex flex-col">
                 <div className="flex justify-center mb-6">
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
                     <i className="fa-solid fa-palette text-4xl text-primary"></i>
                   </div>
                 </div>
                 <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Identidade Visual</h3>
-                <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                <p className="text-lg text-low-medium text-center leading-relaxed mb-4 break-words">
                   A base para a autoridade. Criamos a fundação estratégica que posiciona sua marca no mercado.
                 </p>
               </div>
@@ -271,15 +288,15 @@ const Home = () => {
             </div>
 
             {/* UX/UI Design */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex flex-col justify-between h-full">
-              <div>
+            <div className="bg-white rounded-2xl p-6 md:p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex-1 flex flex-col justify-between md:max-w-[400px] w-full mx-auto">
+              <div className="h-full flex flex-col">
                 <div className="flex justify-center mb-6">
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
                     <i className="fa-solid fa-pen-ruler text-4xl text-primary"></i>
                   </div>
                 </div>
                 <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">UX/UI Design</h3>
-                <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                <p className="text-lg text-low-medium text-center leading-relaxed mb-4 break-words">
                   Interfaces que convertem. Transformamos estratégia em experiências intuitivas e funcionais.
                 </p>
               </div>
@@ -296,15 +313,15 @@ const Home = () => {
             </div>
 
             {/* Front-end */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex flex-col justify-between h-full">
-              <div>
+            <div className="bg-white rounded-2xl p-6 md:p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-primary flex-1 flex flex-col justify-between md:max-w-[400px] w-full mx-auto">
+              <div className="h-full flex flex-col">
                 <div className="flex justify-center mb-6">
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
                     <i className="fa-solid fa-code text-4xl text-primary"></i>
                   </div>
                 </div>
                 <h3 className="font-title text-2xl font-light text-center text-low-dark mb-4">Front-end</h3>
-                <p className="text-lg text-low-medium text-center leading-relaxed mb-4">
+                <p className="text-lg text-low-medium text-center leading-relaxed mb-4 break-words">
                   Performance e fidelidade. Entregamos interfaces rápidas, responsivas e fiéis ao design.
                 </p>
               </div>
@@ -375,62 +392,27 @@ const Home = () => {
             <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
           </div>
           <div className="swiper overflow-visible pb-12 max-w-full">
-            <div
-              className="card-wrapper swiper-wrapper min-h-[680px] mx-2 md:mx-0"
-              style={{
-                display: 'flex',
-                overflowX: window.innerWidth < 768 ? 'auto' : 'visible',
-                maxWidth: window.innerWidth < 768 ? '100vw' : 'none',
-                width: window.innerWidth >= 768 ? 'auto' : undefined
-              }}
-            >
-              <div className="swiper-slide" style={{marginRight: 16, flex: '0 0 auto', display: 'flex'}}>
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 min-h-[680px] overflow-visible"
-                  style={{width: '90vw', ...(window.innerWidth >= 768 ? {maxWidth: 340} : {})}}>
-                  <div className="flex flex-col items-center">
-                    <Card.Image src={idvDesigner} alt="Card Designer" className="w-full aspect-video rounded-xl mb-4" />
-                    <Card.Badge variant="designer">Identidade Visual</Card.Badge>
-                    <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
-                      Desenvolvo identidades visuais autênticas que traduzem a essência da sua marca. Do conceito ao design final, crio conexões visuais fortes e memoráveis que destacam seu negócio no mercado.
-                    </Card.Description>
-                  </div>
-                  <a href="/servico-identidade-visual" className="mt-auto">
-                    <Card.Badge variant="cta">Saiba mais...</Card.Badge>
-                  </a>
-                </Card>
-              </div>
-              <div className="swiper-slide" style={{marginRight: 16, flex: '0 0 auto', display: 'flex'}}>
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 min-h-[680px] overflow-visible" style={{width: '90vw', maxWidth: 400}}>
-                  <div className="flex flex-col items-center">
-                    <Card.Image src={uiDesigner} alt="Card UI designer" className="w-full aspect-video rounded-xl mb-4" />
-                    <Card.Badge variant="ui-ux">UI & UX</Card.Badge>
-                    <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
-                      Crio interfaces intuitivas e envolventes, focadas na melhor experiência do usuário. Aliando estética e funcionalidade, entrego designs que encantam visualmente e facilitam a navegação.
-                    </Card.Description>
-                  </div>
-                  <a href="/servico-ui-design" className="mt-auto">
-                    <Card.Badge variant="cta">Saiba mais...</Card.Badge>
-                  </a>
-                </Card>
-              </div>
-              <div className="swiper-slide" style={{marginRight: 16, flex: '0 0 auto', display: 'flex'}}>
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 min-h-[680px] overflow-visible" style={{width: '90vw', maxWidth: 400}}>
-                  <div className="flex flex-col items-center">
-                    <Card.Image src={developer} alt="Card Programador" className="w-full aspect-video rounded-xl mb-4" />
-                    <Card.Badge variant="developer">Front-End</Card.Badge>
-                    <Card.Description className="text-lg text-low-medium mb-4 leading-relaxed">
-                      Transformo ideias em sites funcionais com código limpo, performance otimizada e designs que conectam marcas às pessoas.
-                    </Card.Description>
-                  </div>
-                  <a href="/servico-front-end" className="mt-auto">
-                    <Card.Badge variant="cta">Saiba mais...</Card.Badge>
-                  </a>
-                </Card>
-              </div>
-              </div>
+            <div className="card-wrapper mx-2 md:mx-0 py-5 px-2 md:px-4 overflow-hidden">
+              <ul className="card-list swiper-wrapper h-auto md:h-[500px]">
+                {servicos.map((servico, idx) => (
+                  <li key={idx} className="card-item swiper-slide bg-white rounded-2xl shadow-md border border-[#f3ede7] p-6 transition-all duration-300 h-auto md:h-[500px] md:max-w-[400px] w-full">
+                    <div className="flex flex-col h-full">
+                      <img src={servico.img} alt={servico.alt} className="w-full aspect-[16/9] object-cover rounded-xl mb-4" />
+                      <p className="inline-block w-fit px-4 py-2 mb-4 rounded-full bg-[#f3f6f9] text-[#2b4a5a] text-[14px] font-medium border border-[#e0e6ed] text-left">{servico.badge.text}</p>
+                      <div className="flex-1">
+                        <h2 className="text-base text-[#2b4a5a] font-normal mb-6">{servico.title}</h2>
+                      </div>
+                      <a href={servico.link} className="mt-auto inline-block px-6 py-2 rounded-full border border-[#b5c6d6] text-[#2b4a5a] bg-[#f3f6f9] text-sm font-medium hover:bg-[#e0e6ed] transition-colors">Saiba mais...</a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div className="swiper-pagination mt-8"></div>
+              <div className="swiper-slide-button swiper-button-prev hidden md:block"></div>
+              <div className="swiper-slide-button swiper-button-next hidden md:block"></div>
             </div>
-            <div className="swiper-pagination mt-8"></div>
           </div>
+        </div>
       </section>
 
       {/* Sobre / About */}
