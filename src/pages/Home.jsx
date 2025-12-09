@@ -331,38 +331,44 @@ const Home = () => {
             <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
           </div>
           <div className="flex flex-col gap-12">
-            {projects.map((project, index) => (
-              <Card key={index} variant="project" className="flex flex-col md:flex-row items-center bg-neutral-800/50 backdrop-blur-sm rounded-xl shadow-lg p-6 md:p-10 gap-8 border border-cream/10">
-                <div className="w-full md:w-1/2 flex justify-center">
-                  <Card.Image src={project.image} alt={project.title} />
-                </div>
-                <div className="w-full md:w-2/5 flex flex-col justify-center">
-                  <Card.Title>{project.title}</Card.Title>
-                  <Card.Description className="text-lg text-cream/70 mb-6 leading-relaxed">{project.description}</Card.Description>
-                  <Card.Actions className="flex flex-col gap-4">
-                    <Card.Button href={project.link}>{project.buttonText}</Card.Button>
-                    {project.buttonText2 && (
-                      <Card.Button href={project.link2}>{project.buttonText2}</Card.Button>
-                    )}
-                  </Card.Actions>
-                </div>
-              </Card>
-            ))}
+            <div className="flex flex-col gap-8 min-h-[2000px]">
+              {projects.map((project, index) => (
+                <Card
+                  key={index}
+                  variant="project"
+                  className={`sticky top-0 z-[${10 + index}] flex flex-col md:flex-row items-center bg-neutral-800/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-10 gap-8 border border-cream/10 transition-transform duration-300 hover:scale-[1.03] w-full h-[400px] mb-8`}
+                >
+                  <div className="w-full md:w-1/2 flex justify-center h-full">
+                    <Card.Image src={project.image} alt={project.title} className="h-full object-contain" />
+                  </div>
+                  <div className="w-full md:w-2/5 flex flex-col justify-center h-full px-0 md:px-10">
+                    <Card.Title>{project.title}</Card.Title>
+                    <Card.Description className="text-lg text-cream/70 mb-6 leading-relaxed">{project.description}</Card.Description>
+                    <Card.Actions className="flex flex-col gap-4">
+                      <Card.Button href={project.link}>{project.buttonText}</Card.Button>
+                      {project.buttonText2 && (
+                        <Card.Button href={project.link2}>{project.buttonText2}</Card.Button>
+                      )}
+                    </Card.Actions>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Principais Serviços / Expertise */}
       <section id="servicos" className="bg-cream py-24 px-4 md:px-16">
-        <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-screen-xl mx-auto px-2 sm:px-4 md:px-16">
           <div className="mb-12 text-center">
             <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Principais Serviços</h2>
             <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
           </div>
-          <div className="swiper overflow-visible pb-12">
-            <div className="card-wrapper swiper-wrapper">
+          <div className="swiper overflow-visible pb-12 max-w-full">
+            <div className="card-wrapper swiper-wrapper w-full max-w-full overflow-x-hidden min-h-[680px] mx-2 md:mx-0">
               <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 w-full min-h-[680px] overflow-visible">
                   <div className="flex flex-col items-center">
                     <Card.Image src={idvDesigner} alt="Card Designer" className="w-full aspect-video rounded-xl mb-4" />
                     <Card.Badge variant="designer">Identidade Visual</Card.Badge>
@@ -376,7 +382,7 @@ const Home = () => {
                 </Card>
               </div>
               <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 w-full min-h-[680px] overflow-visible">
                   <div className="flex flex-col items-center">
                     <Card.Image src={uiDesigner} alt="Card UI designer" className="w-full aspect-video rounded-xl mb-4" />
                     <Card.Badge variant="ui-ux">UI & UX</Card.Badge>
@@ -390,7 +396,7 @@ const Home = () => {
                 </Card>
               </div>
               <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-6 gap-4 border border-cream/20 h-full">
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 w-full min-h-[680px] overflow-visible">
                   <div className="flex flex-col items-center">
                     <Card.Image src={developer} alt="Card Programador" className="w-full aspect-video rounded-xl mb-4" />
                     <Card.Badge variant="developer">Front-End</Card.Badge>
