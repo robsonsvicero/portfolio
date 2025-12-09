@@ -29,7 +29,7 @@ const BusinessCard = () => {
         {/* Botões de Ação */}
         <div className="business-card-buttons">
           <a 
-            href="https://wa.me/5500000000000" 
+            href="https://wa.me/5511964932007" 
             className="business-card-button"
             target="_blank"
             rel="noopener noreferrer"
@@ -38,7 +38,7 @@ const BusinessCard = () => {
           </a>
 
           <a 
-            href="https://www.behance.net/seu-portfolio" 
+            href="https://www.behance.net/robsonsvicero" 
             className="business-card-button"
             target="_blank"
             rel="noopener noreferrer"
@@ -47,7 +47,7 @@ const BusinessCard = () => {
           </a>
 
           <a 
-            href="https://www.seuwebsite.com" 
+            href="https://www.svicerostudio.com.br" 
             className="business-card-button"
             target="_blank"
             rel="noopener noreferrer"
@@ -56,7 +56,7 @@ const BusinessCard = () => {
           </a>
 
           <a 
-            href="https://www.instagram.com/korustudyo" 
+            href="https://www.instagram.com/svicerostudio" 
             className="business-card-button"
             target="_blank"
             rel="noopener noreferrer"
@@ -65,7 +65,7 @@ const BusinessCard = () => {
           </a>
 
           <a 
-            href="mailto:contato@seusite.com" 
+            href="mailto:hello@svicerostudio.com.br" 
             className="business-card-button"
             target="_blank"
             rel="noopener noreferrer"
