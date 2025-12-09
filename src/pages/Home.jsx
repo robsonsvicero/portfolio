@@ -205,7 +205,7 @@ const Home = () => {
 
       {/* Hero Section / Banner */}
       <section id="inicio" className="relative h-[780px] flex items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${heroImage})` }}></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4">
           <h1 className="font-title font-extralight text-cream text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6 drop-shadow-lg">Simplicidade que Posiciona</h1>
           <p className="font-sans text-cream text-xl md:text-2xl lg:text-3xl font-light tracking-wide mb-10 max-w-5xl">Integramos Identidade Visual, UX/UI e Front-end para construir sua autoridade digital.</p>
