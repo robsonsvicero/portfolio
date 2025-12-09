@@ -7,7 +7,7 @@
 
 <!-- Página Principal -->
 <url>
-  <loc>https://robsonsvicero.com.br/</loc>
+  <loc>https://svicerostudio.com.br/</loc>
   <lastmod>2025-11-18T00:00:00+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.00</priority>
@@ -15,7 +15,7 @@
 
 <!-- Agendamento -->
 <url>
-  <loc>https://robsonsvicero.com.br/agenda</loc>
+  <loc>https://svicerostudio.com.br/agenda</loc>
   <lastmod>2025-11-18T00:00:00+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.90</priority>
@@ -23,19 +23,19 @@
 
 <!-- Serviços -->
 <url>
-  <loc>https://robsonsvicero.com.br/servico-identidade-visual</loc>
+  <loc>https://svicerostudio.com.br/servico-identidade-visual</loc>
   <lastmod>2025-11-18T00:00:00+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://robsonsvicero.com.br/servico-ui-design</loc>
+  <loc>https://svicerostudio.com.br/servico-ui-design</loc>
   <lastmod>2025-11-18T00:00:00+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://robsonsvicero.com.br/servico-front-end</loc>
+  <loc>https://svicerostudio.com.br/servico-front-end</loc>
   <lastmod>2025-11-18T00:00:00+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>

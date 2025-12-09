@@ -345,7 +345,7 @@ const BlogPost = () => {
               </h2>
               <div 
                 className="fb-comments" 
-                data-href={`https://robsonsvicero.com.br/blog/${post.slug}`}
+                data-href={`https://svicerostudio.com.br/blog/${post.slug}`}
                 data-width="100%" 
                 data-numposts="5"
                 data-colorscheme="light"

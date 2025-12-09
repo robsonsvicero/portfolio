@@ -79,13 +79,13 @@ Write-Host "4. Opção B - Upload do ZIP:" -ForegroundColor White
 Write-Host "   • Envie 'deploy-hostinger.zip' para public_html/" -ForegroundColor Gray
 Write-Host "   • Extraia via File Manager da Hostinger" -ForegroundColor Gray
 Write-Host "5. Teste todas as rotas do site" -ForegroundColor White
-Write-Host "   • https://robsonsvicero.com.br/" -ForegroundColor Gray
-Write-Host "   • https://robsonsvicero.com.br/agenda" -ForegroundColor Gray
-Write-Host "   • https://robsonsvicero.com.br/servico-front-end" -ForegroundColor Gray
-Write-Host "   • https://robsonsvicero.com.br/servico-ui-design" -ForegroundColor Gray
-Write-Host "   • https://robsonsvicero.com.br/servico-identidade-visual" -ForegroundColor Gray
-Write-Host "   • https://robsonsvicero.com.br/login" -ForegroundColor Gray
-Write-Host "   • https://robsonsvicero.com.br/admin/projetos (após login)" -ForegroundColor Gray
+Write-Host "   • https://svicerostudio.com.br/" -ForegroundColor Gray
+Write-Host "   • https://svicerostudio.com.br/agenda" -ForegroundColor Gray
+Write-Host "   • https://svicerostudio.com.br/servico-front-end" -ForegroundColor Gray
+Write-Host "   • https://svicerostudio.com.br/servico-ui-design" -ForegroundColor Gray
+Write-Host "   • https://svicerostudio.com.br/servico-identidade-visual" -ForegroundColor Gray
+Write-Host "   • https://svicerostudio.com.br/login" -ForegroundColor Gray
+Write-Host "   • https://svicerostudio.com.br/admin/projetos (após login)" -ForegroundColor Gray
 
 Write-Host "`n⚠ IMPORTANTE:" -ForegroundColor Yellow
 Write-Host "  • As variáveis do .env foram incluídas no build automaticamente" -ForegroundColor White

@@ -21,7 +21,7 @@
 
 1. No menu lateral, vá em **"Configurações" → "Básico"**
 2. Role até **"Domínios do App"**
-3. Adicione: `robsonsvicero.com.br`
+3. Adicione: `svicerostudio.com.br`
 4. Clique em **"Salvar Alterações"**
 
 ### 4️⃣ Ativar o Produto "Comentários"
@@ -47,7 +47,7 @@ appId: '123456789012345',
 ### 6️⃣ Moderar Comentários
 
 1. Acesse: https://developers.facebook.com/tools/comments/
-2. Cole a URL do post: `https://robsonsvicero.com.br/blog/nome-do-post`
+2. Cole a URL do post: `https://svicerostudio.com.br/blog/nome-do-post`
 3. Você verá todos os comentários e poderá:
    - ✅ Aprovar
    - ❌ Excluir

@@ -35,11 +35,11 @@
 ### Testes de Funcionamento
 - [ ] Limpar cache do navegador (Ctrl + Shift + Delete)
 - [ ] Testar rotas:
-  - [ ] https://robsonsvicero.com.br/
-  - [ ] https://robsonsvicero.com.br/agenda
-  - [ ] https://robsonsvicero.com.br/servico-front-end
-  - [ ] https://robsonsvicero.com.br/servico-ui-design
-  - [ ] https://robsonsvicero.com.br/servico-identidade-visual
+  - [ ] https://svicerostudio.com.br/
+  - [ ] https://svicerostudio.com.br/agenda
+  - [ ] https://svicerostudio.com.br/servico-front-end
+  - [ ] https://svicerostudio.com.br/servico-ui-design
+  - [ ] https://svicerostudio.com.br/servico-identidade-visual
 - [ ] Testar página 404 (URL inexistente)
 - [ ] Verificar carregamento de imagens
 - [ ] Testar formulário de contato
