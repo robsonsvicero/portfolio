@@ -34,11 +34,11 @@ const Home = () => {
   }, []);
 
   // Inicializar Swiper
+  const swiperRef = React.useRef(null);
   useEffect(() => {
     const cardWrapper = document.querySelector('.card-wrapper');
-
     if (cardWrapper) {
-      const swiper = new Swiper('.swiper', {
+      swiperRef.current = new Swiper('.swiper', {
         loop: false,
         spaceBetween: 20,
         centeredSlides: false,
@@ -46,15 +46,12 @@ const Home = () => {
           enabled: true,
           sticky: false,
         },
-
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
           dynamicBullets: false,
         },
-
         navigation: false,
-
         breakpoints: {
           320: {
             slidesPerView: 1.2,
@@ -78,8 +75,20 @@ const Home = () => {
           }
         }
       });
-      return () => swiper && swiper.destroy();
     }
+    return () => {
+      if (
+        swiperRef.current &&
+        swiperRef.current.destroy &&
+        typeof swiperRef.current.destroy === 'function'
+      ) {
+        try {
+          swiperRef.current.destroy();
+        } catch (e) {
+          // ignora erro de destroy
+        }
+      }
+    };
   }, []);
 
   const handleSubmit = async (e) => {
@@ -336,12 +345,12 @@ const Home = () => {
                 <Card
                   key={index}
                   variant="project"
-                  className={`sticky top-0 z-[${10 + index}] flex flex-col md:flex-row items-center bg-neutral-800/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-10 gap-8 border border-cream/10 transition-transform duration-300 hover:scale-[1.03] w-full h-[400px] mb-8`}
+                  className={`sticky top-0 z-[${10 + index}] flex flex-col items-center bg-[#1a1a1a] backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-10 gap-8 border border-cream/10 transition-transform duration-300 hover:scale-[1.03] min-h-[400px] mb-8`}
                 >
-                  <div className="w-full md:w-1/2 flex justify-center h-full">
+                  <div className="w-full flex justify-center h-full">
                     <Card.Image src={project.image} alt={project.title} className="h-full object-contain" />
                   </div>
-                  <div className="w-full md:w-2/5 flex flex-col justify-center h-full px-0 md:px-10">
+                  <div className="w-full flex flex-col justify-center h-full px-0 md:px-10">
                     <Card.Title>{project.title}</Card.Title>
                     <Card.Description className="text-lg text-cream/70 mb-6 leading-relaxed">{project.description}</Card.Description>
                     <Card.Actions className="flex flex-col gap-4">
@@ -366,9 +375,18 @@ const Home = () => {
             <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
           </div>
           <div className="swiper overflow-visible pb-12 max-w-full">
-            <div className="card-wrapper swiper-wrapper w-full max-w-full overflow-x-hidden min-h-[680px] mx-2 md:mx-0">
-              <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 w-full min-h-[680px] overflow-visible">
+            <div
+              className="card-wrapper swiper-wrapper min-h-[680px] mx-2 md:mx-0"
+              style={{
+                display: 'flex',
+                overflowX: window.innerWidth < 768 ? 'auto' : 'visible',
+                maxWidth: window.innerWidth < 768 ? '100vw' : 'none',
+                width: window.innerWidth >= 768 ? 'auto' : undefined
+              }}
+            >
+              <div className="swiper-slide" style={{marginRight: 16, flex: '0 0 auto', display: 'flex'}}>
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 min-h-[680px] overflow-visible"
+                  style={{width: '90vw', ...(window.innerWidth >= 768 ? {maxWidth: 340} : {})}}>
                   <div className="flex flex-col items-center">
                     <Card.Image src={idvDesigner} alt="Card Designer" className="w-full aspect-video rounded-xl mb-4" />
                     <Card.Badge variant="designer">Identidade Visual</Card.Badge>
@@ -381,8 +399,8 @@ const Home = () => {
                   </a>
                 </Card>
               </div>
-              <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 w-full min-h-[680px] overflow-visible">
+              <div className="swiper-slide" style={{marginRight: 16, flex: '0 0 auto', display: 'flex'}}>
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 min-h-[680px] overflow-visible" style={{width: '90vw', maxWidth: 400}}>
                   <div className="flex flex-col items-center">
                     <Card.Image src={uiDesigner} alt="Card UI designer" className="w-full aspect-video rounded-xl mb-4" />
                     <Card.Badge variant="ui-ux">UI & UX</Card.Badge>
@@ -395,8 +413,8 @@ const Home = () => {
                   </a>
                 </Card>
               </div>
-              <div className="swiper-slide">
-                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 w-full min-h-[680px] overflow-visible">
+              <div className="swiper-slide" style={{marginRight: 16, flex: '0 0 auto', display: 'flex'}}>
+                <Card variant="service" className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg p-4 sm:p-6 gap-4 border border-cream/20 min-h-[680px] overflow-visible" style={{width: '90vw', maxWidth: 400}}>
                   <div className="flex flex-col items-center">
                     <Card.Image src={developer} alt="Card Programador" className="w-full aspect-video rounded-xl mb-4" />
                     <Card.Badge variant="developer">Front-End</Card.Badge>
@@ -409,10 +427,10 @@ const Home = () => {
                   </a>
                 </Card>
               </div>
+              </div>
             </div>
             <div className="swiper-pagination mt-8"></div>
           </div>
-        </div>
       </section>
 
       {/* Sobre / About */}
@@ -544,26 +562,33 @@ const Home = () => {
             <p className="text-base md:text-lg text-cream/60 mx-auto mb-6">Caso tenha ficado com qualquer dúvida basta mandar uma mensagem que entrarei em contato o mais breve possível.</p>
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 bg-neutral-900 rounded-xl shadow-lg p-8">
-            <label htmlFor="nome" className="text-cream text-base">Nome*</label>
-            <input type="text" name="nome" id="nome" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
 
-            <label htmlFor="email" className="text-cream text-base">E-mail*</label>
-            <input type="email" name="email" id="email" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
-
-            <label htmlFor="whats" className="text-cream text-base">WhatsApp*</label>
-            <input type="tel" name="whats" id="whats" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
-
-            <label htmlFor="projeto" className="text-cream text-base">Tipo de projeto*</label>
-            <select name="projeto" id="projeto" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none">
-              <option value="">Selecione uma opção</option>
-              <option value="Identidade Visual">Identidade Visual</option>
-              <option value="UI/UX Design">UI/UX Design</option>
-              <option value="Webdesign">Webdesign</option>
-              <option value="Outros">Outros</option>
-            </select>
-
-            <label htmlFor="mensagem" className="text-cream text-base">Mensagem*</label>
-            <textarea name="mensagem" id="mensagem" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none min-h-[150px] resize-y" />
+            <div className="flex flex-col gap-1">
+              <label htmlFor="nome" className="text-cream text-base">Nome*</label>
+              <input type="text" name="nome" id="nome" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="email" className="text-cream text-base">E-mail*</label>
+              <input type="email" name="email" id="email" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="whats" className="text-cream text-base">WhatsApp*</label>
+              <input type="tel" name="whats" id="whats" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="projeto" className="text-cream text-base">Tipo de projeto*</label>
+              <select name="projeto" id="projeto" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none">
+                <option value="">Selecione uma opção</option>
+                <option value="Identidade Visual">Identidade Visual</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="Webdesign">Webdesign</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="mensagem" className="text-cream text-base">Mensagem*</label>
+              <textarea name="mensagem" id="mensagem" required className="px-4 py-3 rounded-lg bg-neutral-800 border border-cream/20 text-cream text-base focus:border-primary focus:outline-none min-h-[150px] resize-y" />
+            </div>
 
             <p className='w-full text-left text-cream/60 text-sm'>*campos obrigatórios</p>
 
