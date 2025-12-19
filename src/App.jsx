@@ -16,6 +16,8 @@ import BusinessCard from './pages/BusinessCard';
 import NotFound from './pages/NotFound';
 import './styles/global.css';
 
+import Agradecimento from './pages/Agradecimento';
+
 function App() {
   return (
     <AuthProvider>
@@ -30,6 +32,7 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/cartao" element={<BusinessCard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/agradecimento" element={<Agradecimento />} />
           <Route 
             path="/admin/projetos" 
             element={
