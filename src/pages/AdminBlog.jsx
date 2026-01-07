@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
-import Header from '../components/Layout/Header'
-import Footer from '../components/Layout/Footer'
 import Button from '../components/UI/Button'
 
 const AdminBlog = () => {
@@ -259,27 +257,22 @@ const AdminBlog = () => {
 
   return (
     <div className="min-h-screen bg-cream">
-      <Header variant="solid" />
-      
-      <section className="pt-[200px] pb-24 px-4 md:px-16">
+      <section className="pt-20 pb-24 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto">
           {/* Header com informações do usuário e navegação */}
           <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
             <div className="flex-1">
-              <p className="text-sm text-low-medium mb-1">Logado como:</p>
-              <p className="text-lg font-medium text-low-dark">{user?.email}</p>
+              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+                Bem-vindo
+              </h1>
+              <p className="text-low-medium text-lg">
+                <span className="text-primary font-medium">{user?.email}</span>
+              </p>
             </div>
             <div className="flex gap-3">
+              
               <Button
-                variant="outline"
-                onClick={() => navigate('/admin/projetos')}
-                className="px-6 py-2 !bg-neutral-200 !border-2 !border-neutral-300 !text-neutral-800 hover:!bg-neutral-300"
-              >
-                <i className="fa-solid fa-folder mr-2"></i>
-                Projetos
-              </Button>
-              <Button
-                variant="outline"
+                variant="secondary"
                 onClick={handleLogout}
                 className="px-6 py-2 !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
               >
@@ -290,10 +283,9 @@ const AdminBlog = () => {
           </div>
 
           <div className="mb-12 text-center">
-            <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+            <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2 mt-16">
               Gerenciar Blog
             </h1>
-            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
             <p className="text-lg text-low-medium">
               Crie, edite ou remova posts do blog
             </p>
@@ -584,8 +576,6 @@ const AdminBlog = () => {
           </Button>
         </div>
       </section>
-
-      <Footer />
 
       {/* Toast Notification */}
       {showToast && (

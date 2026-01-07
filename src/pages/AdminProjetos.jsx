@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
-import Header from '../components/Layout/Header'
-import Footer from '../components/Layout/Footer'
 import Button from '../components/UI/Button'
 
 const AdminProjetos = () => {
@@ -171,27 +169,29 @@ const AdminProjetos = () => {
 
   return (
     <div className="min-h-screen bg-cream">
-      <Header variant="solid" />
-      
-      <section className="pt-[200px] pb-24 px-4 md:px-16">
+      <section className="pt-20 pb-24 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto">
           {/* Header com informações do usuário e logout */}
           <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
             <div>
-              <p className="text-sm text-low-medium mb-1">Logado como:</p>
-              <p className="text-lg font-medium text-low-dark">{user?.email}</p>
+              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+                Bem-vindo
+              </h1>
+              <p className="text-low-medium text-lg">
+                <span className="text-primary font-medium">{user?.email}</span>
+              </p>
             </div>
             <div className="flex gap-3">
               <Button
-                variant="outline"
+                variant="primary"
                 onClick={() => navigate('/admin/blog')}
-                className="px-6 py-2"
+                className="px-6 py-2 bg"
               >
                 <i className="fa-solid fa-blog mr-2"></i>
                 Gerenciar Blog
               </Button>
               <Button
-                variant="outline"
+                variant="secondary"
                 onClick={handleLogout}
                 className="px-6 py-2 !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
               >
@@ -202,10 +202,9 @@ const AdminProjetos = () => {
           </div>
 
           <div className="mb-12 text-center">
-            <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+            <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2 mt-16">
               Gerenciar Projetos
             </h1>
-            <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
             <p className="text-lg text-low-medium">
               Adicione, edite ou remova projetos do portfólio
             </p>
@@ -216,7 +215,7 @@ const AdminProjetos = () => {
             <h2 className="font-title text-2xl font-light text-low-dark mb-6">
               {editingId ? 'Editar Projeto' : 'Novo Projeto'}
             </h2>
-            
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div>
                 <label htmlFor="titulo" className="block text-low-dark text-base mb-2">
@@ -301,7 +300,7 @@ const AdminProjetos = () => {
               <div className="pt-4 border-t border-cream/40">
                 <h3 className="text-low-dark text-lg font-medium mb-4">Segundo Link (Opcional)</h3>
                 <p className="text-sm text-low-medium mb-4">Use quando o projeto tiver mais de um serviço (ex: site + identidade visual)</p>
-                
+
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="link2" className="block text-low-dark text-base mb-2">
@@ -454,8 +453,6 @@ const AdminProjetos = () => {
           </Button>
         </div>
       </section>
-
-      <Footer />
 
       {/* Toast Notification */}
       {showToast && (

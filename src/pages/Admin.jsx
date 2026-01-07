@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Layout/Header';
-import Footer from '../components/Layout/Footer';
 import { useAuth } from '../contexts/AuthContext';
 
 const Admin = () => {
@@ -42,9 +40,7 @@ const Admin = () => {
 
   return (
     <div className="bg-cream min-h-screen">
-      <Header />
-
-      <main className="pt-32 pb-20 px-4 md:px-16">
+      <main className="pt-20 pb-20 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
@@ -143,8 +139,6 @@ const Admin = () => {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };

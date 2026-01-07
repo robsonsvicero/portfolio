@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
-import Header from '../components/Layout/Header';
-import Footer from '../components/Layout/Footer';
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
+import { useAuth } from '../contexts/AuthContext'
 import Button from '../components/UI/Button';
 
 const AdminDepoimentos = () => {
+  const { user, signOut } = useAuth()
   const [depoimentos, setDepoimentos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -70,7 +71,7 @@ const AdminDepoimentos = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       // Gerar iniciais automaticamente se não fornecidas
       const iniciais = formData.iniciais || formData.nome
@@ -146,6 +147,16 @@ const AdminDepoimentos = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut()
+      navigate('/login')
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error)
+      showToastMessage('Erro ao sair', 'error')
+    }
+  }
+
   const toggleAtivo = async (id, ativo) => {
     try {
       const { error } = await supabase
@@ -190,21 +201,39 @@ const AdminDepoimentos = () => {
 
   return (
     <div className="bg-cream min-h-screen">
-      <Header />
-
       {/* Toast Notification */}
       {showToast && (
-        <div className={`fixed top-24 right-6 z-50 px-6 py-4 rounded-lg shadow-lg transition-all duration-300 ${
-          toastType === 'success' ? 'bg-green-500' : 'bg-red-500'
-        } text-white`}>
+        <div className={`fixed top-24 right-6 z-50 px-6 py-4 rounded-lg shadow-lg transition-all duration-300 ${toastType === 'success' ? 'bg-green-500' : 'bg-red-500'
+          } text-white`}>
           {toastMessage}
         </div>
       )}
 
-      <main className="pt-32 pb-20 px-4 md:px-16">
+      <main className="pt-20 pb-20 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto">
           {/* Header */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-12">
+          <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
+            <div>
+              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+                Bem-vindo
+              </h1>
+              <p className="text-low-medium text-lg">
+                <span className="text-primary font-medium">{user?.email}</span>
+              </p>
+            </div>
+            <div className="flex gap-3">
+              
+              <Button
+                variant="secondary"
+                onClick={handleLogout}
+                className="px-6 py-2 !bg-red-500 !border-2 !border-red-500 !text-white hover:!bg-red-600"
+              >
+                <i className="fa-solid fa-right-from-bracket mr-2"></i>
+                Sair
+              </Button>
+            </div>
+          </div>
+          <div className="flex flex-col justify-between items-start md:items-center gap-4 mb-12 mt-16">
             <div>
               <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
                 Gerenciar Depoimentos
@@ -213,7 +242,8 @@ const AdminDepoimentos = () => {
                 Adicione e gerencie os depoimentos exibidos no site
               </p>
             </div>
-            <Button
+            <div className="w-full items-center flex justify-end">
+              <Button
               onClick={() => {
                 resetForm();
                 setShowForm(true);
@@ -223,6 +253,7 @@ const AdminDepoimentos = () => {
             >
               Novo Depoimento
             </Button>
+            </div>
           </div>
 
           {/* Formulário */}
@@ -434,15 +465,13 @@ const AdminDepoimentos = () => {
               {depoimentos.map((depoimento) => (
                 <div
                   key={depoimento.id}
-                  className={`bg-white rounded-2xl p-6 shadow-lg border-2 transition-all ${
-                    depoimento.ativo ? 'border-green-200' : 'border-gray-200 opacity-60'
-                  }`}
+                  className={`bg-white rounded-2xl p-6 shadow-lg border-2 transition-all ${depoimento.ativo ? 'border-green-200' : 'border-gray-200 opacity-60'
+                    }`}
                 >
                   {/* Status Badge */}
                   <div className="flex justify-between items-start mb-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      depoimento.ativo ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
-                    }`}>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${depoimento.ativo ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
+                      }`}>
                       {depoimento.ativo ? 'Ativo' : 'Inativo'}
                     </span>
                     <span className="text-gray-400 text-sm">Ordem: {depoimento.ordem}</span>
@@ -483,11 +512,10 @@ const AdminDepoimentos = () => {
                     </button>
                     <button
                       onClick={() => toggleAtivo(depoimento.id, depoimento.ativo)}
-                      className={`px-3 py-2 text-sm rounded-lg transition-colors ${
-                        depoimento.ativo 
-                          ? 'bg-yellow-100 hover:bg-yellow-200 text-yellow-700' 
+                      className={`px-3 py-2 text-sm rounded-lg transition-colors ${depoimento.ativo
+                          ? 'bg-yellow-100 hover:bg-yellow-200 text-yellow-700'
                           : 'bg-green-100 hover:bg-green-200 text-green-700'
-                      }`}
+                        }`}
                     >
                       <i className={`fa-solid ${depoimento.ativo ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                     </button>
@@ -516,8 +544,6 @@ const AdminDepoimentos = () => {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };
