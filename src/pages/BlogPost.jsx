@@ -1,4 +1,15 @@
-import { useState, useEffect } from 'react'
+  // Função utilitária para formatar datas
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+import React, { useState, useEffect } from 'react'
+import { marked } from 'marked'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import Header from '../components/Layout/Header'
@@ -14,17 +25,23 @@ const BlogPost = () => {
 
   // Inicializar Facebook SDK
   useEffect(() => {
-    // Carregar o SDK do Facebook
+    // Verificar se o script já existe
+    const existingScript = document.getElementById('facebook-jssdk')
+    
     if (window.FB) {
+      // SDK já carregado, fazer parse
       window.FB.XFBML.parse()
-    } else {
+    } else if (!existingScript) {
+      // Configurar callback de inicialização
       window.fbAsyncInit = function() {
         window.FB.init({
           appId: '1616292912873079', 
           autoLogAppEvents: true,
           xfbml: true,
-          version: 'v18.0'
+          version: 'v21.0'
         })
+        // Parse após inicialização
+        window.FB.XFBML.parse()
       }
 
       // Carregar o SDK
@@ -38,9 +55,9 @@ const BlogPost = () => {
     }
   }, [])
 
-  // Buscar post por slug
-  const fetchPost = async () => {
-    try {
+  // Buscar post pelo slug
+  useEffect(() => {
+    const fetchPost = async () => {
       setIsLoading(true)
       const { data, error } = await supabase
         .from('posts')
@@ -48,195 +65,35 @@ const BlogPost = () => {
         .eq('slug', slug)
         .eq('publicado', true)
         .single()
-
-      if (error) throw error
-
-      if (!data) {
+      if (error || !data) {
+        setIsLoading(false)
         navigate('/404')
         return
       }
-
       setPost(data)
-
-      // Buscar posts relacionados (mesma categoria)
-      if (data.categoria) {
-        const { data: related } = await supabase
-          .from('posts')
-          .select('*')
-          .eq('publicado', true)
-          .eq('categoria', data.categoria)
-          .neq('id', data.id)
-          .order('data_publicacao', { ascending: false })
-          .limit(3)
-
-        setRelatedPosts(related || [])
-      }
-    } catch (error) {
-      console.error('Erro ao buscar post:', error)
-      navigate('/404')
-    } finally {
       setIsLoading(false)
     }
-  }
+    if (slug) fetchPost()
+  }, [slug, navigate])
 
-  useEffect(() => {
-    fetchPost()
-    window.scrollTo(0, 0)
-  }, [slug])
-
-  // Recarregar plugin do Facebook quando o post mudar
+  // Re-parsear os widgets do Facebook quando o post for carregado
   useEffect(() => {
     if (post && window.FB) {
+      // Aguarda um pequeno delay para o DOM renderizar
       setTimeout(() => {
         window.FB.XFBML.parse()
       }, 100)
     }
   }, [post])
 
-  // Formatar data
-  const formatDate = (dateString) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('pt-BR', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    })
-  }
-
-  // Renderizar conteúdo com quebras de linha preservadas
-  const renderContent = (content) => {
-    const lines = content.split('\n')
-    const elements = []
-    let listItems = []
-
-    lines.forEach((line, index) => {
-      const trimmedLine = line.trim()
-      
-      // Linha vazia - ignora
-      if (trimmedLine === '') {
-        // Se havia itens de lista acumulados, fecha a lista
-        if (listItems.length > 0) {
-          elements.push(
-            <ul key={`list-${index}`} className="list-disc ml-6 mb-6">
-              {listItems}
-            </ul>
-          )
-          listItems = []
-        }
-        return
-      }
-      
-      // Detectar títulos Markdown (## ou ##Título)
-      if (/^##\s+/.test(trimmedLine) || /^##[^#]/.test(trimmedLine)) {
-        // Fecha lista se existir
-        if (listItems.length > 0) {
-          elements.push(
-            <ul key={`list-${index}`} className="list-disc ml-6 mb-6">
-              {listItems}
-            </ul>
-          )
-          listItems = []
-        }
-        const title = trimmedLine.replace(/^##\s*/, '')
-        elements.push(
-          <h2 key={index} className="font-title text-3xl font-light text-low-dark mt-8 mb-4">
-            {title}
-          </h2>
-        )
-        return
-      }
-      
-      // Detectar subtítulos Markdown (### ou ###Subtítulo)
-      if (/^###\s+/.test(trimmedLine) || /^###[^#]/.test(trimmedLine)) {
-        // Fecha lista se existir
-        if (listItems.length > 0) {
-          elements.push(
-            <ul key={`list-${index}`} className="list-disc ml-6 mb-6">
-              {listItems}
-            </ul>
-          )
-          listItems = []
-        }
-        const subtitle = trimmedLine.replace(/^###\s*/, '')
-        elements.push(
-          <h3 key={index} className="font-title text-2xl font-light text-low-dark mt-6 mb-3">
-            {subtitle}
-          </h3>
-        )
-        return
-      }
-
-      // Detectar listas (- item ou * item)
-      if (/^[-*]\s+/.test(trimmedLine)) {
-        const itemText = trimmedLine.replace(/^[-*]\s+/, '')
-        listItems.push(
-          <li key={index} className="text-lg text-low-medium leading-relaxed mb-2">
-            {itemText}
-          </li>
-        )
-        return
-      }
-
-      // Detectar imagens Markdown ![alt](url)
-      const imageMatch = trimmedLine.match(/!\[(.*?)\]\((.*?)\)/)
-      if (imageMatch) {
-        // Fecha lista se existir
-        if (listItems.length > 0) {
-          elements.push(
-            <ul key={`list-${index}`} className="list-disc ml-6 mb-6">
-              {listItems}
-            </ul>
-          )
-          listItems = []
-        }
-        const [, alt, url] = imageMatch
-        elements.push(
-          <div key={index} className="my-8">
-            <img 
-              src={url} 
-              alt={alt || 'Imagem do artigo'} 
-              className="w-full rounded-lg shadow-lg"
-              loading="lazy"
-            />
-            {alt && (
-              <p className="text-sm text-low-medium italic text-center mt-2">
-                {alt}
-              </p>
-            )}
-          </div>
-        )
-        return
-      }
-
-      // Fecha lista se existir antes de adicionar parágrafo
-      if (listItems.length > 0) {
-        elements.push(
-          <ul key={`list-${index}`} className="list-disc ml-6 mb-6">
-            {listItems}
-          </ul>
-        )
-        listItems = []
-      }
-
-      // Parágrafo normal
-      elements.push(
-        <p key={index} className="text-lg text-low-medium leading-relaxed mb-6">
-          {line}
-        </p>
-      )
-    })
-
-    // Fecha lista final se existir
-    if (listItems.length > 0) {
-      elements.push(
-        <ul key="list-final" className="list-disc ml-6 mb-6">
-          {listItems}
-        </ul>
-      )
-    }
-
-    return elements
-  }
+  // Renderizar conteúdo como Markdown
+  const renderContent = (content) => (
+    <div
+      className="prose prose-lg max-w-none text-low-medium"
+      dangerouslySetInnerHTML={{ __html: marked.parse(content || '') }}
+    />
+  )
+// Código antigo de parsing manual removido. Agora apenas renderContent baseado em marked é usado.
 
   if (isLoading) {
     return (

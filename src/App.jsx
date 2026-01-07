@@ -12,6 +12,8 @@ import BlogPost from './pages/BlogPost';
 import Login from './pages/Login';
 import AdminProjetos from './pages/AdminProjetos';
 import AdminBlog from './pages/AdminBlog';
+import AdminDepoimentos from './pages/AdminDepoimentos';
+import Admin from './pages/Admin';
 import BusinessCard from './pages/BusinessCard';
 import NotFound from './pages/NotFound';
 import './styles/global.css';
@@ -34,6 +36,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/agradecimento" element={<Agradecimento />} />
           <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
             path="/admin/projetos" 
             element={
               <ProtectedRoute>
@@ -46,6 +56,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AdminBlog />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin/depoimentos" 
+            element={
+              <ProtectedRoute>
+                <AdminDepoimentos />
               </ProtectedRoute>
             } 
           />

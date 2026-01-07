@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
@@ -440,6 +440,18 @@ const AdminProjetos = () => {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Botões de navegação */}
+        <div className="max-w-screen-xl mx-auto mt-12 mb-8 flex flex-col sm:flex-row justify-center gap-4 px-4 md:px-16">
+          <Button href="/admin" variant="primary">
+            <i className="fa-solid fa-gauge-high mr-2"></i>
+            Voltar ao Dashboard
+          </Button>
+          <Button href="/" variant="secondary">
+            <i className="fa-solid fa-home mr-2"></i>
+            Ir para o Site
+          </Button>
         </div>
       </section>
 

@@ -26,11 +26,7 @@ const Footer = () => {
                 <i className="fa-brands fa-instagram text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
               </a>
             </li>
-            <li>
-              <a href="https://www.linkedin.com/in/robsonsvicero/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn">
-                <i className="fa-brands fa-linkedin-in text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
-              </a>
-            </li>
+            
             <li>
               <a href="https://github.com/robsonsvicero" rel="noopener noreferrer" target="_blank" aria-label="GitHub">
                 <i className="fa-brands fa-github-alt text-3xl sm:text-4xl hover:rotate-[-10deg] hover:scale-110 hover:text-secondary transition" />
@@ -47,9 +43,9 @@ const Footer = () => {
         <div className="mb-16">
           <Button
             onClick={scrollToTop}
-            variant="outline"
+            variant="custom"
             icon={<i className="fa-brands fa-space-awesome" />}
-            className="border border-primary text-primary hover:bg-primary hover:text-cream px-6 py-2 rounded-full transition"
+            className="border-2 border-cream text-cream hover:bg-cream hover:text-primary px-6 py-2 rounded-full transition"
           >
             Voltar ao topo
           </Button>

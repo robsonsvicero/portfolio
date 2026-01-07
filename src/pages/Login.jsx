@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import Button from '../components/UI/Button'
@@ -33,7 +33,7 @@ const Login = () => {
       }
 
       // Redirecionar para admin após login bem-sucedido
-      navigate('/admin/projetos')
+      navigate('/admin')
     } catch (err) {
       setError('Erro inesperado. Verifique sua conexão e tente novamente.')
       console.error('Erro no login:', err)

@@ -11,24 +11,24 @@ const Agradecimento = () => (
         className="mx-auto mb-8 w-40 h-auto"
         style={{ maxWidth: '180px' }}
       />
-      <h1 className="text-2xl md:text-2xl font-bold text-gray-900 mb-5 text-center">Obrigado pela conversa e pela confiança!</h1>
+      <h1 className="text-2xl md:text-2xl font-bold text-gray-900 mb-5 text-center">Recebemos sua solicitação com sucesso.</h1>
       <p className="text-gray-800 mb-4 text-base">
-        Foi excelente mergulhar na essência da sua Marca hoje. Agora, vou analisar todos os pontos que discutimos para desenhar a fundação digital que seu negócio merece.
+        Obrigado por compartilhar os detalhes do seu projeto conosco. No Svicero Studio, acreditamos que marcas excepcionais são construídas sobre diagnósticos precisos, e nossa equipe já iniciou a análise preliminar das suas informações.
       </p>
       <p className="text-gray-900 font-semibold mb-2 text-base">O que acontece agora?</p>
       <p className="text-gray-800 mb-4 text-base">
-        Em até 72 horas, você receberá no seu e-mail (ou WhatsApp) o diagnóstico detalhado da nossa call junto com a proposta estratégica que o Svicero Studio usará para dar vida ao seu projeto.
+        O próximo passo é uma avaliação técnica do seu posicionamento atual. Em até 48 horas úteis, entraremos em contato via WhatsApp para agendar sua breve reunião estratégica.
       </p>
       <p className="text-gray-800 mb-4 text-base">
-        Enquanto isso, sinta-se à vontade para rever nosso portfólio ou tirar qualquer dúvida que tenha surgido após nossa conversa.
+        Estamos ansiosos para entender como podemos elevar o valor de mercado do seu negócio.
       </p>
-      <p className="text-gray-900 mb-6 text-base">Vamos construir algo sólido juntos.</p>
+      <p className="text-gray-900 mb-6 text-base">Cordialmente, Equipe <strong>Svicero Studio</strong></p>
       <a
         href="/#projetos"
         className="w-full text-center inline-block bg-[#004a77] hover:bg-[#00385a] text-white font-semibold py-3 px-6 rounded-lg shadow transition-colors duration-200"
         style={{ marginTop: '12px' }}
       >
-        Enquanto espera, veja nosso portfólio
+        Visite o nosso site
       </a>
     </div>
   </div>

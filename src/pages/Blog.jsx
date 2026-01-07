@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
 import Preloader from '../components/Preloader'
+
+// Imagem do Hero
+import capaBlog from '../images/capa-blog.jpg'
 
 const Blog = () => {
   const [posts, setPosts] = useState([])
@@ -83,19 +86,31 @@ const Blog = () => {
       <Preloader />
       <div className="min-h-screen bg-cream">
         <Header variant="solid" />
+
+        {/* Hero Section */}
+        <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+          {/* Imagem de fundo */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${capaBlog})` }}
+          >
+            {/* Overlay escuro */}
+            <div className="absolute inset-0 bg-gradient-to-b from-dark-bg/70 via-dark-bg/60 to-dark-bg/80"></div>
+          </div>
+          
+          {/* Conteúdo do Hero */}
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 className="font-title text-5xl md:text-7xl font-light text-cream mb-6 leading-tight">
+              Crônicas de Design
+            </h1>
+            <p className="text-xl md:text-2xl text-cream/90 max-w-2xl mx-auto leading-relaxed font-light">
+              Insights sobre design, desenvolvimento e criatividade
+            </p>
+          </div>
+        </section>
         
-        <section className="pt-[200px] pb-24 px-4 md:px-16">
+        <section className="py-24 px-4 md:px-16">
           <div className="max-w-screen-xl mx-auto">
-            {/* Cabeçalho do Blog */}
-            <div className="mb-12 text-center">
-              <h1 className="font-title text-5xl md:text-6xl font-light text-low-dark mb-4">
-                Blog
-              </h1>
-              <span className="block w-24 h-1 bg-primary mx-auto rounded mb-6"></span>
-              <p className="text-xl text-low-medium max-w-2xl mx-auto leading-relaxed">
-                Insights sobre design, desenvolvimento e criatividade
-              </p>
-            </div>
 
             {/* Barra de Busca */}
             <div className="mb-8 max-w-2xl mx-auto">

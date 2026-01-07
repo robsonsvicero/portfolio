@@ -3,7 +3,7 @@ import './Button.css';
 
 const Button = ({ 
   children, 
-  variant = 'outline', // outline, primary, secondary
+  variant = 'outline', // outline, primary, secondary, custom
   size = 'md', 
   className = '', 
   icon,
@@ -12,6 +12,7 @@ const Button = ({
   target,
   rel,
   type = 'button',
+  fillColor: customFillColor, // Cor de preenchimento customizada
   ...props 
 }) => {
   const btnRef = useRef(null);
@@ -46,6 +47,9 @@ const Button = ({
   } else if (variant === 'outline') {
     variantClasses = 'bg-transparent border-2 border-primary text-cream outline-hover';
     outlineHoverClass = 'outline-hover';
+  } else if (variant === 'custom') {
+    // Variante custom: não aplica estilos de cor/borda, permite controle total via className
+    variantClasses = '';
   }
 
   const classes = `${baseClasses} ${sizeClasses[size]} ${variantClasses} ${className}`;
@@ -71,6 +75,15 @@ const Button = ({
   // Cor do preenchimento animado
   let fillColor = '#042C5A'; // primary
   if (variant === 'secondary') fillColor = '#5C0028'; // secondary
+  else if (variant === 'outline') fillColor = '#FFF8F0'; // cream
+  else if (variant === 'custom') fillColor = '#FFF8F0'; // cream
+  
+  // Permite sobrescrever com prop customFillColor
+  if (customFillColor) fillColor = customFillColor;
+
+  // Classes de hover para texto (custom não força cor)
+  const textHoverClass = variant === 'custom' ? '' : 'group-hover:text-cream text-cream';
+  const iconHoverClass = variant === 'custom' ? '' : 'group-hover:text-cream text-cream';
 
   const content = (
     <>
@@ -81,8 +94,8 @@ const Button = ({
         style={{ width: circleSize, height: circleSize, background: fillColor }}
         aria-hidden="true"
       />
-      {icon && <span className="relative z-10 mr-2 text-xl group-hover:text-cream text-cream transition-colors duration-300">{icon}</span>}
-      <span className="relative z-10 group-hover:text-cream text-cream transition-colors duration-300">{children}</span>
+      {icon && <span className={`relative z-10 mr-2 text-xl transition-colors duration-300 ${iconHoverClass}`}>{icon}</span>}
+      <span className={`relative z-10 transition-colors duration-300 ${textHoverClass}`}>{children}</span>
     </>
   );
 

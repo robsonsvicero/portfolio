@@ -9,6 +9,7 @@ export default {
       colors: {
         primary: '#094C7E',
         secondary: '#800020',
+        secondary300: '#D8565E',
         cream: '#FFF8F0',
         'dark-bg': '#050505',
         'dark-gray': '#1a1a1a',
@@ -29,5 +30,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
