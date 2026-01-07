@@ -80,15 +80,15 @@ const Home = () => {
           const slides = cardWrapper.querySelectorAll('.swiper-slide');
           const slidesCount = slides.length;
           const screenWidth = window.innerWidth;
-          
+
           // Determinar slidesPerView baseado na largura da tela
           let currentSlidesPerView = 1;
           if (screenWidth >= 1240) currentSlidesPerView = 3;
           else if (screenWidth >= 768) currentSlidesPerView = 2;
-          
+
           // Só habilita loop se houver slides suficientes
           const enableLoop = slidesCount > currentSlidesPerView;
-          
+
           const swiperInstance = new Swiper(cardWrapper, {
             loop: enableLoop,
             spaceBetween: 24,
@@ -97,10 +97,10 @@ const Home = () => {
               clickable: true,
               dynamicBullets: true,
             },
-            navigation: window.innerWidth >= 768 ? {
+            navigation: {
               nextEl: cardWrapper.querySelector('.swiper-button-next'),
               prevEl: cardWrapper.querySelector('.swiper-button-prev'),
-            } : false,
+            },
             breakpoints: {
               426: {
                 slidesPerView: 1
@@ -114,19 +114,6 @@ const Home = () => {
             }
           });
           swipersRef.current.push(swiperInstance);
-
-          // Exibe/oculta botões prev/next conforme o tamanho da tela
-          const prevBtn = cardWrapper.querySelector('.swiper-button-prev');
-          const nextBtn = cardWrapper.querySelector('.swiper-button-next');
-          if (prevBtn && nextBtn) {
-            if (window.innerWidth <= 768) {
-              prevBtn.style.display = 'block';
-              nextBtn.style.display = 'block';
-            } else {
-              prevBtn.style.display = 'none';
-              nextBtn.style.display = 'none';
-            }
-          }
         });
       }
     }
@@ -323,7 +310,7 @@ const Home = () => {
           <div className="max-w-screen-xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-4">A Tríade Integrada: Simplicidade que posiciona.</h2>
-              
+
               <p className="font-sans text-xl text-low-medium max-w-3xl mx-auto leading-relaxed">
                 Eliminamos o abismo entre estratégia e execução. Oferecemos uma solução completa que conecta a força da sua marca à performance tecnológica.
               </p>
@@ -422,7 +409,7 @@ const Home = () => {
           <div className="max-w-screen-xl mx-auto">
             <div className="mb-12 text-center">
               <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-2">Projetos Selecionados</h2>
-              
+
             </div>
             <div className="flex flex-col gap-12">
               <div className="flex flex-col gap-8 min-h-[2000px]">
@@ -457,7 +444,7 @@ const Home = () => {
           <div className="max-w-screen-xl mx-auto px-2 sm:px-4 md:px-16">
             <div className="mb-12 text-center">
               <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Principais Serviços</h2>
-              
+
             </div>
             <div className="swiper overflow-visible pb-12 max-w-full">
               <div className="card-wrapper mx-2 md:mx-0 py-5 px-2 md:px-4 overflow-hidden">
@@ -476,8 +463,8 @@ const Home = () => {
                   ))}
                 </ul>
                 <div className="swiper-pagination mt-8"></div>
-                <div className="swiper-slide-button swiper-button-prev hidden md:block"></div>
-                <div className="swiper-slide-button swiper-button-next hidden md:block"></div>
+                <div className="swiper-slide-button swiper-button-prev block md:hidden"></div>
+                <div className="swiper-slide-button swiper-button-next block md:hidden"></div>
               </div>
             </div>
           </div>
@@ -488,7 +475,7 @@ const Home = () => {
           <div className="max-w-screen-xl mx-auto">
             <div className="mb-12 text-center">
               <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-2">Quem está por trás do Svicero Studio</h2>
-              
+
             </div>
             <div className="flex flex-col lg:flex-row-reverse gap-12 items-center mb-8">
               <div className="w-full lg:w-2/5 flex justify-center mb-8 lg:mb-0">
@@ -547,8 +534,8 @@ const Home = () => {
                     ))}
                   </ul>
                   <div className="swiper-pagination mt-8"></div>
-                  <div className="swiper-slide-button swiper-button-prev hidden md:block"></div>
-                  <div className="swiper-slide-button swiper-button-next hidden md:block"></div>
+                  <div className="swiper-slide-button swiper-button-prev block md:hidden"></div>
+                  <div className="swiper-slide-button swiper-button-next block md:hidden"></div>
                 </div>
               </div>
             </div>
@@ -560,14 +547,14 @@ const Home = () => {
           <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-stretch">
             {/* Imagem - aparece primeiro em mobile */}
             <div className="w-full md:w-1/2 order-1 md:order-2">
-              <img 
-                src={sviceroCta} 
-                alt="Svicero Studio CTA" 
-                className="w-full h-64 md:h-full object-cover rounded-bl-[60px] rounded-tr-[60px]" 
+              <img
+                src={sviceroCta}
+                alt="Svicero Studio CTA"
+                className="w-full h-64 md:h-full object-cover rounded-bl-[60px] rounded-tr-[60px]"
               />
             </div>
             {/* Texto - aparece segundo em mobile */}
-            <div className="w-full md:w-1/2 order-2 md:order-1 flex flex-col items-center md:items-start justify-center text-cream text-center md:text-left py-12 md:py-20 px-6 md:px-16">
+            <div className="w-full md:w-1/2 order-2 md:order-1 flex flex-col items-center md:items-start max-w-screen-xl mx-auto justify-center text-cream text-center md:text-left py-12 md:py-20 px-4 md:px-16">
               <h2 className="font-title font-semibold text-3xl md:text-4xl mb-4 text-cream">Pronto para o próximo nível?</h2>
               <p className="text-lg md:text-xl mb-8 text-cream/75">Deixe a complexidade para trás. Vamos construir o posicionamento que o seu negócio merece.</p>
               <Button
@@ -576,8 +563,8 @@ const Home = () => {
                 className="border-2 border-cream text-cream hover:text-primary transition-colors inline-block mt-8"
                 target="_blank"
                 rel="noopener noreferrer"
-              >Solicitar Diagnóstico Estratégico</Button>
-              
+              >Solicitar Diagnóstico Estratégico
+              </Button>
             </div>
           </div>
         </section>
@@ -587,7 +574,7 @@ const Home = () => {
           <div className="max-w-screen-xl mx-auto">
             <div className="mb-16 text-center">
               <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-2">Crônicas de Design</h2>
-              
+
               <p className="text-lg text-cream font-light max-w-2xl mx-auto leading-relaxed">
                 Insights, tutoriais e reflexões sobre design e desenvolvimento
               </p>
@@ -734,7 +721,7 @@ const Home = () => {
 
         <Footer />
 
-        
+
 
 
 

@@ -31,4 +31,29 @@
   .swiper-slide > * {
     width: 100%;
   }
+
+  /* Swiper - Botões de navegação menores e centralizados */
+  .swiper-button-prev,
+  .swiper-button-next {
+    --swiper-navigation-size: 16px;
+    @apply w-9 h-9 bg-white/90 rounded-full shadow-md;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Ocultar botões em telas >= 768px */
+  @media (min-width: 768px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: none !important;
+    }
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    @apply text-secondary font-bold;
+    font-size: var(--swiper-navigation-size) !important;
+    line-height: 1 !important;
+  }
 }
