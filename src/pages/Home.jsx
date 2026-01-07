@@ -573,10 +573,11 @@ const Home = () => {
               <Button
                 href="https://form.jotform.com/253516622262655"
                 variant="custom"
-                className="px-8 py-4 text-lg border-2 border-cream text-cream hover:text-primary transition-colors"
+                className="border-2 border-cream text-cream hover:text-primary transition-colors inline-block mt-8"
                 target="_blank"
                 rel="noopener noreferrer"
               >Solicitar Diagnóstico Estratégico</Button>
+              
             </div>
           </div>
         </section>
