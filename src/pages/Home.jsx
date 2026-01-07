@@ -521,7 +521,7 @@ const Home = () => {
                         <div className="flex flex-col h-full">
                           <p className="text-cream/90 text-base leading-relaxed mb-6 italic flex-1">"{depoimento.texto}"</p>
                           <div className="flex items-center gap-4 mt-auto">
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getAvatarColorClass(depoimento.cor_avatar)}`}>
+                            <div className={`w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center ${getAvatarColorClass(depoimento.cor_avatar)}`}>
                               <span className="font-semibold text-lg">{depoimento.iniciais || depoimento.nome?.substring(0, 2).toUpperCase()}</span>
                             </div>
                             <div>
