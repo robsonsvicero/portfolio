@@ -40,7 +40,7 @@ const Preloader = () => {
         </div>
 
         {/* Logo com animação */}
-        <div className="relative z-10 animate-scale-fade">
+        <div className="relative z-10 animate-elastic-grow">
           <img 
             src={logoPreloader} 
             alt="Svicero Studio" 
@@ -68,14 +68,23 @@ const Preloader = () => {
       </div>
 
       <style>{`
-        @keyframes scale-fade {
-          0%, 100% {
-            transform: scale(1);
-            opacity: 1;
+        @keyframes elastic-grow {
+          0% {
+            transform: scale(0);
+            opacity: 0;
           }
           50% {
-            transform: scale(1.05);
-            opacity: 0.9;
+            opacity: 1;
+          }
+          70% {
+            transform: scale(1.1);
+          }
+          85% {
+            transform: scale(0.95);
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
           }
         }
 
@@ -99,8 +108,10 @@ const Preloader = () => {
           }
         }
 
-        .animate-scale-fade {
-          animation: scale-fade 2s ease-in-out infinite;
+        .animate-elastic-grow {
+          animation: elastic-grow 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+          transform: scale(0);
+          opacity: 0;
         }
 
         .animate-progress {

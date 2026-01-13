@@ -32,7 +32,7 @@ const Home = () => {
       alt: 'Card UI designer',
       badge: { text: 'UI & UX', className: 'ui-ux text-[15px] font-medium text-[#094C7E] bg-[#EAF4F6]' },
       title: 'Experiências fluidas que removem as barreiras entre você e seu cliente.',
-      link: '/servico-uiux-design'
+      link: '/servico-ui-design'
     },
     {
       img: developer,
@@ -292,8 +292,8 @@ const Home = () => {
             <h1 className="font-title font-extralight text-cream text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6 drop-shadow-lg">O design que transforma sua autoridade <br /> em valor de mercado.</h1>
             <p className="font-sans text-cream text-xl md:text-2xl lg:text-3xl font-light tracking-wide mb-10 max-w-5xl">Unimos Branding Estratégico e UX Design para criar marcas líderes. Simplicidade que posiciona e converte.</p>
             <Button
-              href="https://wa.me/5511964932007"
-              variant="primary"
+              href="https://form.jotform.com/253516622262655"
+              variant="secondary"
               target="_blank"
               rel="noopener noreferrer"
             >Solicitar Diagnóstico de Marca</Button>
@@ -391,7 +391,7 @@ const Home = () => {
             <div className="text-center pt-8">
               <Button
                 href="https://form.jotform.com/253516622262655"
-                variant="primary"
+                variant="secondary"
                 target="_blank"
                 className="inline-block mt-8"
               >
@@ -494,11 +494,13 @@ const Home = () => {
             </div>
             <div className="flex justify-center mt-8">
               <Button
-                href="/agenda"
+                href="https://form.jotform.com/253516622262655"
                 variant="secondary"
-                icon={<i className="fa-regular fa-calendar"></i>}
-                className="mb-16 px-8 py-4 text-lg w-full lg:w-[40%]"
-              >Agendar Conversa</Button>
+                className="inline-block mt-8"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Solicitar Diagnóstico Estratégico
+              </Button>
             </div>
           </div>
         </section>
@@ -543,7 +545,7 @@ const Home = () => {
         )}
 
         {/* CTA Final */}
-        <section className="w-full bg-primary overflow-hidden">
+        <section className="w-full bg-secondary overflow-hidden">
           <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-stretch">
             {/* Imagem - aparece primeiro em mobile */}
             <div className="w-full md:w-1/2 order-1 md:order-2">
@@ -560,7 +562,7 @@ const Home = () => {
               <Button
                 href="https://form.jotform.com/253516622262655"
                 variant="custom"
-                className="border-2 border-cream text-cream hover:text-primary transition-colors inline-block mt-8"
+                className="border-2 border-cream text-cream hover:text-secondary transition-colors inline-block mt-8"
                 target="_blank"
                 rel="noopener noreferrer"
               >Solicitar Diagnóstico Estratégico
@@ -635,7 +637,7 @@ const Home = () => {
                 <div className="text-center">
                   <Button
                     href="/blog"
-                    variant="primary"
+                    variant="secondary"
                     icon={<i className="fa-solid fa-arrow-right"></i>}
                     className="px-8 py-4 text-lg"
                   >

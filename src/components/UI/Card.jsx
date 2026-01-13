@@ -61,8 +61,8 @@ Card.Actions = ({ children, className = '' }) => (
 
 Card.Button = ({ children, href, variant = 'outline', className = '' }) => {
   const variantClasses = {
-    outline: 'border-2 border-primary text-cream hover:bg-primary hover:border-primary',
-    filled: 'bg-primary text-cream hover:bg-primary/80',
+    outline: 'border-2 border-primary text-cream hover:bg-secondary hover:border-secondary',
+    filled: 'bg-primary text-cream hover:bg-secondary/80',
   };
   return (
     <a

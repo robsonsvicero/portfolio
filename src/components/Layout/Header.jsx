@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '../UI/Button';
 
-import logoBranco from '../../images/logo_alternativo 4.png';
-import logoAzul from '../../images/logo_alternativo 1.png';
+import logoBranco from '../../images/simbolo 3.png';
+import logoAzul from '../../images/simbolo 1.png';
 
 const Header = ({ variant = 'transparent' }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -100,13 +100,13 @@ const Header = ({ variant = 'transparent' }) => {
               Blog
             </a>
             <Button
-              href="/agenda"
-              variant="secondary"
-              icon={<i className="fa-regular fa-calendar"></i>}
-              className="ml-4 px-6 py-2 text-base font-semibold"
-            >
-              Agendar Conversa
-            </Button>
+                href="https://form.jotform.com/253516622262655"
+                variant="secondary"
+                className="inline-block"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Solicitar Diagnóstico Estratégico
+              </Button>
           </nav>
 
           {/* Menu Mobile */}
