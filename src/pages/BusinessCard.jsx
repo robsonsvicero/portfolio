@@ -38,15 +38,6 @@ const BusinessCard = () => {
           </a>
 
           <a 
-            href="https://www.behance.net/robsonsvicero" 
-            className="business-card-button"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver Portfólio (Behance)
-          </a>
-
-          <a 
             href="https://www.svicerostudio.com.br" 
             className="business-card-button"
             target="_blank"
