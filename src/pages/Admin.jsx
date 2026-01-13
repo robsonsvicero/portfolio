@@ -45,7 +45,7 @@ const Admin = () => {
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
             <div>
-              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+              <h1 className="font-title text-4xl md:text-5xl font-semibold text-low-dark mb-2">
                 Painel Administrativo
               </h1>
               <p className="text-low-medium text-lg">

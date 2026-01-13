@@ -77,7 +77,6 @@ const Header = ({ variant = 'transparent' }) => {
               { label: 'Projetos', section: 'projetos' },
               { label: 'Serviços', section: 'servicos' },
               { label: 'Sobre', section: 'sobre' },
-              { label: 'Contato', section: 'contato' },
             ].map((item) => (
               <a
                 key={item.section}
@@ -100,11 +99,9 @@ const Header = ({ variant = 'transparent' }) => {
               Blog
             </a>
             <Button
-                href="https://form.jotform.com/253516622262655"
+                href="/diagnostico"
                 variant="secondary"
                 className="inline-block"
-                target="_blank"
-                rel="noopener noreferrer"
               >Solicitar Diagnóstico Estratégico
               </Button>
           </nav>
@@ -134,7 +131,6 @@ const Header = ({ variant = 'transparent' }) => {
             { label: 'Projetos', section: 'projetos' },
             { label: 'Serviços', section: 'servicos' },
             { label: 'Sobre', section: 'sobre' },
-            { label: 'Contato', section: 'contato' },
           ].map((item) => (
             <a
               key={item.section}

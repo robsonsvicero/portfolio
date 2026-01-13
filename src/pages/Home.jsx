@@ -13,7 +13,7 @@ import uiDesigner from '../images/ui-designer.webp';
 import developer from '../images/developer.webp';
 
 import heroImage from '../images/hero.webp';
-import aboutPhoto from '../images/about-photo.webp';
+import aboutPhoto from '../images/about-photo.png';
 import sviceroCta from '../images/Svicero_CTA.png';
 
 
@@ -288,15 +288,13 @@ const Home = () => {
         {/* Hero Section / Banner */}
         <section id="inicio" className="relative h-[780px] flex items-center justify-center text-center overflow-hidden">
           <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}></div>
-          <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4">
-            <h1 className="font-title font-extralight text-cream text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6 drop-shadow-lg">O design que transforma sua autoridade <br /> em valor de mercado.</h1>
-            <p className="font-sans text-cream text-xl md:text-2xl lg:text-3xl font-light tracking-wide mb-10 max-w-5xl">Unimos Branding Estratégico e UX Design para criar marcas líderes. Simplicidade que posiciona e converte.</p>
+          <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 md:px-8">
+            <h1 className="font-title font-semibold text-cream text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide mb-6 drop-shadow-lg max-w-6xl">Posicionamento Premium. Escala Inevitável.</h1>
+            <p className="font-body text-cream text-lg md:text-xl lg:text-2xl font-normal tracking-wide mb-10 max-w-4xl drop-shadow-md">Criamos a estrutura estratégica e visual para marcas que decidiram dominar seu mercado e atrair clientes de alto valor.</p>
             <Button
-              href="https://form.jotform.com/253516622262655"
+              href="/diagnostico"
               variant="secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >Solicitar Diagnóstico de Marca</Button>
+            >Solicitar Diagnóstico Estratégico</Button>
           </div>
           <div className="absolute bottom-20 left-0 w-full flex justify-center z-20">
             <a href="#triade" className="animate-bounce text-cream text-3xl hover:text-primary transition-colors duration-300">
@@ -390,9 +388,8 @@ const Home = () => {
 
             <div className="text-center pt-8">
               <Button
-                href="https://form.jotform.com/253516622262655"
+                href="/diagnostico"
                 variant="secondary"
-                target="_blank"
                 className="inline-block mt-8"
               >
                 Solicitar Diagnóstico Estratégico
@@ -408,7 +405,7 @@ const Home = () => {
         <section id="projetos" className="bg-low-dark py-24 px-4 md:px-16">
           <div className="max-w-screen-xl mx-auto">
             <div className="mb-12 text-center">
-              <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-2">Projetos Selecionados</h2>
+              <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-4">Projetos Selecionados</h2>
 
             </div>
             <div className="flex flex-col gap-12">
@@ -443,7 +440,7 @@ const Home = () => {
         <section id="servicos" className="bg-cream py-24 px-4 md:px-16">
           <div className="max-w-screen-xl mx-auto px-2 sm:px-4 md:px-16">
             <div className="mb-12 text-center">
-              <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Principais Serviços</h2>
+              <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-4">Principais Serviços</h2>
 
             </div>
             <div className="swiper overflow-visible pb-12 max-w-full">
@@ -474,7 +471,7 @@ const Home = () => {
         <section id="sobre" className="bg-low-dark py-24 px-4 md:px-16">
           <div className="max-w-screen-xl mx-auto">
             <div className="mb-12 text-center">
-              <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-2">Quem está por trás do Svicero Studio</h2>
+              <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-4">A mente por trás da estratégia</h2>
 
             </div>
             <div className="flex flex-col lg:flex-row-reverse gap-12 items-center mb-8">
@@ -483,22 +480,25 @@ const Home = () => {
               </div>
               <div className="w-full lg:w-3/5 text-cream">
                 <div className="text-about">
-                  <p className="text-lg leading-relaxed mb-6">O <strong className='text-blue-light'>Svicero Studio</strong> nasceu da minha trajetória integrando design e desenvolvimento. Eu sou o <strong className='text-blue-light'>Robson Svicero</strong>, fundador do estúdio e responsável por transformar a estratégia visual da sua marca em uma presença digital completa e de alta performance.</p>
-                  <p className="text-lg leading-relaxed mb-6">Minha jornada começou no <strong className='text-blue-light'>design gráfico</strong>, criando identidades visuais que ajudavam marcas a se expressarem com propósito e autenticidade. Com o tempo, percebi que queria ir além da estética — queria entender como as pessoas interagem com o design. Foi aí que mergulhei no universo do <strong className='text-blue-light'>UI/UX design</strong>, unindo beleza e funcionalidade para criar interfaces que realmente conectam marcas e usuários.</p>
-                  <p className="text-lg leading-relaxed mb-6">Em seguida, encontrei no <strong className='text-blue-light'>desenvolvimento front-end</strong> a ponte perfeita entre o design e a tecnologia. Hoje, utilizo HTML, CSS, JavaScript e React para dar vida às criações e garantir que cada detalhe visual funcione de forma fluida e responsiva.</p>
-                  <p className="text-lg leading-relaxed mb-6">Essa trajetória é a base do Svicero Studio: um estúdio focado em <strong className='text-blue-light'>simplicidade estratégica</strong>, onde cada projeto integra <strong className='text-blue-light'>identidade visual</strong>, <strong className='text-blue-light'>UX/UI</strong> e <strong className='text-blue-light'>front-end</strong> de forma coesa. Acredito que o design não termina no layout — ele ganha força quando se transforma em uma experiência real, acessível e envolvente.</p>
-                  <p className="text-lg leading-relaxed mb-6">Quando não estou projetando ou codando, você provavelmente vai me encontrar brincando com minha filha, ouvindo música, assistindo filmes, séries ou animes, ou lendo HQs — paixões que alimentam minha criatividade e mantêm minha mente em constante movimento.</p>
-                  <p className="text-lg leading-relaxed mb-6"><strong className='text-secondary300'>Vamos construir sua autoridade digital juntos?</strong> O Svicero Studio está sempre aberto a novos desafios, colaborações estratégicas e projetos que façam a diferença.</p>
+                  <p className="text-lg leading-relaxed mb-6">Eu sou Robson Svicero, e não acredito em design como decoração. No Svicero Studio, minha missão é eliminar o abismo entre a excelência do seu serviço e a forma como o mercado o percebe.</p>
+                  <p className="text-lg leading-relaxed mb-6">Com uma trajetória que integra o rigor do Design Gráfico, a precisão do UX e a robustez da Tecnologia, desenvolvi uma visão sistêmica que a maioria das agências ignora. Eu não entrego apenas layouts; eu construo ativos digitais de alta performance que servem como o alicerce para a escala de negócios que buscam o público premium.</p>
+                  <p className="text-lg leading-relaxed mb-6">Minha atuação se baseia na Tríade:</p>
+                  <ul className="list-disc list-inside mb-6 text-lg leading-relaxed">
+                    <li className="mb-2"><strong>Estratégia:</strong> Onde definimos seu domínio de mercado.</li>
+                    <li className="mb-2"><strong>Design:</strong> Onde construímos sua percepção de autoridade.</li>
+                    <li className="mb-2"><strong>Tecnologia:</strong> Onde garantimos que sua estrutura seja rápida, fluida e impecável.</li>
+                  </ul>
+                  <p className="text-lg leading-relaxed mb-6">Quando não estou redesenhando o posicionamento de nossos parceiros, foco no que realmente importa: a construção de um legado para minha família e a busca constante por referências que transcendem o digital.</p>
+                  <br />
+                  <p className="text-xl leading-relaxed mb-6 font-semibold italic">Não estamos aqui para fazer "mais um site". Estamos aqui para posicionar sua marca onde ela merece estar.</p>
                 </div>
               </div>
             </div>
             <div className="flex justify-center mt-8">
               <Button
-                href="https://form.jotform.com/253516622262655"
+                href="/diagnostico"
                 variant="secondary"
                 className="inline-block mt-8"
-                target="_blank"
-                rel="noopener noreferrer"
               >Solicitar Diagnóstico Estratégico
               </Button>
             </div>
@@ -544,38 +544,12 @@ const Home = () => {
           </section>
         )}
 
-        {/* CTA Final */}
-        <section className="w-full bg-secondary overflow-hidden">
-          <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-stretch">
-            {/* Imagem - aparece primeiro em mobile */}
-            <div className="w-full md:w-1/2 order-1 md:order-2">
-              <img
-                src={sviceroCta}
-                alt="Svicero Studio CTA"
-                className="w-full h-64 md:h-full object-cover rounded-bl-[60px] rounded-tr-[60px]"
-              />
-            </div>
-            {/* Texto - aparece segundo em mobile */}
-            <div className="w-full md:w-1/2 order-2 md:order-1 flex flex-col items-center md:items-start max-w-screen-xl mx-auto justify-center text-cream text-center md:text-left py-12 md:py-20 px-4 md:px-16">
-              <h2 className="font-title font-semibold text-3xl md:text-4xl mb-4 text-cream">Pronto para o próximo nível?</h2>
-              <p className="text-lg md:text-xl mb-8 text-cream/75">Deixe a complexidade para trás. Vamos construir o posicionamento que o seu negócio merece.</p>
-              <Button
-                href="https://form.jotform.com/253516622262655"
-                variant="custom"
-                className="border-2 border-cream text-cream hover:text-secondary transition-colors inline-block mt-8"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Solicitar Diagnóstico Estratégico
-              </Button>
-            </div>
-          </div>
-        </section>
 
         {/* Blog - Últimas Publicações */}
         <section className="bg-low-dark  py-24 px-4 md:px-16">
           <div className="max-w-screen-xl mx-auto">
             <div className="mb-16 text-center">
-              <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-2">Crônicas de Design</h2>
+              <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-4">Crônicas de Design</h2>
 
               <p className="text-lg text-cream font-light max-w-2xl mx-auto leading-relaxed">
                 Insights, tutoriais e reflexões sobre design e desenvolvimento
@@ -654,69 +628,28 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Contato / Contact */}
-        <section id="contato" className="bg-cream py-24 px-4 md:px-16">
-          <div className="max-w-screen-md mx-auto">
-            <div className="mb-12 text-center">
-              <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Inicie sua transformação estratégica</h2>
-              <p className="text-base md:text-lg text-low-dark/60 mx-auto mb-6">Preencha os campos abaixo para que possamos analisar o seu perfil e preparar um diagnóstico personalizado para o seu negócio.</p>
+        {/* CTA Final */}
+        <section className="w-full bg-secondary overflow-hidden">
+          <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-stretch">
+            {/* Imagem - aparece primeiro em mobile */}
+            <div className="w-full md:w-1/2 order-1 md:order-2">
+              <img
+                src={sviceroCta}
+                alt="Svicero Studio CTA"
+                className="w-full h-64 md:h-full object-cover rounded-bl-[60px] rounded-tr-[60px]"
+              />
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6 bg-white rounded-xl shadow-lg p-8">
-
-              <div className="flex flex-col gap-1">
-                <label htmlFor="nome" className="text-low-dark text-base">Nome*</label>
-                <input type="text" name="nome" id="nome" required className="px-4 py-3 rounded-lg bg-black/25 border border-cream/20 text-low-dark text-base focus:border-primary focus:outline-none" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="email" className="text-low-dark text-base">E-mail*</label>
-                <input type="email" name="email" id="email" required className="px-4 py-3 rounded-lg bg-black/25 border border-cream/20 text-low-dark text-base focus:border-primary focus:outline-none" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="whats" className="text-low-dark text-base">WhatsApp*</label>
-                <input type="tel" name="whats" id="whats" required className="px-4 py-3 rounded-lg bg-black/25 border border-cream/20 text-low-dark text-base focus:border-primary focus:outline-none" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="link" className="text-low-dark text-base">Link do site ou Instagram atual da empresa.</label>
-                <input type="tel" name="link" id="link" required className="px-4 py-3 rounded-lg bg-black/25 border border-cream/20 text-low-dark text-base focus:border-primary focus:outline-none" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="budget" className="text-low-dark text-base">Qual o investimento planejado para o projeto?*</label>
-                <select name="budget" id="budget" required className="px-4 py-3 rounded-lg bg-black/25 border border-cream/20 text-low-dark text-base focus:border-primary focus:outline-none">
-                  <option value="">Selecione uma opção</option>
-                  <option value="5k">R$ 5k a R$ 8k</option>
-                  <option value="9k">R$ 9k a R$ 12k</option>
-                  <option value="+12k">Acima de R$12k</option>
-                </select>
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="projeto" className="text-low-dark text-base">Tipo de projeto*</label>
-                <select name="projeto" id="projeto" required className="px-4 py-3 rounded-lg bg-black/25 border border-cream/20 text-low-dark text-base focus:border-primary focus:outline-none">
-                  <option value="">Selecione uma opção</option>
-                  <option value="Triade" className='font-bold'>Ecossistema Completo (Branding + Site + UX)</option>
-                  <option value="Identidade Visual">Branding & Identidade</option>
-                  <option value="UI/UX Design">Experiência Digital e Interfaces (UI/UX)</option>
-                  <option value="Web Site">Desenvolvimento web</option>
-                  <option value="Outros">Outros</option>
-                </select>
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="mensagem" className="text-low-dark text-base">Conte-nos brevemente sobre o seu desafio atual.*</label>
-                <textarea name="mensagem" id="mensagem" required className="px-4 py-3 rounded-lg bg-black/25 border border-cream/20 text-low-dark text-base focus:border-primary focus:outline-none min-h-[150px] resize-y" />
-              </div>
-
-              <p className='w-full text-left text-cream/60 text-sm'>*campos obrigatórios</p>
-
-              <input type="hidden" name="_subject" value="Novo envio!" />
-
-              <div className='w-full flex justify-center items-center'>
-                <Button
-                  type="submit"
-                  variant="secondary"
-                  className="text-cream w-full md:w-1/2 border-2 hover:border-primary px-8 py-4 text-lg"
-                  disabled={isSubmitting}
-                >{isSubmitting ? 'Enviando...' : 'Solicitar Diagnóstico Estratégico'}</Button>
-              </div>
-            </form>
+            {/* Texto - aparece segundo em mobile */}
+            <div className="w-full md:w-1/2 order-2 md:order-1 flex flex-col items-center md:items-start max-w-screen-xl mx-auto justify-center text-cream text-center md:text-left py-12 md:py-20 px-4 md:px-16">
+              <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-4">Pronto para o próximo nível?</h2>
+              <p className="text-lg md:text-xl mb-8 text-cream/75">Deixe a complexidade para trás. Vamos construir o posicionamento que o seu negócio merece.</p>
+              <Button
+                href="/diagnostico"
+                variant="custom"
+                className="border-2 border-cream text-cream hover:text-secondary transition-colors inline-block mt-8"
+              >Solicitar Diagnóstico Estratégico
+              </Button>
+            </div>
           </div>
         </section>
 

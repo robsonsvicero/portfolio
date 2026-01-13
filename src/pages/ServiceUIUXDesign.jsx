@@ -4,6 +4,7 @@ import Footer from '../components/Layout/Footer';
 import Button from '../components/UI/Button';
 
 // Importar imagens
+import heroServiceUiux from '../images/hero_service-uiux-bg.webp';
 import ctaUi from '../images/cta-uiux.webp';
 import unm from '../images/cta-umusic.webp';
 import crypto from '../images/cta-crypto.webp';
@@ -36,21 +37,18 @@ const ServiceUIUXDesign = () => {
       </a>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-primary/95 to-primary/90 px-4 md:px-16 py-24" id="inicio">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-title text-5xl md:text-7xl font-extralight text-cream mb-6 leading-tight">UI & UX Design</h1>
-          <p className="font-sans text-xl md:text-2xl font-light text-cream/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+      <section className="relative min-h-screen flex items-center justify-center px-4 md:px-16 py-24" id="inicio">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroServiceUiux})` }}></div>
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h1 className="font-title font-semibold text-cream text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide mb-6 drop-shadow-lg max-w-6xl">UI & UX Design</h1>
+          <p className="font-body text-cream text-lg md:text-xl lg:text-2xl font-normal tracking-wide mb-10 max-w-4xl drop-shadow-md mx-auto">
             Crio interfaces visuais funcionais, modernas e esteticamente consistentes — focadas em experiência, usabilidade e conversão.
           </p>
           <Button
-            className='lg:w-[40%] w-full whitespace-nowrap'
-            href="https://wa.me/5511964932007"
-            variant="secondary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Começar seu Posicionamento
-          </Button>
+              href="/diagnostico"
+              variant="secondary"
+            >Solicitar Diagnóstico Estratégico</Button>
         </div>
       </section>
 
@@ -58,7 +56,7 @@ const ServiceUIUXDesign = () => {
       <section className="bg-dark-bg py-24 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-neutral-900 rounded-2xl p-8 border border-cream/10">
-            <h2 className="font-title text-3xl md:text-4xl font-light text-cream mb-8">O que inclui</h2>
+            <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-4">O que inclui</h2>
             <ul className="space-y-4 text-cream/80 text-lg">
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
@@ -80,7 +78,7 @@ const ServiceUIUXDesign = () => {
           </div>
 
           <div className="bg-neutral-900 rounded-2xl p-8 border border-cream/10">
-            <h2 className="font-title text-3xl md:text-4xl font-light text-cream mb-8">Processo de criação</h2>
+            <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-4">Processo de criação</h2>
             <ul className="space-y-4 text-cream/80 text-lg">
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
@@ -106,9 +104,9 @@ const ServiceUIUXDesign = () => {
       {/* Gallery */}
       <section className="bg-cream py-24 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">Projetos relacionados</h2>
-            <span className="block w-24 h-1 bg-primary mx-auto rounded"></span>
+          <div className="text-center mb-20">
+            <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark">Projetos relacionados</h2>
+            
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <a href="https://www.behance.net/gallery/174232557/Universal-Music" target="_blank" rel="noopener noreferrer" className="block group">
@@ -125,19 +123,15 @@ const ServiceUIUXDesign = () => {
       </section>
 
       {/* CTA */}
-      <section className="bg-dark-bg py-24 px-4 md:px-16">
+      <section className="bg-primary py-24 px-4 md:px-16">
         <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center gap-12">
           <div className="w-full lg:w-1/2">
-            <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-6 leading-tight">Quer transformar sua interface em uma experiência memorável?</h2>
+            <h2 className="font-title text-4xl md:text-5xl font-light text-cream mb-4">Quer transformar sua interface em uma experiência memorável?</h2>
             <p className="font-sans text-lg text-cream/80 mb-8 leading-relaxed">Vamos criar juntos uma interface intuitiva, envolvente e alinhada à identidade da sua marca.</p>
             <Button
-              className='lg:w-[60%] w-full'
-              href="/agenda"
+              href="/diagnostico"
               variant="secondary"
-              icon={<i className="fa-regular fa-calendar"></i>}
-            >
-              Agendar Conversa Estratégica
-            </Button>
+            >Solicitar Diagnóstico Estratégico</Button>
           </div>
           <div className="w-full lg:w-1/2">
             <img src={ctaUi} alt="UI & UX Design" className="w-full h-auto rounded-2xl shadow-2xl" />

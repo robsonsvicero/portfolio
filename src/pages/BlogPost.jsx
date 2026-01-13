@@ -149,7 +149,7 @@ const BlogPost = () => {
               </div>
 
               {/* Título */}
-              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-6 leading-tight">
+              <h1 className="font-title text-4xl md:text-5xl font-semibold text-low-dark mb-6 leading-tight">
                 {post.titulo}
               </h1>
 

@@ -29,12 +29,12 @@ const BusinessCard = () => {
         {/* Botões de Ação */}
         <div className="business-card-buttons">
           <a 
-            href="https://wa.me/5511964932007" 
+            href="/diagnostico" 
             className="business-card-button"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Começar um Projeto
+            Solicitar Diagnóstico Estratégico
           </a>
 
           <a 

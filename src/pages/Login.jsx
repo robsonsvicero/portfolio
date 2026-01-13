@@ -52,7 +52,7 @@ const Login = () => {
             alt="Svicero Studio" 
             className="h-16 mx-auto mb-12"
           />
-          <h1 className="font-title text-3xl md:text-4xl font-light text-low-dark mb-2">
+          <h1 className="font-title text-3xl md:text-4xl font-semibold text-low-dark mb-2">
             Área Administrativa
           </h1>
           <p className="text-lg text-low-medium">

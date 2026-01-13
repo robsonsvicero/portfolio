@@ -100,7 +100,7 @@ const Blog = () => {
           
           {/* Conteúdo do Hero */}
           <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <h1 className="font-title text-5xl md:text-7xl font-light text-cream mb-6 leading-tight">
+            <h1 className="font-title text-5xl md:text-7xl font-semibold text-cream mb-6 leading-tight">
               Crônicas de Design
             </h1>
             <p className="text-xl md:text-2xl text-cream/90 max-w-2xl mx-auto leading-relaxed font-light">

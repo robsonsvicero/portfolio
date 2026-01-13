@@ -214,7 +214,7 @@ const AdminDepoimentos = () => {
           {/* Header */}
           <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
             <div>
-              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+              <h1 className="font-title text-4xl md:text-5xl font-semibold text-low-dark mb-2">
                 Bem-vindo
               </h1>
               <p className="text-low-medium text-lg">
@@ -235,7 +235,7 @@ const AdminDepoimentos = () => {
           </div>
           <div className="flex flex-col justify-between items-start md:items-center gap-4 mb-12 mt-16">
             <div>
-              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+              <h1 className="font-title text-4xl md:text-5xl font-semibold text-low-dark mb-2">
                 Gerenciar Depoimentos
               </h1>
               <p className="text-low-medium text-lg">

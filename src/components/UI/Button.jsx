@@ -73,7 +73,7 @@ const Button = ({
   };
 
   // Cor do preenchimento animado
-  let fillColor = '#042C5A'; // primary
+  let fillColor = '#171F2A'; // primary
   if (variant === 'secondary') fillColor = '#844219'; // secondary
   else if (variant === 'outline') fillColor = '#FFF8F0'; // cream
   else if (variant === 'custom') fillColor = '#FFF8F0'; // cream

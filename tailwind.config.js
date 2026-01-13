@@ -17,6 +17,7 @@ export default {
         'low-light': '#707070',
         'low-medium': '#404040',
         'low-dark': '#232323',
+        gelo: '#F5F5F5',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

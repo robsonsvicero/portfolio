@@ -262,7 +262,7 @@ const AdminBlog = () => {
           {/* Header com informações do usuário e navegação */}
           <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white rounded-xl shadow-lg p-6 border border-cream/20">
             <div className="flex-1">
-              <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2">
+              <h1 className="font-title text-4xl md:text-5xl font-semibold text-low-dark mb-2">
                 Bem-vindo
               </h1>
               <p className="text-low-medium text-lg">
@@ -283,7 +283,7 @@ const AdminBlog = () => {
           </div>
 
           <div className="mb-12 text-center">
-            <h1 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-2 mt-16">
+            <h1 className="font-title text-4xl md:text-5xl font-semibold text-low-dark mb-2 mt-16">
               Gerenciar Blog
             </h1>
             <p className="text-lg text-low-medium">

@@ -1,6 +1,7 @@
 
 import React from "react";
 import logo from "../images/logo_alternativo 1.png";
+import Button from "../components/UI/Button";
 
 const Agradecimento = () => (
   <div className="min-h-screen flex items-center justify-center bg-[#f9f4ee] px-2 py-8">
@@ -23,13 +24,13 @@ const Agradecimento = () => (
         Estamos ansiosos para entender como podemos elevar o valor de mercado do seu negócio.
       </p>
       <p className="text-gray-900 mb-6 text-base">Cordialmente, Equipe <strong>Svicero Studio</strong></p>
-      <a
-        href="/#projetos"
-        className="w-full text-center inline-block bg-[#004a77] hover:bg-[#00385a] text-white font-semibold py-3 px-6 rounded-lg shadow transition-colors duration-200"
-        style={{ marginTop: '12px' }}
+      <Button
+        href="/"
+        variant="secondary"
+        className="w-full text-center"
       >
         Visite o nosso site
-      </a>
+      </Button>
     </div>
   </div>
 );
