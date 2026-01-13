@@ -108,7 +108,7 @@ const BlogPost = () => {
       <SEOHelmet 
         title={post?.titulo || 'Post do Blog'}
         description={post?.resumo || 'Leia mais sobre design, desenvolvimento e estratégia digital no Svicero Studio.'}
-        keywords={post?.tags?.join(', ') || 'design, desenvolvimento, tecnologia'}
+        keywords={post?.tags || 'design, desenvolvimento, tecnologia'}
         ogImage={post?.imagem_capa || '/images/og-image.jpg'}
         ogType="article"
       />
@@ -162,7 +162,7 @@ const BlogPost = () => {
               {/* Tags */}
               {post.tags && (
                 <div className="flex flex-wrap gap-2 mt-6">
-                  {post.tags.toLowerCase().split(',').map((tag, idx) => (
+                  {String(post.tags).toLowerCase().split(',').map((tag, idx) => (
                     <span
                       key={idx}
                       className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium hover:bg-primary hover:text-white transition-colors cursor-default"

@@ -32,22 +32,14 @@
     width: 100%;
   }
 
-  /* Swiper - Botões de navegação menores e centralizados */
+  /* Swiper - Botões de navegação */
   .swiper-button-prev,
   .swiper-button-next {
-    --swiper-navigation-size: 16px;
-    @apply w-9 h-9 bg-white/90 rounded-full shadow-md;
+    --swiper-navigation-size: 20px;
+    @apply w-10 h-10 bg-white/90 rounded-full shadow-lg;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-  }
-
-  /* Ocultar botões em telas >= 768px */
-  @media (min-width: 768px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-      display: none !important;
-    }
   }
 
   .swiper-button-prev::after,
@@ -55,5 +47,36 @@
     @apply text-secondary font-bold;
     font-size: var(--swiper-navigation-size) !important;
     line-height: 1 !important;
+  }
+
+  /* Depoimentos - Cards com altura controlada */
+  .depoimentos-swiper .swiper-slide {
+    height: auto;
+    min-height: 280px;
+    max-height: 350px;
+    flex-shrink: 0;
+  }
+  
+  /* Forçar exatamente 3 slides no desktop */
+  @media (min-width: 1024px) {
+    .depoimentos-swiper .swiper-slide {
+      width: calc((100% - 64px) / 3) !important;
+      max-width: calc((100% - 64px) / 3) !important;
+      min-width: calc((100% - 64px) / 3) !important;
+    }
+  }
+  
+  /* Forçar exatamente 2 slides no tablet */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .depoimentos-swiper .swiper-slide {
+      width: calc((100% - 32px) / 2) !important;
+      max-width: calc((100% - 32px) / 2) !important;
+      min-width: calc((100% - 32px) / 2) !important;
+    }
+  }
+  
+  /* Garantir que o container não mostre overflow */
+  .depoimentos-swiper {
+    overflow: hidden !important;
   }
 }

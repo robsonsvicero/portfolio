@@ -71,72 +71,73 @@ const Home = () => {
 
   useEffect(() => {
     // Aguarda depoimentos carregarem antes de inicializar Swiper
-    if (depoimentos.length === 0 || swipersInitialized) return;
+    if (depoimentos.length === 0) return;
 
-    let rafId = null;
-    function initSwipers() {
-      const cardWrappers = document.querySelectorAll('.card-wrapper');
-      if (cardWrappers.length > 0) {
-        // Destruir swipers anteriores
-        swipersRef.current.forEach(swiper => {
-          if (swiper && swiper.destroy) {
-            try { swiper.destroy(); } catch (e) { /* ignora */ }
+    // Destruir swipers anteriores
+    swipersRef.current.forEach(swiper => {
+      if (swiper && swiper.destroy) {
+        try { swiper.destroy(true, true); } catch (e) { /* ignora */ }
+      }
+    });
+    swipersRef.current = [];
+
+    const timeoutId = setTimeout(() => {
+      const depoimentosSwiper = document.querySelector('.depoimentos-swiper');
+      if (depoimentosSwiper) {
+        const depoimentosSwiperInstance = new Swiper('.depoimentos-swiper', {
+          slidesPerView: 1,
+          spaceBetween: 24,
+          loop: true,
+          grabCursor: true,
+          centeredSlides: false,
+          watchOverflow: true,
+          watchSlidesProgress: true,
+          observer: true,
+          observeParents: true,
+          slidesPerGroup: 1,
+          resistanceRatio: 0.85,
+          slidesOffsetBefore: 0,
+          slidesOffsetAfter: 0,
+          pagination: {
+            el: '.depoimentos-swiper .swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+          },
+          navigation: {
+            nextEl: '.depoimentos-swiper .swiper-button-next',
+            prevEl: '.depoimentos-swiper .swiper-button-prev',
+          },
+          breakpoints: {
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 24
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 32
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 32
+            }
           }
         });
-        swipersRef.current = [];
-
-        cardWrappers.forEach((cardWrapper) => {
-          const slides = cardWrapper.querySelectorAll('.swiper-slide');
-          const slidesCount = slides.length;
-          const screenWidth = window.innerWidth;
-
-          // Determinar slidesPerView baseado na largura da tela
-          let currentSlidesPerView = 1;
-          if (screenWidth >= 1240) currentSlidesPerView = 3;
-          else if (screenWidth >= 768) currentSlidesPerView = 2;
-
-          // Só habilita loop se houver slides suficientes
-          const enableLoop = slidesCount > currentSlidesPerView;
-
-          const swiperInstance = new Swiper(cardWrapper, {
-            loop: enableLoop,
-            spaceBetween: 24,
-            pagination: {
-              el: cardWrapper.querySelector('.swiper-pagination'),
-              clickable: true,
-              dynamicBullets: true,
-            },
-            navigation: {
-              nextEl: cardWrapper.querySelector('.swiper-button-next'),
-              prevEl: cardWrapper.querySelector('.swiper-button-prev'),
-            },
-            breakpoints: {
-              426: {
-                slidesPerView: 1
-              },
-              768: {
-                slidesPerView: 2
-              },
-              1240: {
-                slidesPerView: 3
-              }
-            }
-          });
-          swipersRef.current.push(swiperInstance);
-        });
+        swipersRef.current.push(depoimentosSwiperInstance);
         setSwipersInitialized(true);
+      } else {
+        console.error('Elemento .depoimentos-swiper não encontrado');
       }
-    }
-    rafId = requestAnimationFrame(initSwipers);
+    }, 200);
+    
     return () => {
-      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(timeoutId);
       swipersRef.current.forEach(swiper => {
         if (swiper && swiper.destroy && typeof swiper.destroy === 'function') {
-          try { swiper.destroy(); } catch (e) { /* ignora */ }
+          try { swiper.destroy(true, true); } catch (e) { /* ignora */ }
         }
       });
     };
-  }, [depoimentos.length, swipersInitialized]);
+  }, [depoimentos.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -391,31 +392,40 @@ const Home = () => {
 
         {/* Principais Serviços / Expertise */}
         <section id="servicos" className="bg-cream py-24 px-4 md:px-16">
-          <div className="max-w-screen-xl mx-auto px-2 sm:px-4 md:px-16">
+          <div className="max-w-screen-xl mx-auto">
             <div className="mb-12 text-center">
               <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-4">Principais Serviços</h2>
-
+              <p className="font-sans text-lg text-low-medium max-w-2xl mx-auto leading-relaxed">
+                Soluções completas em design e desenvolvimento web para fortalecer sua presença digital
+              </p>
             </div>
-            <div className="swiper overflow-visible pb-12 max-w-full">
-              <div className="card-wrapper mx-2 md:mx-0 py-5 px-2 md:px-4 overflow-hidden">
-                <ul className="card-list swiper-wrapper h-auto md:h-[400px]">
-                  {servicos.map((servico, idx) => (
-                    <li key={idx} className="card-item swiper-slide bg-white rounded-2xl shadow-md border border-[#f3ede7] p-6 transition-all duration-300 h-auto md:h-[400px] md:max-w-[400px] w-full">
-                      <div className="flex flex-col h-full">
-                        <img src={servico.img} alt={servico.alt} className="w-full aspect-[16/9] object-cover rounded-xl mb-4" loading="lazy" />
-                        <p className={"inline-block w-fit px-4 py-2 mb-4 rounded-full text-[14px] font-medium border text-left " + (servico.badge.className || "")}>{servico.badge.text}</p>
-                        <div className="flex-1">
-                          <h2 className="text-base text-[#2b4a5a] font-normal mb-6">{servico.title}</h2>
-                        </div>
-                        <a href={servico.link} className="mt-auto inline-block px-6 py-2 rounded-full border border-[#b5c6d6] text-[#232323] bg-[#F4F4F4] text-sm font-medium hover:bg-[#e0e6ed] transition-colors">Saiba mais...</a>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <div className="swiper-pagination mt-8"></div>
-                <div className="swiper-slide-button swiper-button-prev block md:hidden"></div>
-                <div className="swiper-slide-button swiper-button-next block md:hidden"></div>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {servicos.map((servico, idx) => (
+                <div key={idx} className="bg-white rounded-2xl shadow-md border border-cream/20 p-6 transition-all duration-300 hover:shadow-xl">
+                  <div className="flex flex-col h-full">
+                    <div className="w-full aspect-[16/9] overflow-hidden rounded-xl mb-4">
+                      <img 
+                        src={servico.img} 
+                        alt={servico.alt} 
+                        className="w-full h-full object-cover" 
+                        loading="lazy" 
+                      />
+                    </div>
+                    <span className={"inline-block w-fit px-4 py-2 mb-4 rounded-full text-sm font-medium " + (servico.badge.className || "")}>
+                      {servico.badge.text}
+                    </span>
+                    <div className="flex-1">
+                      <p className="text-base text-low-dark leading-relaxed mb-4">{servico.title}</p>
+                    </div>
+                    <a 
+                      href={servico.link} 
+                      className="mt-auto inline-block px-6 py-2 rounded-full border border-low-medium/30 text-low-dark bg-cream hover:bg-low-light transition-all duration-200 text-sm font-medium"
+                    >
+                      Saiba mais...
+                    </a>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -461,37 +471,35 @@ const Home = () => {
         {/* Depoimentos */}
         {depoimentos.length > 0 && (
           <section className="bg-cream py-24 px-4 md:px-16">
-            <div className="max-w-screen-xl mx-auto px-2 sm:px-4 md:px-2">
+            <div className="max-w-screen-xl mx-auto">
               <div className="mb-12 text-center">
                 <h2 className="font-title text-4xl md:text-5xl font-light text-low-dark mb-4">Depoimentos</h2>
                 <p className="text-lg text-low-dark/80 font-light max-w-2xl mx-auto leading-relaxed">
                   Palavras de quem valoriza a excelência
                 </p>
               </div>
-              <div className="swiper depoimentos-swiper overflow-visible pb-12 max-w-full">
-                <div className="card-wrapper mx-2 md:mx-0 py-5 px-2 md:px-4 overflow-hidden">
-                  <ul className="card-list swiper-wrapper h-auto">
-                    {depoimentos.map((depoimento) => (
-                      <li key={depoimento.id} className="card-item swiper-slide bg-low-dark/90 rounded-2xl p-8 border border-cream/10 h-auto md:max-w-[400px] w-full">
-                        <div className="flex flex-col h-full">
-                          <p className="text-cream/90 text-base leading-relaxed mb-6 italic flex-1">"{depoimento.texto}"</p>
-                          <div className="flex items-center gap-4 mt-auto">
-                            <div className={`w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center ${getAvatarColorClass(depoimento.cor_avatar)}`}>
-                              <span className="font-semibold text-lg">{depoimento.iniciais || depoimento.nome?.substring(0, 2).toUpperCase()}</span>
-                            </div>
-                            <div>
-                              <p className="text-cream font-medium">{depoimento.nome}</p>
-                              <p className="text-cream/60 text-sm">{depoimento.cargo}{depoimento.empresa ? `, ${depoimento.empresa}` : ''}</p>
-                            </div>
+              <div className="swiper depoimentos-swiper pb-16 relative">
+                <ul className="swiper-wrapper">
+                  {depoimentos.map((depoimento) => (
+                    <li key={depoimento.id} className="swiper-slide">
+                      <div className="bg-low-dark/90 rounded-2xl p-8 border border-cream/10 h-full flex flex-col">
+                        <p className="text-cream/90 text-base leading-relaxed mb-6 italic flex-1">"{depoimento.texto}"</p>
+                        <div className="flex items-center gap-4 mt-auto">
+                          <div className={`w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center ${getAvatarColorClass(depoimento.cor_avatar)}`}>
+                            <span className="font-semibold text-lg">{depoimento.iniciais || depoimento.nome?.substring(0, 2).toUpperCase()}</span>
+                          </div>
+                          <div>
+                            <p className="text-cream font-medium">{depoimento.nome}</p>
+                            <p className="text-cream/60 text-sm">{depoimento.cargo}{depoimento.empresa ? `, ${depoimento.empresa}` : ''}</p>
                           </div>
                         </div>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="swiper-pagination mt-8"></div>
-                  <div className="swiper-slide-button swiper-button-prev block md:hidden"></div>
-                  <div className="swiper-slide-button swiper-button-next block md:hidden"></div>
-                </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="swiper-pagination mt-8"></div>
+                <div className="swiper-button-prev"></div>
+                <div className="swiper-button-next"></div>
               </div>
             </div>
           </section>
