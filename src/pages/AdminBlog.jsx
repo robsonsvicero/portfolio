@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import Button from '../components/UI/Button'
+import { formatDate } from '../utils/formatDate'
+import { useToast } from '../hooks/useToast'
+import Toast from '../components/UI/Toast'
 
 const AdminBlog = () => {
   const { user, signOut } = useAuth()
@@ -11,9 +14,7 @@ const AdminBlog = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [editingId, setEditingId] = useState(null)
-  const [showToast, setShowToast] = useState(false)
-  const [toastMessage, setToastMessage] = useState('')
-  const [toastType, setToastType] = useState('success')
+  const { showToast, toastMessage, toastType, showToastMessage, hideToast } = useToast()
 
   const [formData, setFormData] = useState({
     titulo: '',
@@ -40,7 +41,7 @@ const AdminBlog = () => {
       if (error) throw error
       setPosts(data || [])
     } catch (error) {
-      console.error('Erro ao buscar posts:', error)
+      // Erro ao buscar posts
       showToastMessage('Erro ao carregar posts', 'error')
     } finally {
       setIsLoading(false)
@@ -50,13 +51,6 @@ const AdminBlog = () => {
   useEffect(() => {
     fetchPosts()
   }, [])
-
-  const showToastMessage = (message, type = 'success') => {
-    setToastMessage(message)
-    setToastType(type)
-    setShowToast(true)
-    setTimeout(() => setShowToast(false), 3000)
-  }
 
   // Gerar slug automaticamente do título
   const generateSlug = (text) => {
@@ -129,7 +123,7 @@ const AdminBlog = () => {
           }
           reader.readAsDataURL(file)
         } catch (error) {
-          console.error('Erro ao processar imagem:', error)
+          // Erro ao processar imagem
           showToastMessage('Erro ao colar imagem', 'error')
         }
       }
@@ -182,7 +176,7 @@ const AdminBlog = () => {
       setEditingId(null)
       fetchPosts()
     } catch (error) {
-      console.error('Erro ao salvar post:', error)
+      // Erro ao salvar post
       showToastMessage('Erro ao salvar post', 'error')
     } finally {
       setIsSubmitting(false)
@@ -219,7 +213,7 @@ const AdminBlog = () => {
       showToastMessage('Post excluído com sucesso!', 'success')
       fetchPosts()
     } catch (error) {
-      console.error('Erro ao excluir post:', error)
+      // Erro ao excluir post
       showToastMessage('Erro ao excluir post', 'error')
     }
   }
@@ -245,14 +239,9 @@ const AdminBlog = () => {
       await signOut()
       navigate('/login')
     } catch (error) {
-      console.error('Erro ao fazer logout:', error)
+      // Erro ao fazer logout
       showToastMessage('Erro ao sair', 'error')
     }
-  }
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('pt-BR')
   }
 
   return (

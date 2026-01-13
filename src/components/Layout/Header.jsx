@@ -111,7 +111,8 @@ const Header = ({ variant = 'transparent' }) => {
             <button
               className="flex flex-col justify-center items-center w-12 h-12 group"
               onClick={toggleMenu}
-              aria-label="Abrir menu"
+              aria-label="Menu de navegação"
+              aria-expanded={menuOpen}
             >
               <span className={`block w-7 h-0.5 bg-primary mb-1 transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
               <span className={`block w-7 h-0.5 bg-primary mb-1 transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
@@ -122,6 +123,8 @@ const Header = ({ variant = 'transparent' }) => {
 
         {/* Mobile Nav */}
         <nav
+          role="navigation"
+          aria-label="Menu principal mobile"
           className={`lg:hidden fixed top-0 left-0 w-full h-screen bg-cream/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center transition-all duration-300
             ${menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none'}`}
         >

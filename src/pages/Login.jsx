@@ -28,7 +28,6 @@ const Login = () => {
         } else {
           setError(`Erro ao fazer login: ${error.message}`)
         }
-        console.error('Erro de autenticação:', error)
         return
       }
 
@@ -36,7 +35,6 @@ const Login = () => {
       navigate('/admin')
     } catch (err) {
       setError('Erro inesperado. Verifique sua conexão e tente novamente.')
-      console.error('Erro no login:', err)
     } finally {
       setIsLoading(false)
     }

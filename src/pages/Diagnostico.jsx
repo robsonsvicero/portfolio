@@ -16,7 +16,7 @@ const Diagnostico = () => {
           ></div>
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 md:px-8">
-            <h1 className="font-title font-semibold text-cream text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide mb-6 drop-shadow-lg max-w-6xl">
+            <h1 className="font-title font-semibold text-cream text-4xl lg:text-6xl tracking-wide mb-6 drop-shadow-lg max-w-6xl">
               Solicitação de Diagnóstico Estratégico
             </h1>
             <p className="font-body text-cream text-lg md:text-xl lg:text-2xl font-normal tracking-wide mb-10 max-w-4xl drop-shadow-md">

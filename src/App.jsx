@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import ErrorBoundary from './components/ErrorBoundary';
 import Home from './pages/Home';
 import Schedule from './pages/Schedule';
 import Diagnostico from './pages/Diagnostico';
@@ -23,7 +24,8 @@ import Agradecimento from './pages/Agradecimento';
 
 function App() {
   return (
-    <AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -73,6 +75,7 @@ function App() {
         </Routes>
       </Router>
     </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

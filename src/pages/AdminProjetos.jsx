@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import Button from '../components/UI/Button'
+import { useToast } from '../hooks/useToast'
+import Toast from '../components/UI/Toast'
 
 const AdminProjetos = () => {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
-  const [projetos, setProjetos] = useState([])
+  const [projects, setProjects] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [editingId, setEditingId] = useState(null)
-  const [showToast, setShowToast] = useState(false)
-  const [toastMessage, setToastMessage] = useState('')
-  const [toastType, setToastType] = useState('success')
+  const { showToast, toastMessage, toastType, showToastMessage, hideToast } = useToast()
 
   const [formData, setFormData] = useState({
     titulo: '',
@@ -39,7 +39,7 @@ const AdminProjetos = () => {
       if (error) throw error
       setProjetos(data || [])
     } catch (error) {
-      console.error('Erro ao buscar projetos:', error)
+      // Erro ao buscar projetos
       showToastMessage('Erro ao carregar projetos', 'error')
     } finally {
       setIsLoading(false)
@@ -49,13 +49,6 @@ const AdminProjetos = () => {
   useEffect(() => {
     fetchProjetos()
   }, [])
-
-  const showToastMessage = (message, type = 'success') => {
-    setToastMessage(message)
-    setToastType(type)
-    setShowToast(true)
-    setTimeout(() => setShowToast(false), 3000)
-  }
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -101,7 +94,7 @@ const AdminProjetos = () => {
       setEditingId(null)
       fetchProjetos()
     } catch (error) {
-      console.error('Erro ao salvar projeto:', error)
+      // Erro ao salvar projeto
       showToastMessage('Erro ao salvar projeto', 'error')
     } finally {
       setIsSubmitting(false)
@@ -137,7 +130,7 @@ const AdminProjetos = () => {
       showToastMessage('Projeto excluído com sucesso!', 'success')
       fetchProjetos()
     } catch (error) {
-      console.error('Erro ao excluir projeto:', error)
+      // Erro ao excluir projeto
       showToastMessage('Erro ao excluir projeto', 'error')
     }
   }
@@ -162,7 +155,7 @@ const AdminProjetos = () => {
       await signOut()
       navigate('/login')
     } catch (error) {
-      console.error('Erro ao fazer logout:', error)
+      // Erro ao fazer logout
       showToastMessage('Erro ao sair', 'error')
     }
   }

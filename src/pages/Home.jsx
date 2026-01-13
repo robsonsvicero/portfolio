@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import { supabase } from '../lib/supabase';
@@ -7,6 +7,10 @@ import Footer from '../components/Layout/Footer';
 import Button from '../components/UI/Button';
 import Card from '../components/UI/Card';
 import Preloader from '../components/Preloader';
+import SEOHelmet from '../components/SEOHelmet';
+import Toast from '../components/UI/Toast';
+import { useToast } from '../hooks/useToast';
+import { useBlogPosts, useDepoimentos } from '../hooks/useSupabaseData';
 
 import idvDesigner from '../images/idv-deigner.webp';
 import uiDesigner from '../images/ui-designer.webp';
@@ -42,14 +46,15 @@ const Home = () => {
       link: '/servico-front-end'
     },
   ];
+  
   const [whatsappVisible, setWhatsappVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState('success');
   const [projects, setProjects] = useState([]);
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [depoimentos, setDepoimentos] = useState([]);
+  
+  // Usar hooks personalizados
+  const { showToast, toastMessage, toastType, showToastMessage, hideToast } = useToast();
+  const { data: blogPosts = [] } = useBlogPosts(3);
+  const { data: depoimentos = [] } = useDepoimentos();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,10 +65,14 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Inicializar Swiper
-  const swipersRef = React.useRef([]);
+  // Inicializar Swiper - separado em useEffect próprio
+  const swipersRef = useRef([]);
+  const [swipersInitialized, setSwipersInitialized] = useState(false);
+
   useEffect(() => {
-    // Aguarda o próximo paint do React para garantir que os elementos estejam no DOM
+    // Aguarda depoimentos carregarem antes de inicializar Swiper
+    if (depoimentos.length === 0 || swipersInitialized) return;
+
     let rafId = null;
     function initSwipers() {
       const cardWrappers = document.querySelectorAll('.card-wrapper');
@@ -115,6 +124,7 @@ const Home = () => {
           });
           swipersRef.current.push(swiperInstance);
         });
+        setSwipersInitialized(true);
       }
     }
     rafId = requestAnimationFrame(initSwipers);
@@ -126,7 +136,7 @@ const Home = () => {
         }
       });
     };
-  }, [depoimentos]);
+  }, [depoimentos.length, swipersInitialized]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -145,31 +155,13 @@ const Home = () => {
       });
 
       if (response.ok) {
-        setToastMessage('Mensagem enviada com sucesso! Entrarei em contato em breve.');
-        setToastType('success');
-        setShowToast(true);
+        showToastMessage('Mensagem enviada com sucesso! Entrarei em contato em breve.', 'success', 5000);
         form.reset();
-
-        setTimeout(() => {
-          setShowToast(false);
-        }, 5000);
       } else {
-        setToastMessage('Erro ao enviar mensagem. Tente novamente.');
-        setToastType('error');
-        setShowToast(true);
-
-        setTimeout(() => {
-          setShowToast(false);
-        }, 5000);
+        showToastMessage('Erro ao enviar mensagem. Tente novamente.', 'error', 5000);
       }
     } catch (error) {
-      setToastMessage('Erro ao enviar mensagem. Verifique sua conexão.');
-      setToastType('error');
-      setShowToast(true);
-
-      setTimeout(() => {
-        setShowToast(false);
-      }, 5000);
+      showToastMessage('Erro ao enviar mensagem. Verifique sua conexão.', 'error', 5000);
     } finally {
       setIsSubmitting(false);
     }
@@ -201,56 +193,12 @@ const Home = () => {
 
         setProjects(projetosFormatados);
       } catch (error) {
-        console.error('Erro ao buscar projetos:', error);
-        // Array vazio como fallback - incentiva usar o banco de dados
+        // Erro ao buscar projetos - usando fallback
         setProjects([]);
       }
     };
 
     fetchProjetos();
-  }, []);
-
-  // Buscar últimas 3 publicações do blog
-  useEffect(() => {
-    const fetchBlogPosts = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('posts')
-          .select('*')
-          .eq('publicado', true)
-          .order('data_publicacao', { ascending: false })
-          .limit(3);
-
-        if (error) throw error;
-        setBlogPosts(data || []);
-      } catch (error) {
-        console.error('Erro ao buscar posts do blog:', error);
-        setBlogPosts([]);
-      }
-    };
-
-    fetchBlogPosts();
-  }, []);
-
-  // Buscar depoimentos do Supabase
-  useEffect(() => {
-    const fetchDepoimentos = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('depoimentos')
-          .select('*')
-          .eq('ativo', true)
-          .order('ordem', { ascending: true });
-
-        if (error) throw error;
-        setDepoimentos(data || []);
-      } catch (error) {
-        console.error('Erro ao buscar depoimentos:', error);
-        setDepoimentos([]);
-      }
-    };
-
-    fetchDepoimentos();
   }, []);
 
   // Função para obter a classe de cor do avatar
@@ -270,6 +218,11 @@ const Home = () => {
 
   return (
     <>
+      <SEOHelmet 
+        title="Svicero Studio - Design Digital & Desenvolvimento Web"
+        description="Transformamos suas ideias em experiências digitais memoráveis. Especialistas em UI/UX Design, Desenvolvimento Front-End e Identidade Visual."
+        keywords="design digital, desenvolvimento web, ui ux design, front-end, identidade visual, branding, criação de sites"
+      />
       <Preloader />
       <div className="bg-cream min-h-screen">
         <Header />
@@ -289,7 +242,7 @@ const Home = () => {
         <section id="inicio" className="relative h-[780px] flex items-center justify-center text-center overflow-hidden">
           <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}></div>
           <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 md:px-8">
-            <h1 className="font-title font-semibold text-cream text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide mb-6 drop-shadow-lg max-w-6xl">Posicionamento Premium. Escala Inevitável.</h1>
+            <h1 className="font-title font-semibold text-cream text-4xl lg:text-6xl tracking-wide mb-6 drop-shadow-lg max-w-6xl">Posicionamento Premium.<br /> Escala Inevitável.</h1>
             <p className="font-body text-cream text-lg md:text-xl lg:text-2xl font-normal tracking-wide mb-10 max-w-4xl drop-shadow-md">Criamos a estrutura estratégica e visual para marcas que decidiram dominar seu mercado e atrair clientes de alto valor.</p>
             <Button
               href="/diagnostico"
@@ -449,7 +402,7 @@ const Home = () => {
                   {servicos.map((servico, idx) => (
                     <li key={idx} className="card-item swiper-slide bg-white rounded-2xl shadow-md border border-[#f3ede7] p-6 transition-all duration-300 h-auto md:h-[400px] md:max-w-[400px] w-full">
                       <div className="flex flex-col h-full">
-                        <img src={servico.img} alt={servico.alt} className="w-full aspect-[16/9] object-cover rounded-xl mb-4" />
+                        <img src={servico.img} alt={servico.alt} className="w-full aspect-[16/9] object-cover rounded-xl mb-4" loading="lazy" />
                         <p className={"inline-block w-fit px-4 py-2 mb-4 rounded-full text-[14px] font-medium border text-left " + (servico.badge.className || "")}>{servico.badge.text}</p>
                         <div className="flex-1">
                           <h2 className="text-base text-[#2b4a5a] font-normal mb-6">{servico.title}</h2>
@@ -476,7 +429,7 @@ const Home = () => {
             </div>
             <div className="flex flex-col lg:flex-row-reverse gap-12 items-center mb-8">
               <div className="w-full lg:w-2/5 flex justify-center mb-8 lg:mb-0">
-                <img src={aboutPhoto} alt="Robson Svicero - Fundador do Svicero Studio" className="w-full h-auto rounded-2xl shadow-lg" />
+                <img src={aboutPhoto} alt="Robson Svicero - Fundador do Svicero Studio" className="w-full h-auto rounded-2xl shadow-lg" loading="lazy" />
               </div>
               <div className="w-full lg:w-3/5 text-cream">
                 <div className="text-about">
@@ -661,21 +614,12 @@ const Home = () => {
 
 
         {/* Toast Notification */}
-        {showToast && (
-          <div className={`fixed top-8 right-8 z-50 min-w-[320px] max-w-[450px] p-6 bg-white rounded-xl shadow-2xl flex items-center justify-between gap-4 animate-slideInRight border-l-4 ${toastType === 'success' ? 'border-green-500' : 'border-red-500'}`}>
-            <div className="flex items-center gap-3 flex-1">
-              <i className={`fa-solid text-2xl ${toastType === 'success' ? 'fa-circle-check text-green-500' : 'fa-circle-exclamation text-red-500'}`}></i>
-              <span className="text-neutral-900 text-base font-medium">{toastMessage}</span>
-            </div>
-            <button
-              className="bg-transparent border-none text-neutral-500 hover:text-neutral-900 transition-colors p-1 flex items-center justify-center text-xl"
-              onClick={() => setShowToast(false)}
-              aria-label="Fechar notificação"
-            >
-              <i className="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-        )}
+        <Toast 
+          show={showToast} 
+          message={toastMessage} 
+          type={toastType} 
+          onClose={hideToast} 
+        />
       </div>
     </>
   );

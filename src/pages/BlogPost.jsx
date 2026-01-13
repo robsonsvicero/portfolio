@@ -1,13 +1,3 @@
-  // Função utilitária para formatar datas
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  }
 import React, { useState, useEffect } from 'react'
 import { marked } from 'marked'
 import { useParams, useNavigate, Link } from 'react-router-dom'
@@ -15,6 +5,8 @@ import { supabase } from '../lib/supabase'
 import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
 import Preloader from '../components/Preloader'
+import SEOHelmet from '../components/SEOHelmet'
+import { formatDate } from '../utils/formatDate'
 
 const BlogPost = () => {
   const { slug } = useParams()
@@ -113,6 +105,13 @@ const BlogPost = () => {
 
   return (
     <>
+      <SEOHelmet 
+        title={post?.titulo || 'Post do Blog'}
+        description={post?.resumo || 'Leia mais sobre design, desenvolvimento e estratégia digital no Svicero Studio.'}
+        keywords={post?.tags?.join(', ') || 'design, desenvolvimento, tecnologia'}
+        ogImage={post?.imagem_capa || '/images/og-image.jpg'}
+        ogType="article"
+      />
       <Preloader />
       <div className="min-h-screen bg-cream">
         <Header variant="solid" />

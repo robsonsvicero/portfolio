@@ -4,6 +4,8 @@ import { supabase } from '../lib/supabase'
 import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
 import Preloader from '../components/Preloader'
+import SEOHelmet from '../components/SEOHelmet'
+import { formatDate } from '../utils/formatDate'
 
 // Imagem do Hero
 import capaBlog from '../images/capa-blog.jpg'
@@ -44,7 +46,7 @@ const Blog = () => {
       })
       setAllTags(Array.from(tagsSet).sort())
     } catch (error) {
-      console.error('Erro ao buscar posts:', error)
+      // Erro ao buscar posts
     } finally {
       setIsLoading(false)
     }
@@ -83,6 +85,11 @@ const Blog = () => {
 
   return (
     <>
+      <SEOHelmet 
+        title="Blog - Crônicas de Design"
+        description="Reflexões sobre design, desenvolvimento e estratégia digital. Insights e tendências do mundo do design digital."
+        keywords="blog design, tendências design, desenvolvimento web, ui ux, design thinking"
+      />
       <Preloader />
       <div className="min-h-screen bg-cream">
         <Header variant="solid" />
@@ -100,7 +107,7 @@ const Blog = () => {
           
           {/* Conteúdo do Hero */}
           <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <h1 className="font-title text-5xl md:text-7xl font-semibold text-cream mb-6 leading-tight">
+            <h1 className="font-title text-4xl lg:text-6xl font-semibold text-cream mb-6 leading-tight">
               Crônicas de Design
             </h1>
             <p className="text-xl md:text-2xl text-cream/90 max-w-2xl mx-auto leading-relaxed font-light">

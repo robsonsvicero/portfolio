@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import Button from '../components/UI/Button';
+import { useToast } from '../hooks/useToast';
+import Toast from '../components/UI/Toast';
 
 const AdminDepoimentos = () => {
   const { user, signOut } = useAuth()
@@ -10,9 +12,7 @@ const AdminDepoimentos = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState('success');
+  const { showToast, toastMessage, toastType, showToastMessage, hideToast } = useToast();
 
   const [formData, setFormData] = useState({
     nome: '',
@@ -47,18 +47,11 @@ const AdminDepoimentos = () => {
       if (error) throw error;
       setDepoimentos(data || []);
     } catch (error) {
-      console.error('Erro ao buscar depoimentos:', error);
-      showNotification('Erro ao carregar depoimentos', 'error');
+      // Erro ao buscar depoimentos
+      showToastMessage('Erro ao carregar depoimentos', 'error');
     } finally {
       setLoading(false);
     }
-  };
-
-  const showNotification = (message, type = 'success') => {
-    setToastMessage(message);
-    setToastType(type);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 4000);
   };
 
   const handleInputChange = (e) => {
@@ -95,21 +88,21 @@ const AdminDepoimentos = () => {
           .eq('id', editingId);
 
         if (error) throw error;
-        showNotification('Depoimento atualizado com sucesso!');
+        showToastMessage('Depoimento atualizado com sucesso!');
       } else {
         const { error } = await supabase
           .from('depoimentos')
           .insert([dataToSave]);
 
         if (error) throw error;
-        showNotification('Depoimento criado com sucesso!');
+        showToastMessage('Depoimento criado com sucesso!');
       }
 
       resetForm();
       fetchDepoimentos();
     } catch (error) {
-      console.error('Erro ao salvar depoimento:', error);
-      showNotification('Erro ao salvar depoimento', 'error');
+      // Erro ao salvar depoimento
+      showToastMessage('Erro ao salvar depoimento', 'error');
     }
   };
 
@@ -139,11 +132,11 @@ const AdminDepoimentos = () => {
         .eq('id', id);
 
       if (error) throw error;
-      showNotification('Depoimento excluído com sucesso!');
+      showToastMessage('Depoimento excluído com sucesso!');
       fetchDepoimentos();
     } catch (error) {
-      console.error('Erro ao excluir depoimento:', error);
-      showNotification('Erro ao excluir depoimento', 'error');
+      // Erro ao excluir depoimento
+      showToastMessage('Erro ao excluir depoimento', 'error');
     }
   };
 
@@ -152,7 +145,7 @@ const AdminDepoimentos = () => {
       await signOut()
       navigate('/login')
     } catch (error) {
-      console.error('Erro ao fazer logout:', error)
+      // Erro ao fazer logout
       showToastMessage('Erro ao sair', 'error')
     }
   }
@@ -165,11 +158,11 @@ const AdminDepoimentos = () => {
         .eq('id', id);
 
       if (error) throw error;
-      showNotification(`Depoimento ${!ativo ? 'ativado' : 'desativado'}!`);
+      showToastMessage(`Depoimento ${!ativo ? 'ativado' : 'desativado'}!`);
       fetchDepoimentos();
     } catch (error) {
-      console.error('Erro ao atualizar status:', error);
-      showNotification('Erro ao atualizar status', 'error');
+      // Erro ao atualizar status
+      showToastMessage('Erro ao atualizar status', 'error');
     }
   };
 

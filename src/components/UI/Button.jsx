@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './Button.css';
 
 const Button = ({ 
@@ -17,9 +17,9 @@ const Button = ({
 }) => {
   const btnRef = useRef(null);
   const circleRef = useRef(null);
-  const [circleSize, setCircleSize] = React.useState(0);
+  const [circleSize, setCircleSize] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (btnRef.current) {
       const width = btnRef.current.offsetWidth;
       const height = btnRef.current.offsetHeight;
@@ -27,7 +27,7 @@ const Button = ({
       const size = Math.sqrt(width * width + height * height) * 1.2;
       setCircleSize(size);
     }
-  }, [btnRef.current, size, className]);
+  }, [className]); // Removido btnRef.current e size das dependências
 
   // Classes base
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary';
