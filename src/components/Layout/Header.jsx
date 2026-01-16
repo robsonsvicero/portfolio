@@ -154,13 +154,11 @@ const Header = ({ variant = 'transparent' }) => {
             Blog
           </a>
           <Button
-            href="/agenda"
-            variant="secondary"
-            icon={<i className="fa-regular fa-calendar"></i>}
-            className="px-8 py-3 text-lg font-semibold"
-          >
-            Agendar Conversa
-          </Button>
+                href="/diagnostico"
+                variant="secondary"
+                className="inline-block"
+              >Solicitar Diagnóstico Estratégico
+              </Button>
         </nav>
       </div>
     </header>
