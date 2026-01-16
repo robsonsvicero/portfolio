@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
-import Preloader from '../components/Preloader'
 import SEOHelmet from '../components/SEOHelmet'
 import { formatDate } from '../utils/formatDate'
 
@@ -83,7 +82,6 @@ const Blog = () => {
         description="Reflexões sobre design, desenvolvimento e estratégia digital. Insights e tendências do mundo do design digital."
         keywords="blog design, tendências design, desenvolvimento web, ui ux, design thinking"
       />
-      <Preloader />
       <div className="min-h-screen bg-cream">
         <Header variant="solid" />
 

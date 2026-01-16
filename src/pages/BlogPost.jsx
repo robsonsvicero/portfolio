@@ -4,7 +4,6 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
-import Preloader from '../components/Preloader'
 import SEOHelmet from '../components/SEOHelmet'
 import { formatDate } from '../utils/formatDate'
 
@@ -90,7 +89,6 @@ const BlogPost = () => {
   if (isLoading) {
     return (
       <>
-        <Preloader />
         <div className="min-h-screen bg-cream flex items-center justify-center">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -112,7 +110,6 @@ const BlogPost = () => {
         ogImage={post?.imagem_capa || '/images/og-image.jpg'}
         ogType="article"
       />
-      <Preloader />
       <div className="min-h-screen bg-cream">
         <Header variant="solid" />
         
