@@ -98,6 +98,24 @@ http://localhost:5173
 
 ## 📦 Build para Produção
 
+## 🗓️ Formato de Datas (posts)
+
+- **Formato recomendado:** sempre salvar `data_publicacao` no formato `YYYY-MM-DD` (ex.: `2026-01-16`).
+- **Motivo:** datetimes com `Z` (UTC midnight) são convertidos para o fuso local (ex.: UTC-3), o que pode exibir o dia anterior. Para evitar esse deslocamento, o projeto agora normaliza datas ao salvar e ao exibir.
+- **O que foi alterado:**
+  - Util de formatação: [src/utils/formatDate.js](src/utils/formatDate.js#L1-L200) — agora interpreta `YYYY-MM-DD` e `YYYY-MM-DDT00:00:00Z` como data local antes de formatar.
+  - Admin: [src/pages/AdminBlog.jsx](src/pages/AdminBlog.jsx) — antes de gravar, o campo `data_publicacao` é normalizado para `YYYY-MM-DD`; ao carregar para edição, também é apresentado nesse formato.
+- **Como testar localmente:**
+  1. Rode o script de testes criado: 
+
+```bash
+node scripts/test-formatDate.mjs
+```
+
+  2. No admin, crie/edite um post e defina a data de publicação como `2026-01-16`. Verifique na listagem do blog que a data aparece como `16 de janeiro de 2026`.
+
+Se preferir, podemos também adotar a prática de sempre salvar `data_publicacao` com timezone explícito `-03:00` no backend; me avise se quer que eu implemente isso.
+
 ```bash
 npm run build
 ```

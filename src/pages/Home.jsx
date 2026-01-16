@@ -11,6 +11,7 @@ import SEOHelmet from '../components/SEOHelmet';
 import Toast from '../components/UI/Toast';
 import { useToast } from '../hooks/useToast';
 import { useBlogPosts, useDepoimentos } from '../hooks/useSupabaseData';
+import { formatDate } from '../utils/formatDate';
 
 import idvDesigner from '../images/idv-deigner.webp';
 import uiDesigner from '../images/ui-designer.webp';
@@ -521,15 +522,6 @@ const Home = () => {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                   {blogPosts.map((post) => {
-                    const formatDate = (dateString) => {
-                      const date = new Date(dateString);
-                      return date.toLocaleDateString('pt-BR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      });
-                    };
-
                     return (
                       <a
                         key={post.id}

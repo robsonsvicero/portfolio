@@ -141,6 +141,12 @@ const AdminBlog = () => {
         tags: formData.tags.toLowerCase()
       }
 
+      // Normalizar data_publicacao para YYYY-MM-DD (sem timezone)
+      if (normalizedData.data_publicacao) {
+        // Pega os 10 primeiros caracteres (YYYY-MM-DD) para garantir formato
+        normalizedData.data_publicacao = String(normalizedData.data_publicacao).slice(0, 10)
+      }
+
       if (editingId) {
         // Atualizar post existente
         const { error } = await supabase
@@ -192,7 +198,8 @@ const AdminBlog = () => {
       imagem_destaque: post.imagem_destaque || '',
       categoria: post.categoria || '',
       tags: post.tags || '',
-      data_publicacao: post.data_publicacao,
+      // Ao carregar para edição, garantir YYYY-MM-DD para o input date
+      data_publicacao: post.data_publicacao ? String(post.data_publicacao).slice(0, 10) : '',
       autor: post.autor,
       publicado: post.publicado
     })
