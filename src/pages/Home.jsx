@@ -18,7 +18,7 @@ import uiDesigner from '../images/ui-designer.webp';
 import developer from '../images/developer.webp';
 
 import heroImage from '../images/hero.webp';
-import aboutPhoto from '../images/about-photo.png';
+import aboutPhoto from '../images/aboutphoto.png';
 import sviceroCta from '../images/Svicero_CTA.png';
 
 
